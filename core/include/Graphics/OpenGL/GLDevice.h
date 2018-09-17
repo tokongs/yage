@@ -7,6 +7,7 @@
 #include <config.h>
 #include <memory>
 #include <iostream>
+#include <glm/vec4.hpp>
 
 namespace yage
 {
@@ -33,6 +34,19 @@ class GLDevice
      */
     GLDevice();
     ~GLDevice();
+
+    /**
+     * @brief Clears the Color and Depth bufers
+     * 
+     */
+    void clearBuffers();
+
+    /**
+     * @brief Set the color to clear the color buffer with
+     * 
+     * @param color
+     */
+    void setClearColor(glm::vec4 color);
 
   private:
 

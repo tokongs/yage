@@ -42,6 +42,14 @@ GLDevice::~GLDevice(){
 
 }
 
+void GLDevice::setClearColor(glm::vec4 color){
+    glClearColor(color.r, color.g, color.b, color.a);
+}
+
+void GLDevice::clearBuffers(){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void GLAPIENTRY gl_debug_message_callback(GLenum source, GLenum type, GLuint id, GLenum severity,
                                           GLsizei length, const GLchar *message, const void *userParam)
 {

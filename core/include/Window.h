@@ -76,7 +76,7 @@ class Window
      * 
      * @return GLDevice* 
      */
-    GLDevice* getGraphicsDevice();
+    std::shared_ptr<GLDevice> getGraphicsDevice();
 
     
 
@@ -92,7 +92,7 @@ class Window
     static std::shared_ptr<spdlog::logger> file_logger;
 
     //Graphics Device
-    GLDevice* m_device;
+    std::shared_ptr<GLDevice> m_device;
   private:
 
     /**

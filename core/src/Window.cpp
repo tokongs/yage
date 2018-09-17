@@ -62,13 +62,11 @@ Window::Window(WindowDesc desc)
     //Make the created OpenGL context the current context
     glfwMakeContextCurrent(m_window_handle);
 
-    m_device = new GLDevice();
+    m_device = std::make_shared<GLDevice>();
 }
 
 Window::~Window()
 {
-    if(m_device != NULL)
-        delete m_device;
     glfwTerminate();
 }
 
@@ -90,7 +88,7 @@ void Window::resize(int width, int height)
     glfwSetWindowSize(m_window_handle, width, height);
 }
 
-GLDevice* Window::getGraphicsDevice(){
+std::shared_ptr<GLDevice> Window::getGraphicsDevice(){
     return m_device;
 }
 
