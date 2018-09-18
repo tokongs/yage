@@ -9,6 +9,10 @@ namespace yage
      */
 class IndexBuffer{
     public:
+    /**
+     * @brief Construct a new Index Buffer object with the indices in a vector as the argument
+     * 
+     */
     IndexBuffer(std::vector<unsigned int>);
     ~IndexBuffer();
 

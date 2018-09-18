@@ -1,4 +1,3 @@
-#pragma once
 #include <IndexBuffer.h>
 namespace yage
 {
@@ -18,12 +17,12 @@ IndexBuffer::~IndexBuffer()
     glDeleteBuffers(1, &m_gl_object_id);
 }
 
-void IndexBuffer::bind() 
+void IndexBuffer::bind()
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_gl_object_id);
 }
 
-void IndexBuffer::unbind() 
+void IndexBuffer::unbind()
 {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
