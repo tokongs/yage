@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <vector>
+#include <config.h>
 namespace yage
 {
     /**
@@ -27,9 +28,13 @@ class IndexBuffer{
      */
     void unbind();
 
+    unsigned int getGlId();
+
     private:
 
     GLuint m_gl_object_id;
     std::vector<unsigned int> m_shadow_copy;
+
+    DECLARE_LOGGERS;
 };
 }

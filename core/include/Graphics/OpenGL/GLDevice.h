@@ -1,9 +1,6 @@
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h" //support for stdout logging
-#include "spdlog/sinks/basic_file_sink.h"    //support for basic file logging
 #include <config.h>
 #include <memory>
 #include <iostream>
@@ -50,9 +47,7 @@ class GLDevice
 
   private:
 
-    //Loggers
-    static std::shared_ptr<spdlog::logger> console_logger;
-    static std::shared_ptr<spdlog::logger> file_logger;
+    DECLARE_LOGGERS;
 
 
   private:

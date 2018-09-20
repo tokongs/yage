@@ -104,6 +104,8 @@ class VertexBuffer
     bool m_indexed = false;
     std::vector<float> m_shadow_copy;
 
+    DECLARE_LOGGERS;
+
     private:
     /**
      * @brief Calculate the size of one verterx in bytes. Assumes all components are floats. May have to change...
