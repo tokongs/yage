@@ -36,9 +36,10 @@ void GLDevice::clearBuffers(){
 void GLAPIENTRY gl_debug_message_callback(GLenum source, GLenum type, GLuint id, GLenum severity,
                                           GLsizei length, const GLchar *message, const void *userParam)
 {
-    if(severity = GL_DEBUG_TYPE_ERROR){
+    if(type == GL_DEBUG_TYPE_ERROR){
         LOG(GLDevice, error, "OpenGL Error(" + std::to_string(severity) + "): " + message);
     }
+    
     else{
         LOG(GLDevice, info, "OpenGL Debug Callback(type: " + std::to_string(type) + ", severity: " + std::to_string(severity)+ "): " + message);
     }

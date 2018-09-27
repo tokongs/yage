@@ -17,6 +17,7 @@ VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data)
 
     //calculate size of one vertex
     int size_of_vertex = sizeOfVertex(desc);
+    m_size = data.size();
 
     int buffer_size = size_of_vertex / sizeof(float) * data.size();
     float *buffer = new float[buffer_size];
@@ -57,8 +58,7 @@ void VertexBuffer::unbind()
 
 void VertexBuffer::attachIndexBuffer(std::shared_ptr<IndexBuffer> index_buffer)
 {
-    LOG(VertexBuffer, info, "Attaching Index Buffer Object " +
-         std::to_string(index_buffer->getGlId()) + " to Vertex Array Object " + std::to_string(m_vao_object_id));
+    LOG(VertexBuffer, info, "Attaching Index Buffer Object " + std::to_string(index_buffer->getGlId()) + " to Vertex Array Object " + std::to_string(m_vao_object_id));
     bool m_indexed = true;
     bind();
     index_buffer->bind();
@@ -186,6 +186,15 @@ int VertexBuffer::sizeOfVertex(VertexBufferDesc desc)
         size += 8 * sizeof(float);
 
     return size;
+}
+std::shared_ptr<IndexBuffer> VertexBuffer::getIndexBuffer()
+{
+    return m_index_buffer;
+}
+
+unsigned int VertexBuffer::getSize()
+{
+    return m_size;
 }
 
 } // namespace yage

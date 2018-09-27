@@ -1,35 +1,19 @@
 #include <Window.h>
 namespace yage
 {
-std::shared_ptr<spdlog::logger> Window::console_logger = NULL;
-std::shared_ptr<spdlog::logger> Window::file_logger = NULL;
+DEFINE_LOGGERS(Window);
 Window::Window(WindowDesc desc)
 {
     m_window_desc = desc;
 
     //Create loggers
-#ifdef DEBUG
-    if(!Window::console_logger)
-        Window::console_logger = spdlog::stdout_color_mt("window_console_logger");
-
-    if(!Window::file_logger)
-        try
-        {
-            Window::file_logger = spdlog::basic_logger_mt("window_file_logger", "default.txt");
-        }
-        catch (const spdlog::spdlog_ex &ex)
-        {
-            std::cout << "Failed to start window logger: " << ex.what() << std::endl;
-        }
-#endif
+INIT_LOGGERS(Window);
     //Initialize GLFW
     glfwSetErrorCallback(glfw_error_callback);
     
     if (!glfwInit())
     {
-#ifdef DEBUG
-        Window::console_logger->error("Failed to initialize GLFW. See logs/default.log");
-#endif
+        LOG(Window, error, "Failed to initialize GLFW");
         return;
     }
 
@@ -53,9 +37,7 @@ Window::Window(WindowDesc desc)
     if (!m_window_handle)
     {
         glfwTerminate();
-#ifdef DEBUG
-        Window::console_logger->error("Failed to create GLFW window. See logs/default.log");
-#endif
+        LOG(Window, error, "Failed to create GLFW window");
         return;
     }
 
@@ -92,10 +74,13 @@ std::shared_ptr<GLDevice> Window::getGraphicsDevice(){
     return m_device;
 }
 
+GLFWwindow* Window::getWindowHandle(){
+    return m_window_handle;
+}
+
 void glfw_error_callback(int error, const char *description)
 {
-    Window::file_logger->error("GLFW ERROR {0}: {1}", error, description);
-    Window::file_logger->flush();
+    LOG(Window, error, "GLFW ERROR: " + std::to_string(error) + description);
 
 }
 }

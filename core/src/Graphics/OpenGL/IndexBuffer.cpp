@@ -11,7 +11,7 @@ IndexBuffer::IndexBuffer(std::vector<unsigned int> data)
 
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * data.size(), &data[0], GL_STATIC_DRAW);
     unbind();
-
+    m_size = data.size();
     m_shadow_copy = data;
 }
 
@@ -35,4 +35,9 @@ unsigned int IndexBuffer::getGlId()
 {
     return m_gl_object_id;
 }
+
+unsigned int IndexBuffer::getSize(){
+    return m_size;
+}
+
 } // namespace yage

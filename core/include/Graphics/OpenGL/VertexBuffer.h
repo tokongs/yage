@@ -80,6 +80,19 @@ class VertexBuffer
      */
     void attachIndexBuffer(std::shared_ptr<IndexBuffer> index_buffer);
 
+    /**
+     * @brief Get the Index Buffer object
+     * 
+     * @return std::shared_ptr<IndexBuffer> 
+     */
+    std::shared_ptr<IndexBuffer> getIndexBuffer();
+
+    /**
+     * @brief Get the number of vertices in the buffer
+     * 
+     * @return unsigned int 
+     */
+    unsigned int getSize();
   private:
     /**
      * @brief Convert from a vector of vertices to an array of floats that can be loaded into video memory
@@ -98,6 +111,8 @@ class VertexBuffer
     void setupVao(VertexBufferDesc desc);
     GLuint m_vb_object_id;
     GLuint m_vao_object_id;
+
+    unsigned int m_size;
 
     VertexBufferDesc m_buffer_desc;
     std::shared_ptr<IndexBuffer> m_index_buffer;
