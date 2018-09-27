@@ -1,12 +1,13 @@
 project(yage_core)
 
 set(GraphicsSource src/Graphics/OpenGL/GLDevice.cpp src/Graphics/OpenGL/VertexBuffer.cpp
-src/Graphics/OpenGL/IndexBuffer.cpp)
-add_library(yage_core STATIC src/Window.cpp ${GraphicsSource})
+src/Graphics/OpenGL/IndexBuffer.cpp src/Graphics/OpenGL/Shader.cpp src/Graphics/Renderer.cpp)
+set(UtilSource src/Util/FileReader.cpp)
+add_library(yage_core STATIC src/Window.cpp ${GraphicsSource} ${UtilSource})
 
 target_include_directories(yage_core PUBLIC 
 ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics
-${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics/OpenGL)
+${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics/OpenGL ${CMAKE_CURRENT_SOURCE_DIR}/include/Util) 
 
 find_package(glfw3 REQUIRED)
 if(glfw3_FOUND)

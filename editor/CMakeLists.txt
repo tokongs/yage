@@ -1,4 +1,6 @@
+cmake_minimum_required(VERSION 3.12)
 project(yage_editor)
-
+subdirs(3rd-party)
 add_executable(yage_editor src/main.cpp)
-target_link_libraries(yage_editor yage_core)
+target_link_libraries(yage_editor yage_core imgui)
+target_include_directories(yage_editor PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include/windows)
