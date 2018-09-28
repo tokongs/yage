@@ -1,11 +1,11 @@
 #include <config.h>
 #ifdef WINDOWS
 #include <direct.h>
-#define GetCurrentDir _getcwd
+#define getCurrentDir _getcwd
 #else
 #include <unistd.h>
-#define GetCurrentDir getcwd
+#define getCurrentDir getcwd
 #endif
 #include<iostream>
  
-std::string GetCurrentWorkingDir( void );
+std::string getCurrentWorkingDir( void );

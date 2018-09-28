@@ -8,26 +8,17 @@
 #include "VertexBuffer.h"
 #include "Shader.h"
 #include "Window.h"
-#ifdef WINDOWS
-#include <direct.h>
-#define GetCurrentDir _getcwd
-#else
-#include <unistd.h>
-#define GetCurrentDir getcwd
-#endif
 #include <iostream>
-#include <FileReader.h>
- 
-std::string GetCurrentWorkingDir( void ) {
-  char buff[FILENAME_MAX];
-  GetCurrentDir( buff, FILENAME_MAX );
-  std::string current_working_dir(buff);
-  return current_working_dir;
-}
+#include "Util.h"
+#include "FileReader.h"
+#include "ResourceManager.h" 
 
 int main(int argc, char** argv){
+
+    yage::ResourceManager manager("assets/resource_overview");
+
   const char* glsl_version = "#version 460";
-    std::cout << GetCurrentWorkingDir() << std::endl;
+    std::cout << getCurrentWorkingDir() << std::endl;
     yage::WindowDesc desc;
     desc.floating = true;
     desc.decorated = true;
@@ -54,7 +45,6 @@ int main(int argc, char** argv){
     bool show_demo_window = true;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
     while(!window->shouldClose()){
         device->clearBuffers();
         ImGui_ImplOpenGL3_NewFrame();
