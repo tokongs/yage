@@ -14,7 +14,9 @@ class Resource
 {
 
   public:
-    Resource(unsigned int id, std::string name, std::string filepath);
+    Resource(unsigned int id, std::string name, std::string file_path);
+    Resource();
+    
     virtual ~Resource();
 
     /**
@@ -40,7 +42,7 @@ class Resource
 
   protected:
     unsigned int m_id;
-    std::string m_filepath;
+    std::string m_file_path;
     std::string m_name;
 };
 typedef std::shared_ptr<Resource> ResourcePtr;

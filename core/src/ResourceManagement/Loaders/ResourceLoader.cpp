@@ -7,12 +7,16 @@ ResourceLoader::ResourceLoader(std::string type)
 {
 }
 
+ResourceLoader::ResourceLoader(){
+}
+
 ResourceLoader::~ResourceLoader()
 {
 }
 
-ResourcePtr ResourceLoader::load(){
-
+std::string ResourceLoader::getType(){
+    return m_type;
 }
+
 
 } // namespace yage

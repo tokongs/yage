@@ -17,7 +17,16 @@ ResourceManager::ResourceManager(std::string resource_overview_file_path)
 }
 
 ResourceManager::~ResourceManager(){
+    FLUSH_LOGGERS(ResourceManager);
+}
 
+
+void ResourceManager::registerResourceLoader(std::shared_ptr<ResourceLoader> loader){
+    if(!loader){
+        LOG(ResourceManager, error, "Trying to register nullptr as a resource loader");
+        return;
+    }
+    m_loaders[loader->getType()] = loader;
 }
 
 void ResourceManager::buildFilePathMap(std::string resource_overview)

@@ -7,6 +7,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/sinks/basic_file_sink.h" 
 #include <iostream>
+#include <memory>
 
 namespace yage
 {
@@ -36,4 +37,6 @@ private:
   
   DECLARE_LOGGERS;
 };
+
+typedef std::shared_ptr<Shader> ShaderPtr;
 } // namespace yage

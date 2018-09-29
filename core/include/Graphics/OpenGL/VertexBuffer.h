@@ -115,7 +115,7 @@ class VertexBuffer
     unsigned int m_size;
 
     VertexBufferDesc m_buffer_desc;
-    std::shared_ptr<IndexBuffer> m_index_buffer;
+    IndexBufferPtr m_index_buffer;
     bool m_indexed = false;
     std::vector<float> m_shadow_copy;
 
@@ -130,4 +130,6 @@ class VertexBuffer
      */
     int sizeOfVertex(VertexBufferDesc desc);
 };
+
+    typedef std::shared_ptr<VertexBuffer> VertexBufferPtr;
 } // namespace yage

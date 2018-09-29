@@ -40,15 +40,15 @@
         }
 #define FILE_LOGGER(class, type, message)                        \
     if (#type == "error")                                        \
-        class ::file_logger->type("{}:{}:", __FILE__, __LINE__); \
-    class ::file_logger->type(message);
+        class::file_logger->type("{}:{}:", __FILE__, __LINE__); \
+    class::file_logger->type(message);
 
 #define CONSOLE_LOGGER(class, type, message)                        \
     if (#type == "error")                                           \
-        class ::console_logger->type("{}:{}:", __FILE__, __LINE__); \
-    class ::console_logger->type(message);
+        class::console_logger->type("{}:{}:", __FILE__, __LINE__); \
+    class::console_logger->type(message);
 #define LOG(class, type, message) FILE_LOGGER(class, type, message) CONSOLE_LOGGER(class, type, message)
-
+#define FLUSH_LOGGERS(class) class::console_logger->flush(); class::file_logger->flush();
 #else
 #define DECLARE_LOGGERS
 #define DEFINE_LOGGERS

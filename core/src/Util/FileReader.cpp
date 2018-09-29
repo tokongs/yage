@@ -19,11 +19,12 @@ FileReader::FileReader(std::string root_dir)
 
 FileReader::~FileReader()
 {
+    FLUSH_LOGGERS(FileReader);
 }
 
 std::string FileReader::readAsString(std::string file_name)
 {
-    std::string path = m_root_dir + file_name;
+    std::string path = file_name;
     CONSOLE_LOGGER(FileReader, info, "Atempting to read file to string, file name: " + file_name);
     FILE_LOGGER(FileReader, info, "Atempting to read file to string, file name: " + file_name);
 

@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <vector>
 #include <config.h>
+#include <memory>
 namespace yage
 {
     /**
@@ -50,4 +51,5 @@ class IndexBuffer{
 
     DECLARE_LOGGERS;
 };
+    typedef std::shared_ptr<IndexBuffer> IndexBufferPtr;
 }

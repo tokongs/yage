@@ -22,15 +22,19 @@ public:
    * @param type 
    * @return ResourcePtr returns nullptr if it cannot find the resource 
    */
-  ResourcePtr getResource(std::string name, std::string type);
+template<typename T> std::shared_ptr<T> getResource(std::string name, std::string type){
+    std::shared_ptr<ResourceLoader> loader = m_loaders[type];
+    ResourcePtr result = loader->load(m_file_paths[name]);
+    return std::dynamic_pointer_cast<T>(result);
+}
 
-  void registerResourceLoader(ResourceLoader loader, std::string type);
+  void registerResourceLoader(std::shared_ptr<ResourceLoader> loader);
 
 private:
   void buildFilePathMap(std::string resource_overview);
 
   std::unordered_map<std::string, ResourcePtr> m_loaded_resources;
-  std::unordered_map<std::string, ResourceLoader> m_loaders;
+  std::unordered_map<std::string, std::shared_ptr<ResourceLoader> > m_loaders;
   std::unordered_map<std::string, std::string> m_file_paths;
   std::vector<std::string> m_types;
 

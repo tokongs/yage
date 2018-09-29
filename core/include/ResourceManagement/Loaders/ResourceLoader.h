@@ -18,6 +18,7 @@ class ResourceLoader
    * @param type 
    */
     ResourceLoader(std::string type);
+    ResourceLoader();
     ~ResourceLoader();
 
     /**
@@ -25,7 +26,14 @@ class ResourceLoader
      * 
      * @return ResourcePtr 
      */
-    virtual ResourcePtr load();
+    virtual ResourcePtr load(std::string filepath) = 0;
+
+    /**
+     * @brief Returns the type of resource this loader loads
+     * 
+     * @return std::string 
+     */
+    std::string getType();
 
   private:
     std::string m_type;
