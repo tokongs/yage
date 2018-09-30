@@ -1,0 +1,6 @@
+#shader
+basic_fragment_shader shaders/basic.fs
+basic_vertex_shader shaders/basic.vs
+
+#mesh
+box meshes/box.obj
