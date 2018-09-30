@@ -12,10 +12,12 @@
 #include "Util.h"
 #include "FileReader.h"
 #include "ResourceManager.h" 
-
+#include "MeshLoader.h"
+#include "ShaderLoader.h"
+#include "Program.h"
 int main(int argc, char** argv){
 
-    yage::ResourceManager manager("assets/resource_overview");
+   
 
   const char* glsl_version = "#version 460";
     std::cout << getCurrentWorkingDir() << std::endl;
@@ -30,11 +32,22 @@ int main(int argc, char** argv){
 
     std::shared_ptr<yage::GLDevice> device = window->getGraphicsDevice();
 
+    yage::ResourceManager manager("/home/tokongs/projects/personal/yage/assets/");
+    std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
+    std::shared_ptr<yage::ShaderLoader> shader_loader = std::make_shared<yage::ShaderLoader>();
+
+    manager.registerResourceLoader<yage::Mesh>(mesh_loader);
+    manager.registerResourceLoader<yage::Shader>(shader_loader);
+
+
+    int mesh = manager.getHandle<yage::Mesh>("box");
+    int vertex = manager.getHandle<yage::Shader>("basic_vertex_shader");
+    yage::Program program;
+    program.attachShader(manager.getResource<yage::Shader>(vertex));
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;   // Enable Gamepad Controls
 
     ImGui_ImplGlfw_InitForOpenGL(window->getWindowHandle(), true);
     ImGui_ImplOpenGL3_Init(glsl_version);

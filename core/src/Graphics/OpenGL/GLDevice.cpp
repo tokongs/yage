@@ -8,7 +8,7 @@ GLDevice::GLDevice()
 {
 
     INIT_LOGGERS(GLDevice);
-
+    LOG(GLDevice, info, "Creating GL Device and initializing glew.")
     //Load GL extensions
     glewExperimental = true;
     if (glewInit() != GLEW_OK)
@@ -22,6 +22,7 @@ GLDevice::GLDevice()
 }
 
 GLDevice::~GLDevice(){
+    LOG(GLDevice, info, "Destroying GL Device and initializing glew.")
 
 }
 

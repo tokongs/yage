@@ -42,6 +42,10 @@ std::string FileReader::readAsString(std::string file_name)
         CONSOLE_LOGGER(FileReader, error, "Failed to read file: " + file_name);
         FILE_LOGGER(FileReader, error, "Failed to read file: " + file_name);
     }
+
+    CONSOLE_LOGGER(FileReader, info, "File read successfully");
+    FILE_LOGGER(FileReader, info, "File read successfully");
+
 }
 
 void FileReader::changeRootDir(std::string dir)

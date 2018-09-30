@@ -1,6 +1,6 @@
 #include <GL/glew.h>
 #include <VertexBuffer.h>
-#include <Shader.h>
+#include <Program.h>
 #include <memory>
 
 namespace yage
@@ -26,7 +26,7 @@ class Renderer
      * @param vb 
      * @param shader 
      */
-    void render(std::shared_ptr<VertexBuffer> vb, std::shared_ptr<Shader> shader);
+    void render(std::shared_ptr<VertexBuffer> vb, std::shared_ptr<Program> program);
 
 };
 

@@ -25,4 +25,16 @@ std::string Resource::getFilePath(){
 std::string Resource::getName(){
     return m_name;
 }
+
+void Resource::setId(int id){
+    m_id = id;
+}
+
+void Resource::setName(std::string name){
+    m_name = name;
+}
+
+void Resource::setFilePath(std::string file_path){
+    m_file_path = file_path;
+}
 } // namespace yage

@@ -10,11 +10,11 @@ Renderer::~Renderer()
 {
 }
 
-void Renderer::render(std::shared_ptr<VertexBuffer> vb, std::shared_ptr<Shader> shader)
+void Renderer::render(std::shared_ptr<VertexBuffer> vb, std::shared_ptr<Program> program)
 {
     std::shared_ptr<IndexBuffer> ib = vb->getIndexBuffer();
     vb->bind();
-    shader->activate();
+    program->activate();
     if (ib)
     {
         glDrawElements(GL_TRIANGLES, ib->getSize(), GL_UNSIGNED_INT, 0);

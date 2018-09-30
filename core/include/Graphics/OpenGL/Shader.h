@@ -2,16 +2,20 @@
 #pragma once
 #include <GL/glew.h>
 #include <string>
-#include <config.h>
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/sinks/basic_file_sink.h" 
 #include <iostream>
 #include <memory>
+#include "config.h"
+#include "Resource.h"
 
 namespace yage
 {
-class Shader
+
+enum ShaderType{
+  VERTEX_SHADER,
+  FRAGMENT_SHADER
+};
+
+class Shader : public Resource
 {
 public:
   /**
@@ -20,21 +24,18 @@ public:
      * @param vertexCode as a string
      * @param fragmentCode as a string
      */
-  Shader(const char* vertex_code, const char* fragment_code);
+  Shader(std::string code, ShaderType type);
   ~Shader();
 
-  /**
-     * @brief Set this shader to the active shader
-     * 
-     */
-  void activate();
+  unsigned int getGLObjectId();
 
 private:
-  std::string m_vertex_code;
-  std::string m_fragment_code;
+  std::string m_code;
   
   GLuint m_gl_object_id;
   
+  ShaderType m_type;
+
   DECLARE_LOGGERS;
 };
 

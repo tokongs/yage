@@ -8,11 +8,21 @@
 #include <WavefrontLoader.h>
 
 namespace yage{
+    /**
+     * @brief Loader class for meshes
+     * 
+     */
     class MeshLoader : public ResourceLoader{
         public:
-        MeshLoader(std::string type);
+        MeshLoader();
         ~MeshLoader();
 
+        /**
+         * @brief reads contnetn from a file path and return a MeshPtr casted to a ResourcePtr
+         * 
+         * @param file_path 
+         * @return ResourcePtr 
+         */
         ResourcePtr load(std::string file_path) override;
 
         private:

@@ -40,6 +40,10 @@ class Resource
          */
     std::string getName();
 
+    void setId(int id);
+    void setName(std::string name);
+    void setFilePath(std::string file_path);
+
   protected:
     unsigned int m_id;
     std::string m_file_path;

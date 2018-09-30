@@ -2,82 +2,41 @@
 namespace yage
 {
 DEFINE_LOGGERS(Shader)
-Shader::Shader(const char *vertex_code, const char *fragment_code)
+Shader::Shader(std::string code, ShaderType type)
+    : m_type(type), m_code(code)
 {
-
     INIT_LOGGERS(Shader);
-
-
-    unsigned int vertex, fragment;
+    const char *c_code = code.c_str();
     int success;
     char info_log[512];
 
     // vertex Shader
 
-    CONSOLE_LOGGER(Shader, info, "Compiling vertex shader");
-    FILE_LOGGER(Shader, info, "Compiling vertex shader");
+    LOG(Shader, info, "Compiling shader");
 
-    vertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex, 1, &vertex_code, NULL);
-    glCompileShader(vertex);
+    m_gl_object_id = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(m_gl_object_id, 1, &c_code, NULL);
+    glCompileShader(m_gl_object_id);
     // print compile errors if any
 
-    glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
+    glGetShaderiv(m_gl_object_id, GL_COMPILE_STATUS, &success);
     if (!success)
     {
-        glGetShaderInfoLog(vertex, 512, NULL, info_log);
-        CONSOLE_LOGGER(Shader, error, info_log);
-        FILE_LOGGER(Shader, error, info_log);
+        glGetShaderInfoLog(m_gl_object_id, 512, NULL, info_log);
+        LOG(Shader, error, info_log);
+        return;
     };
-
-    CONSOLE_LOGGER(Shader, info, "Compiling fragment shader");
-    FILE_LOGGER(Shader, info, "Compiling fragment shader");
-
-    fragment = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment, 1, &fragment_code, NULL);
-    glCompileShader(fragment);
-
-    // print compile errors if any
-    glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(fragment, 512, NULL, info_log);
-        CONSOLE_LOGGER(Shader, error, info_log);
-        FILE_LOGGER(Shader, error, info_log);
-    };
-
-
-    
-    // shader Program
-    m_gl_object_id = glCreateProgram();
-    CONSOLE_LOGGER(Shader, info, "Linking program with id: " + std::to_string(m_gl_object_id));
-    FILE_LOGGER(Shader, info, "Linking program with id: " + std::to_string(m_gl_object_id));
-    glAttachShader(m_gl_object_id, vertex);
-    glAttachShader(m_gl_object_id, fragment);
-    glLinkProgram(m_gl_object_id);
-    // print linking errors if any
-    glGetProgramiv(m_gl_object_id, GL_LINK_STATUS, &success);
-    if (!success)
-    {
-        glGetProgramInfoLog(m_gl_object_id, 512, NULL, info_log);
-        CONSOLE_LOGGER(Shader, error, info_log);
-        FILE_LOGGER(Shader, error, info_log);
-    }else{
-        CONSOLE_LOGGER(Shader, info, "Shader creations successfull.");
-        FILE_LOGGER(Shader, info, "Shader creations successfull.");
-    }
-
-    // delete the shaders as they're linked into our program now and no longer necessery
-    glDeleteShader(vertex);
-    glDeleteShader(fragment);
+    LOG(Shader, info, "Shader successfully complied with id" + std::to_string(m_gl_object_id));
 }
 
-Shader::~Shader(){
-    glDeleteProgram(m_gl_object_id);
-}
-
-void Shader::activate()
+Shader::~Shader()
 {
-    glUseProgram(m_gl_object_id);
+    LOG(Shader, info, "Deleting shader with id" + std::to_string(m_gl_object_id));     
+    glDeleteShader(m_gl_object_id);
+}
+
+unsigned int Shader::getGLObjectId()
+{
+    return m_gl_object_id;
 }
 } // namespace yage

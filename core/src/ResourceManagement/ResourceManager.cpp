@@ -3,11 +3,12 @@
 namespace yage
 {
 DEFINE_LOGGERS(ResourceManager);
-ResourceManager::ResourceManager(std::string resource_overview_file_path)
+ResourceManager::ResourceManager(std::string resource_dir)
 {
     INIT_LOGGERS(ResourceManager);
     FileReader reader;
-    std::string resource_overview = reader.readAsString(resource_overview_file_path);
+    std::string resource_overview = reader.readAsString(resource_dir + "resource_overview");
+    m_resource_dir = resource_dir;
 
     if(resource_overview.empty()){
         LOG(ResourceManager, warn, "Resource Overview File is empty");
@@ -20,24 +21,24 @@ ResourceManager::~ResourceManager(){
     FLUSH_LOGGERS(ResourceManager);
 }
 
-
-void ResourceManager::registerResourceLoader(std::shared_ptr<ResourceLoader> loader){
-    if(!loader){
-        LOG(ResourceManager, error, "Trying to register nullptr as a resource loader");
-        return;
+void ResourceManager::unloadResource(int id){
+    for(auto it = m_indices.begin();  it != m_indices.end(); it++){
+        if(it->second == id){
+            m_indices.erase(it);
+            break;
+        }
     }
-    m_loaders[loader->getType()] = loader;
+    m_loaded_resources.erase(id);
+    m_free_ids.push(id);
 }
 
 void ResourceManager::buildFilePathMap(std::string resource_overview)
 {
-    std::string cwd = getCurrentWorkingDir();
     auto it = resource_overview.find_first_of('#');
     while (it != std::string::npos)
     {   
         auto it2 = resource_overview.find_first_of('\n', it);
         std::string type = resource_overview.substr(it + 1, it2 - it - 1);
-        m_types.push_back(type);
         auto it3 = resource_overview.find_first_of('\n', it2 + 1);
 
         while((it3 < resource_overview.find_first_of("#", it + 1) || it3 == std::string::npos) && it2 != std::string::npos){
@@ -55,7 +56,7 @@ void ResourceManager::buildFilePathMap(std::string resource_overview)
             it2 = it3;
             it3 = resource_overview.find_first_of('\n', it2 + 1);
 
-            m_file_paths[name] = cwd + '/' + path;
+            m_file_paths[name] = m_resource_dir + path;
         }
     it = resource_overview.find_first_of('#', it + 1);
     }
