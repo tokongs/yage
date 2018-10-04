@@ -1,7 +1,7 @@
 #include <Shader.h>
 namespace yage
 {
-DEFINE_LOGGERS(Shader)
+DEFINE_LOGGERS(Shader);
 Shader::Shader(std::string code, ShaderType type)
     : m_type(type), m_code(code)
 {
@@ -14,7 +14,14 @@ Shader::Shader(std::string code, ShaderType type)
 
     LOG(Shader, info, "Compiling shader");
 
-    m_gl_object_id = glCreateShader(GL_VERTEX_SHADER);
+    if (m_type == ShaderType::VERTEX_SHADER)
+    {
+        m_gl_object_id = glCreateShader(GL_VERTEX_SHADER);
+    }
+    else if (m_type == ShaderType::FRAGMENT_SHADER)
+    {
+        m_gl_object_id = glCreateShader(GL_FRAGMENT_SHADER);
+    }
     glShaderSource(m_gl_object_id, 1, &c_code, NULL);
     glCompileShader(m_gl_object_id);
     // print compile errors if any
@@ -29,10 +36,18 @@ Shader::Shader(std::string code, ShaderType type)
     LOG(Shader, info, "Shader successfully complied with id" + std::to_string(m_gl_object_id));
 }
 
+Shader::Shader(){
+    
+}
+
 Shader::~Shader()
 {
-    LOG(Shader, info, "Deleting shader with id" + std::to_string(m_gl_object_id));     
+    LOG(Shader, info, "Deleting shader with id: " + std::to_string(m_gl_object_id));
     glDeleteShader(m_gl_object_id);
+}
+
+std::string Shader::getType(){
+    return m_resource_type;
 }
 
 unsigned int Shader::getGLObjectId()

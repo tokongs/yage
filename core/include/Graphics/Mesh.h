@@ -12,14 +12,19 @@ class Mesh : public Resource
 {
     public:
     Mesh(VertexBufferPtr);
+    Mesh();
     ~Mesh();
 
     VertexBufferPtr getVertexBuffer();
     glm::vec3 getAABB();
 
+    std::string getType() override;
+
+
     private:
     VertexBufferPtr m_vertex_buffer;
     glm::vec3 m_aabb;
+    std::string m_resource_type = "Mesh";
     
     DECLARE_LOGGERS;
 };

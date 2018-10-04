@@ -7,6 +7,10 @@ Mesh::Mesh(VertexBufferPtr buffer)
 {
 }
 
+Mesh::Mesh(){
+    
+}
+
 Mesh::~Mesh()
 {
 }
@@ -21,4 +25,8 @@ glm::vec3 Mesh::getAABB()
     return m_aabb;
 }
 
+
+std::string Mesh::getType(){
+    return m_resource_type;
+}
 } // namespace yage

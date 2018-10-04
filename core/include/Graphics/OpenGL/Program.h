@@ -1,9 +1,12 @@
 #pragma once
 #include <GL/glew.h>
 #include <memory>
+#include <vector>
+#include <string>
 #include "config.h"
 #include "Shader.h"
 #include "Resource.h"
+#include "ResourceManager.h"
 
 namespace yage
 {
@@ -13,19 +16,21 @@ namespace yage
      */
 class Program : public Resource
 {
-  public:
-    Program();
-    ~Program();
+public:
+  Program();
+  ~Program();
 
-    void attachShader(ShaderPtr shader);
-    void activate();
+  void attachShaders(std::vector<int> shaders);
+  void activate();
 
-  private:
-    GLuint m_gl_object_id;
-    ShaderPtr m_vertex_shader = nullptr;
-    ShaderPtr m_fragment_shader = nullptr;
+  std::string getType() override;
 
-    DECLARE_LOGGERS
+private:
+  GLuint m_gl_object_id;
+  ShaderPtr m_vertex_shader = nullptr;
+  ShaderPtr m_fragment_shader = nullptr;
+  std::string m_type;
+  DECLARE_LOGGERS
 };
-    typedef std::shared_ptr<Program> ProgramPtr;
+typedef std::shared_ptr<Program> ProgramPtr;
 } // namespace yage

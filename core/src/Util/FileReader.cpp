@@ -48,6 +48,11 @@ std::string FileReader::readAsString(std::string file_name)
 
 }
 
+bool FileReader::fileExists(std::string file){
+    std::ifstream f(file.c_str());
+    return f.good();
+}
+
 void FileReader::changeRootDir(std::string dir)
 {
     m_root_dir = dir;

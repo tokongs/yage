@@ -25,9 +25,12 @@ public:
      * @param fragmentCode as a string
      */
   Shader(std::string code, ShaderType type);
+  Shader();
   ~Shader();
 
   unsigned int getGLObjectId();
+
+  std::string getType() override;
 
 private:
   std::string m_code;
@@ -36,8 +39,12 @@ private:
   
   ShaderType m_type;
 
+  std::string m_resource_type = "Shader";
+
   DECLARE_LOGGERS;
 };
+
+
 
 typedef std::shared_ptr<Shader> ShaderPtr;
 } // namespace yage

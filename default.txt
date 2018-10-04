@@ -545,3 +545,92 @@
 s GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
 [2018-09-29 23:01:59.790] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
 [2018-09-29 23:01:59.790] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-02 20:17:32.983] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 20:18:04.441] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 20:19:54.509] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 20:20:03.794] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 20:21:58.261] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 20:50:06.544] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 20:50:06.544] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/meshes/box.obj
+[2018-10-02 20:50:06.545] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/shaders/basic.vs
+[2018-10-02 20:50:06.545] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/shaders/basic.fs
+[2018-10-02 20:50:06.545] [VertexBuffer_file_logger] [info] Created Vertex Array Object, ID: 1
+[2018-10-02 20:50:06.545] [VertexBuffer_file_logger] [info] Created Vertex Buffer Object, ID: 1
+[2018-10-02 20:50:09.090] [VertexBuffer_file_logger] [info] Deleting Vertex Buffer Object, ID: 1
+[2018-10-02 20:50:09.090] [VertexBuffer_file_logger] [info] Deleting Vertex Array Object, ID: 1
+[2018-10-02 20:50:06.545] [ShaderLoader_file_logger] [info] Loading shader form file: /home/tokongs/projects/personal/yage/assets/shaders/basic.vs
+[2018-10-02 20:50:06.545] [ShaderLoader_file_logger] [info] Loading shader form file: /home/tokongs/projects/personal/yage/assets/shaders/basic.fs
+[2018-10-02 20:50:06.544] [MeshLoader_file_logger] [info] Loading mesh from file: /home/tokongs/projects/personal/yage/assets/meshes/box.obj
+[2018-10-02 20:50:06.545] [Program_file_logger] [info] Created program with id: 3
+[2018-10-02 20:50:06.545] [Program_file_logger] [info] Linking basic_vertex_shader to program 3
+[2018-10-02 20:50:06.546] [Program_file_logger] [info] Linking basic_fragment_shader to program 3
+[2018-10-02 20:50:06.546] [Program_file_logger] [info] Shader linking successfull.
+[2018-10-02 20:50:09.083] [Program_file_logger] [info] Deleting program with id: 3
+[2018-10-02 20:50:06.545] [Shader_file_logger] [info] Compiling shader
+[2018-10-02 20:50:06.545] [Shader_file_logger] [info] Shader successfully complied with id1
+[2018-10-02 20:50:06.545] [Shader_file_logger] [info] Compiling shader
+[2018-10-02 20:50:06.545] [Shader_file_logger] [info] Shader successfully complied with id2
+[2018-10-02 20:50:09.090] [Shader_file_logger] [info] Deleting shader with id2
+[2018-10-02 20:50:09.090] [Shader_file_logger] [info] Deleting shader with id1
+[2018-10-02 20:50:06.487] [GLDevice_file_logger] [info] Creating GL Device and initializing glew.
+[2018-10-02 20:50:06.566] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STATIC_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-02 20:50:06.566] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STATIC_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-02 20:50:06.666] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-02 20:50:06.666] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-02 20:50:09.090] [GLDevice_file_logger] [info] Destroying GL Device and initializing glew.
+[2018-10-02 20:54:37.614] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 20:57:50.752] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:02:33.038] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:03:26.706] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:10:46.529] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:11:40.399] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:14:57.318] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:15:07.102] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:15:14.451] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:17:25.570] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:18:06.821] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-02 21:18:44.119] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-05 00:50:19.665] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-05 01:12:26.970] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-05 01:31:05.673] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-05 01:31:05.673] [MeshLoader_file_logger] [info] Loading mesh from file: 
+[2018-10-05 01:31:05.673] [MeshLoader_file_logger] [error] /home/tokongs/projects/personal/yage/core/src/ResourceManagement/Loaders/MeshLoader.cpp:19:
+[2018-10-05 01:31:05.673] [MeshLoader_file_logger] [error] Trying to load empty mesh from: 
+[2018-10-05 01:31:05.673] [ResourceManager_file_logger] [error] /home/tokongs/projects/personal/yage/core/include/ResourceManagement/ResourceManager.h:66:
+[2018-10-05 01:31:05.673] [ResourceManager_file_logger] [error] Failed to load resource: box from 
+[2018-10-05 01:31:05.673] [ShaderLoader_file_logger] [info] Loading shader form file: 
+[2018-10-05 01:31:05.673] [ShaderLoader_file_logger] [error] /home/tokongs/projects/personal/yage/core/src/ResourceManagement/Loaders/ShaderLoader.cpp:32:
+[2018-10-05 01:31:05.673] [ShaderLoader_file_logger] [error] Trying to load shader from empty file: 
+[2018-10-05 01:31:05.673] [ResourceManager_file_logger] [error] /home/tokongs/projects/personal/yage/core/include/ResourceManagement/ResourceManager.h:66:
+[2018-10-05 01:31:05.673] [ResourceManager_file_logger] [error] Failed to load resource: basic_vertex_shader from 
+[2018-10-05 01:31:05.673] [ShaderLoader_file_logger] [info] Loading shader form file: 
+[2018-10-05 01:31:05.673] [ShaderLoader_file_logger] [error] /home/tokongs/projects/personal/yage/core/src/ResourceManagement/Loaders/ShaderLoader.cpp:32:
+[2018-10-05 01:31:05.673] [ShaderLoader_file_logger] [error] Trying to load shader from empty file: 
+[2018-10-05 01:31:05.673] [ResourceManager_file_logger] [error] /home/tokongs/projects/personal/yage/core/include/ResourceManagement/ResourceManager.h:66:
+[2018-10-05 01:31:05.673] [ResourceManager_file_logger] [error] Failed to load resource: basic_fragment_shader from 
+[2018-10-05 01:33:15.808] [FileReader_file_logger] [info] Atempting to read file to string, file name: /home/tokongs/projects/personal/yage/assets/resource_overview
+[2018-10-05 01:33:15.800] [GLDevice_file_logger] [info] Creating GL Device and initializing glew.
+[2018-10-05 01:33:41.227] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 1 (bound to GL_ARRAY_BUFFER_ARB, usage hint is GL_STATIC_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:41.234] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STATIC_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:41.234] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STATIC_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.164] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.164] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.214] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.214] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.231] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.231] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.247] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.247] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.264] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.264] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.280] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.280] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.297] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.297] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.314] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.314] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.330] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.330] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.347] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 2 (bound to GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (0), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (1), GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB (2), and GL_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.347] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): Buffer detailed info: Buffer object 3 (bound to GL_ELEMENT_ARRAY_BUFFER_ARB, usage hint is GL_STREAM_DRAW) will use VIDEO memory as the source for buffer object operations.
+[2018-10-05 01:33:43.381] [GLDevice_file_logger] [info] OpenGL Debug Callback(type: 33361, severity: 33387): 
