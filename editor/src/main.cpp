@@ -1,65 +1,70 @@
-#include <Window.h>
-#include <GLDevice.h>
+#include "Window.h"
+#include "GLDevice.h"
 #include <glm/vec4.hpp>
 #include <memory>
-#include <VertexBuffer.h>
-#include <Shader.h>
-#ifdef WINDOWS
-#include <direct.h>
-#define GetCurrentDir _getcwd
-#else
-#include <unistd.h>
-#define GetCurrentDir getcwd
-#endif
-#include<iostream>
-#include <FileReader.h>
- 
-std::string GetCurrentWorkingDir( void ) {
-  char buff[FILENAME_MAX];
-  GetCurrentDir( buff, FILENAME_MAX );
-  std::string current_working_dir(buff);
-  return current_working_dir;
-}
+#include "VertexBuffer.h"
+#include "Shader.h"
+#include "Window.h"
+#include <iostream>
+#include "Util.h"
+#include "FileReader.h"
+#include "ResourceManager.h"
+#include "MeshLoader.h"
+#include "ShaderLoader.h"
+#include "Program.h"
+#include "Renderer.h"
+#include "Gui.h"
+#include "ResourceBrowser.h"
+int main(int argc, char **argv)
+{
 
-int main(){
-
-    std::cout << GetCurrentWorkingDir() << std::endl;
+    std::cout << getCurrentWorkingDir() << std::endl;
 
     yage::WindowDesc desc;
     desc.floating = true;
+    desc.decorated = true;
+    desc.height = 768;
+    desc.width = 1024;
+    desc.resizable = true;
+    desc.title = "Test";
+    std::shared_ptr<yage::Window> window = std::make_shared<yage::Window>(desc);
+    std::shared_ptr<yage::GLDevice> device = window->getGraphicsDevice();
 
-    yage::Window window(desc);
-    std::shared_ptr<yage::GLDevice> gld = window.getGraphicsDevice();
-    std::vector<yage::Vertex> vertices;
+    yage::Gui gui(window->getWindowHandle(), 460);
+    yage::ResourceBrowser resource_browser;
 
-    vertices.push_back(yage::Vertex());
-    vertices.push_back(yage::Vertex());
-    vertices.push_back(yage::Vertex());
-    
-    vertices[0].position = glm::vec3(0.0, 1.0, 0.0);
-    vertices[1].position = glm::vec3(1.0, 0.0, 0.0);
-    vertices[2].position = glm::vec3(-1.0, 0.0, 0.0);
+    yage::ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
+    std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
+    std::shared_ptr<yage::ShaderLoader> shader_loader = std::make_shared<yage::ShaderLoader>();
 
-    yage::VertexBufferDesc buffer_desc;
-    buffer_desc.has_position = true;
-    buffer_desc.keep_shadow_buffer = true;
+    yage::ResourceManager::getInstance().registerResourceLoader<yage::Mesh>(mesh_loader);
+    yage::ResourceManager::getInstance().registerResourceLoader<yage::Shader>(shader_loader);
 
-    std::shared_ptr<yage::VertexBuffer> buffer = std::make_shared<yage::VertexBuffer>(buffer_desc, vertices);
-    gld->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
-    yage::FileReader reader;
-    std::string vs = reader.readAsString("assets/shaders/basic.vs");
-    std::string fs = reader.readAsString("assets/shaders/basic.fs");
-    yage::Shader shader(vs.c_str(), fs.c_str());
+    int mesh = yage::ResourceManager::getInstance().getHandle<yage::Mesh>("box");
+    int vertex = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_vertex_shader");
+    int fragment = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_fragment_shader");
 
-    while(!window.shouldClose()){
-        gld->clearBuffers();
-        shader.activate();
-        buffer->bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        buffer->unbind();
-        window.update();
+    yage::ProgramPtr program = std::make_shared<yage::Program>();
+
+    yage::Renderer renderer;
+
+    std::vector<int> shaders;
+    shaders.push_back(vertex);
+    shaders.push_back(fragment);
+
+    program->attachShaders(shaders);
+
+    device->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
+    while (!window->shouldClose())
+    {
+        gui.startFrame();
+        resource_browser.constructFrame();
+
+        device->clearBuffers();
+        renderer.render(yage::ResourceManager::getInstance().getResource<yage::Mesh>(mesh)->getVertexBuffer(), program);
+        gui.render();
+        window->update();
     }
-
 
     return 0;
 }

@@ -36,6 +36,15 @@ class FileReader
     void changeRootDir(std::string dir);
     
     /**
+     * @brief Checks if file exists
+     * 
+     * @param file 
+     * @return true 
+     * @return false 
+     */
+    bool fileExists(std::string file);
+
+    /**
      * @brief Returns the root directory as a string
      * 
      * @return std::string 

@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.12)
+project(imgui)
+
+add_library(imgui STATIC imgui_draw.cpp imgui_widgets.cpp imgui.cpp imgui_impl_glfw.cpp imgui_impl_opengl3.cpp)
+
+target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+find_package(glfw3 REQUIRED)
+if(glfw3_FOUND)
+    target_include_directories(imgui PUBLIC ${GLFW_INCLUDE_DIRS})
+    target_link_libraries(imgui glfw)
+else()
+    message([ERROR] "Failed to find GLFW3")
+endif()
+
+find_package(GLEW REQUIRED)
+if(GLEW_FOUND)
+    target_include_directories(imgui PUBLIC ${GLEW_INCLUDE_DIRS})
+    target_link_libraries(imgui ${GLEW_LIBRARIES})
+else()
+    message([ERROR] "Failed to find GLEW")
+endif()
+
+find_package(OpenGL REQUIRED)
+if(OPENGL_FOUND)
+    target_include_directories(imgui PUBLIC ${OPENGL_INCLUDE_DIRS})
+    target_link_libraries(imgui ${OPENGL_LIBRARIES})
+else()
+    message([ERROR] "Failed to find OpenGL")
+endif()

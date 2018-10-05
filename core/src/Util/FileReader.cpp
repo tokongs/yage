@@ -19,11 +19,12 @@ FileReader::FileReader(std::string root_dir)
 
 FileReader::~FileReader()
 {
+    FLUSH_LOGGERS(FileReader);
 }
 
 std::string FileReader::readAsString(std::string file_name)
 {
-    std::string path = m_root_dir + file_name;
+    std::string path = file_name;
     CONSOLE_LOGGER(FileReader, info, "Atempting to read file to string, file name: " + file_name);
     FILE_LOGGER(FileReader, info, "Atempting to read file to string, file name: " + file_name);
 
@@ -41,6 +42,15 @@ std::string FileReader::readAsString(std::string file_name)
         CONSOLE_LOGGER(FileReader, error, "Failed to read file: " + file_name);
         FILE_LOGGER(FileReader, error, "Failed to read file: " + file_name);
     }
+
+    CONSOLE_LOGGER(FileReader, info, "File read successfully");
+    FILE_LOGGER(FileReader, info, "File read successfully");
+
+}
+
+bool FileReader::fileExists(std::string file){
+    std::ifstream f(file.c_str());
+    return f.good();
 }
 
 void FileReader::changeRootDir(std::string dir)

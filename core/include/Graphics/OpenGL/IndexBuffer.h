@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <vector>
 #include <config.h>
+#include <memory>
 namespace yage
 {
     /**
@@ -28,13 +29,27 @@ class IndexBuffer{
      */
     void unbind();
 
+    /**
+     * @brief Get the Id of the underlying gl object
+     * 
+     * @return unsigned int 
+     */
     unsigned int getGlId();
+
+    /**
+     * @brief Get the the number of elements in the buffer
+     * 
+     * @return unsigned int 
+     */
+    unsigned int getSize();
 
     private:
 
     GLuint m_gl_object_id;
+    unsigned int m_size;
     std::vector<unsigned int> m_shadow_copy;
 
     DECLARE_LOGGERS;
 };
+    typedef std::shared_ptr<IndexBuffer> IndexBufferPtr;
 }

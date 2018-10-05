@@ -3,9 +3,6 @@
 #include <GLFW/glfw3.h>
 #include <string>
 #include <iostream>
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h" //support for stdout logging
-#include "spdlog/sinks/basic_file_sink.h"    //support for basic file logging
 #include <config.h>
 #include <memory>
 
@@ -78,7 +75,12 @@ class Window
      */
     std::shared_ptr<GLDevice> getGraphicsDevice();
 
-    
+    /**
+     * @brief Get a pointer to the glfw window internal window handle
+     * 
+     * @return GLFWwindow* 
+     */
+    GLFWwindow* getWindowHandle();
 
   private:
     //Window properties
@@ -87,9 +89,7 @@ class Window
     //pointer to the internal glfw window
     GLFWwindow *m_window_handle;
 
-    //Loggers
-    static std::shared_ptr<spdlog::logger> console_logger;
-    static std::shared_ptr<spdlog::logger> file_logger;
+    DECLARE_LOGGERS;
 
     //Graphics Device
     std::shared_ptr<GLDevice> m_device;
