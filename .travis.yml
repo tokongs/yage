@@ -1,0 +1,14 @@
+language: cpp
+compiler: gcc
+
+os:
+    - linux
+addons:
+    apt:
+        packages:
+            - cmake
+            - libglew-dev
+script:
+    - cmake CMakeLists.txt
+    - cmake --build .
+
