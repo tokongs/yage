@@ -7,11 +7,11 @@ VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data)
 {
     INIT_LOGGERS(VertexBuffer);
     m_buffer_desc = desc;
-    glCreateVertexArrays(1, &m_vao_object_id);
+    glGenVertexArrays(1, &m_vao_object_id);
     LOG(VertexBuffer, info, "Created Vertex Array Object, ID: " + std::to_string(m_vao_object_id));
 
     bind();
-    glCreateBuffers(1, &m_vb_object_id);
+    glGenBuffers(1, &m_vb_object_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_vb_object_id);
     LOG(VertexBuffer, info, "Created Vertex Buffer Object, ID: " + std::to_string(m_vb_object_id));
 

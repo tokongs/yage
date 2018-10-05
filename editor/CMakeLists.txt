@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.9)
 project(yage_editor)
 subdirs(3rd-party)
 add_executable(yage_editor src/main.cpp src/Gui.cpp src/ResourceBrowser.cpp)

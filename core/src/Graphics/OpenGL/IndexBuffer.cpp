@@ -6,7 +6,7 @@ IndexBuffer::IndexBuffer(std::vector<unsigned int> data)
 {
     INIT_LOGGERS(IndexBuffer);
 
-    glCreateBuffers(1, &m_gl_object_id);
+    glGenBuffers(1, &m_gl_object_id);
     LOG(IndexBuffer, info, "Created Index Buffer Object, ID: " + std::to_string(m_gl_object_id));
     bind();
 

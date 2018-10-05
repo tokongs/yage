@@ -1,14 +1,22 @@
 language: cpp
-compiler: gcc
-
-os:
-    - linux
+compiler: g++
+dist: trusty
+before_install:
+    - ./install_glfw.sh
+    - ./install_glm.sh
+    - ./install_spdlog.sh
 addons:
     apt:
+        sources:
+            - ubuntu-toolchain-r-test
         packages:
+            - libgl1-mesa-dev
             - cmake
             - libglew-dev
+            - g++-4.9
 script:
     - cmake CMakeLists.txt
     - cmake --build .
+install:
+    - export CXX="g++-4.9"
 
