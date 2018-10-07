@@ -23,6 +23,7 @@ class ResourceBrowser
     void setVisible(bool visible);
   private:
     const std::string m_title = "Resource Browser";
+    std::vector<std::unique_ptr<bool> > m_selected_resource;
     bool m_visible = true;
 };
 } // namespace yage
