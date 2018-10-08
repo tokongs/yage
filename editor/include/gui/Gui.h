@@ -7,13 +7,25 @@
 
 namespace yage
 {
+    /**
+     * @brief This needs to be instantiated before any other gui elements are used
+     * 
+     */
     class Gui{
         public:
         Gui(GLFWwindow* glfw_window_handle, unsigned int glsl_version);
         ~Gui();
 
+        /**
+         * @brief Use this at the start of the rendering/game loop to indicate a new frame is being drawn
+         * 
+         */
         void startFrame();
 
+        /**
+         * @brief Use this at the end of the rendering loop to draw the gui elements.
+         * 
+         */
         void render();
 
 
