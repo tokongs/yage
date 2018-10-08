@@ -39,7 +39,7 @@ private:
   
   ShaderType m_type;
 
-  std::string m_resource_type = "Shader";
+  std::string m_resource_type = "shader";
 
   DECLARE_LOGGERS;
 };

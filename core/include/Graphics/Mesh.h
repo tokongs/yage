@@ -27,7 +27,7 @@ class Mesh : public Resource
   private:
     VertexBufferPtr m_vertex_buffer;
     aabb m_aabb;
-    std::string m_resource_type = "Mesh";
+    std::string m_resource_type = "mesh";
 
     DECLARE_LOGGERS;
 };

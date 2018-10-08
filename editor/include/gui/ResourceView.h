@@ -9,7 +9,7 @@
 namespace yage
 {
 
-class ResourceGui : public GuiElement
+class ResourceView : public GuiElement
 {
     public:
     /**
@@ -17,8 +17,8 @@ class ResourceGui : public GuiElement
      * 
      * @param independent_gui 
      */
-    ResourceGui();
-    ~ResourceGui();
+    ResourceView();
+    ~ResourceView();
     
     /**
      * @brief Set the resource object to be operated on when construcing the frame
@@ -28,8 +28,10 @@ class ResourceGui : public GuiElement
     void setResource(ResourcePtr resource);
     void constructFrame(bool independent) override;
 
-    private:
+    protected:
     ResourcePtr m_resource;
+
+    private:
     DECLARE_LOGGERS;
 };
 } // namespace yage

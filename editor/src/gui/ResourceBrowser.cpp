@@ -18,7 +18,7 @@ ResourceBrowser::~ResourceBrowser()
 void ResourceBrowser::constructFrame()
 {
 
-    ResourceGui rg;
+    ResourceView rg;
     if (!m_visible)
     {
         return;
@@ -42,11 +42,25 @@ void ResourceBrowser::constructFrame()
         ImGui::Selectable(it->second->getName().c_str(), m_selected_resource[it->second->getResourceId()].get());
         if (*m_selected_resource[it->second->getResourceId()].get())
         {
-            rg.setResource(it->second);
-            rg.constructFrame(false);
+            if (m_resource_views.find(it->second->getType()) != m_resource_views.end())
+            {
+                m_resource_views[it->second->getType()]->setResource(it->second);
+                m_resource_views[it->second->getType()]->constructFrame(false);
+            }
+            else
+            {
+                ResourceView rv;
+                rv.setResource(it->second);
+                rv.constructFrame(false);
+            }
         }
     }
     ImGui::End();
+}
+
+void ResourceBrowser::addResourceView(std::string type, std::unique_ptr<ResourceView> view)
+{  
+    m_resource_views[type] = std::move(view);
 }
 
 void ResourceBrowser::setVisible(bool visible)

@@ -15,6 +15,7 @@
 #include "Renderer.h"
 #include "Gui.h"
 #include "ResourceBrowser.h"
+#include "MeshResourceView.h"
 int main(int argc, char **argv)
 {
 
@@ -32,6 +33,8 @@ int main(int argc, char **argv)
 
     yage::Gui gui(window->getWindowHandle(), 460);
     yage::ResourceBrowser resource_browser;
+    
+    resource_browser.addResourceView("mesh", std::make_unique<yage::MeshResourceView>());
 
     yage::ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
     std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
