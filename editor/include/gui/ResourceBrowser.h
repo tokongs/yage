@@ -11,15 +11,14 @@ namespace yage
  * @brief An imgui window for browsing resources
  * 
  */
-class ResourceBrowser
+class ResourceBrowser : public GuiElement
 {
 public:
   ResourceBrowser();
   ~ResourceBrowser();
 
-  void constructFrame();
+  void constructFrame(bool independent) override;
 
-  void setVisible(bool visible);
   /**
      * @brief Adds a resource view for the specified resource type. If a resource has no resgistered resource view 
      * it vill display a default minimal display
@@ -33,6 +32,5 @@ private:
   const std::string m_title = "Resource Browser";
   std::unordered_map<int, std::unique_ptr<bool>> m_selected_resource;
   std::unordered_map<std::string, std::unique_ptr<ResourceView> > m_resource_views;
-  bool m_visible = true;
 };
 } // namespace yage

@@ -7,7 +7,7 @@
 namespace yage
 {
 /**
-     * @brief Base class for gui elements or windows
+     * @brief Base class for gui elements
      * 
      */
 class GuiElement
@@ -27,7 +27,16 @@ class GuiElement
          * @param bool independent
          */
     virtual void constructFrame(bool independent = false);
+    /**
+     * @brief A pointer to the open status of the element. Do not use this unless you know what you are doing
+     * 
+     * @return true 
+     * @return false 
+     */
 
+    bool isOpen();
+    protected:
+      bool *m_open;
   private:
     DECLARE_LOGGERS;
 };

@@ -16,6 +16,8 @@
 #include "Gui.h"
 #include "ResourceBrowser.h"
 #include "MeshResourceView.h"
+#include "ShaderResourceView.h"
+
 int main(int argc, char **argv)
 {
 
@@ -32,9 +34,7 @@ int main(int argc, char **argv)
     std::shared_ptr<yage::GLDevice> device = window->getGraphicsDevice();
 
     yage::Gui gui(window->getWindowHandle(), 460);
-    yage::ResourceBrowser resource_browser;
-    
-    resource_browser.addResourceView("mesh", std::make_unique<yage::MeshResourceView>());
+   
 
     yage::ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
     std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
@@ -58,14 +58,18 @@ int main(int argc, char **argv)
     program->attachShaders(shaders);
 
     device->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
+
+    std::unique_ptr<yage::ResourceBrowser> resource_browser = std::make_unique<yage::ResourceBrowser>();
+    resource_browser->addResourceView("mesh", std::make_unique<yage::MeshResourceView>());
+    resource_browser->addResourceView("shader", std::make_unique<yage::ShaderResourceView>());
+    gui.addGuiElement(std::move(resource_browser));
+
     while (!window->shouldClose())
     {
-        gui.startFrame();
-        resource_browser.constructFrame();
 
         device->clearBuffers();
         renderer.render(yage::ResourceManager::getInstance().getResource<yage::Mesh>(mesh)->getVertexBuffer(), program);
-        gui.render();
+        gui.constructFrame();
         window->update();
     }
 

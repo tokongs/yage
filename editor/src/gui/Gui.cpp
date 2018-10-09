@@ -8,7 +8,8 @@ Gui::Gui(GLFWwindow *glfw_window_handle, unsigned int glsl_version)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO(); (void)io;
+    ImGuiIO &io = ImGui::GetIO();
+    (void)io;
 
     ImGui_ImplGlfw_InitForOpenGL(m_glfw_window_handle, true);
     std::string verison_string = "#version " + std::to_string(m_glsl_version);
@@ -25,16 +26,24 @@ Gui::~Gui()
     ImGui::DestroyContext();
 }
 
-void Gui::startFrame()
+void Gui::constructFrame()
 {
+
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-}
 
-void Gui::render()
-{
+    for (auto it = m_elements.begin(); it != m_elements.end(); it++)
+    {
+        it->get()->constructFrame(true);
+    }
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void Gui::addGuiElement(std::unique_ptr<GuiElement> element)
+{
+    m_elements.push_back(std::move(element));
 }
 } // namespace yage

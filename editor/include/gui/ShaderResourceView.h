@@ -2,19 +2,19 @@
 #include <memory>
 #include "imgui.h"
 #include "ResourceView.h"
-#include "Mesh.h"
+#include "Shader.h"
 
 namespace yage
 {
 /**
- * @brief Constructs a gui from a MeshPtr.
+ * @brief Constructs a gui detail view for a Shader
  * 
  */
-class MeshResourceView : public ResourceView
+class ShaderResourceView : public ResourceView
 {
     public:
-    MeshResourceView();
-    ~MeshResourceView();
+    ShaderResourceView();
+    ~ShaderResourceView();
 
     void constructFrame(bool independent) override;
 

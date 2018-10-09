@@ -8,7 +8,12 @@
 
 namespace yage
 {
-
+/**
+ * @brief Base class for resource detail views. Must be extended if a new type of reosurce is to be displayed
+ * by the resource browser. See MeshResourceView for an example of how to do it. Basically just override the
+ * constructFrame function
+ * 
+ */
 class ResourceView : public GuiElement
 {
     public:

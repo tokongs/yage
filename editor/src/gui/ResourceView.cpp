@@ -24,7 +24,7 @@ void ResourceView::constructFrame(bool independent)
         LOG(ResourceView, warn, "Trying to show a resource gui with no resource.");
     }
     if(independent){
-        ImGui::Begin("Resource View");
+        ImGui::Begin("Resource View", m_open);
     }
     ImGui::LabelText("Name:", m_resource->getName().c_str());
     ImGui::LabelText("File path:", m_resource->getFilePath().c_str());
