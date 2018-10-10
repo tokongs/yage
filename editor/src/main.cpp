@@ -17,6 +17,7 @@
 #include "ResourceBrowser.h"
 #include "MeshResourceView.h"
 #include "ShaderResourceView.h"
+#include <functional>
 
 int main(int argc, char **argv)
 {
@@ -34,7 +35,6 @@ int main(int argc, char **argv)
     std::shared_ptr<yage::GLDevice> device = window->getGraphicsDevice();
 
     yage::Gui gui(window->getWindowHandle(), 460);
-   
 
     yage::ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
     std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
@@ -60,6 +60,11 @@ int main(int argc, char **argv)
     device->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
 
     std::unique_ptr<yage::ResourceBrowser> resource_browser = std::make_unique<yage::ResourceBrowser>();
+
+    // Proof of concept need to do something like this to implement event handeling in the gui
+    //  std::function<bool()> func(std::bind(&yage::ResourceBrowser::isOpen, resource_browser.get()));
+    //  bool test = func();
+
     resource_browser->addResourceView("mesh", std::make_unique<yage::MeshResourceView>());
     resource_browser->addResourceView("shader", std::make_unique<yage::ShaderResourceView>());
     gui.addGuiElement(std::move(resource_browser));
