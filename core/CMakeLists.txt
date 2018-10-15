@@ -8,7 +8,7 @@ set(UtilSource src/Util/FileReader.cpp src/Util/Util.cpp)
 set(ResourceManagementSource src/ResourceManagement/Resource.cpp src/ResourceManagement/ResourceManager.cpp
 src/ResourceManagement/Loaders/ResourceLoader.cpp src/ResourceManagement/Loaders/MeshLoader.cpp src/ResourceManagement/Loaders/WavefrontLoader.cpp
 src/ResourceManagement/Loaders/ShaderLoader.cpp)
-add_library(yage_core STATIC src/Window.cpp ${GraphicsSource} ${UtilSource} ${ResourceManagementSource})
+add_library(yage_core STATIC src/Window.cpp src/Input.cpp ${GraphicsSource} ${UtilSource} ${ResourceManagementSource})
 
 target_include_directories(yage_core PUBLIC 
 ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics

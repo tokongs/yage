@@ -24,7 +24,7 @@ void ResourceBrowser::constructFrame(bool independent)
         return;
     }
 
-    ImGui::Begin(m_title.c_str(), m_open);
+    ImGui::Begin(m_title.c_str(), m_open.get());
 
     
         std::unordered_map<int, ResourcePtr> resource_map = ResourceManager::getInstance().getResourceMap();

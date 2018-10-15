@@ -15,7 +15,7 @@ void MeshResourceView::constructFrame(bool independent)
     MeshPtr mesh = std::static_pointer_cast<Mesh>(m_resource);
     if (independent)
     {
-        ImGui::Begin("Resource View", m_open);
+        ImGui::Begin("Resource View", m_open.get());
     }
     ResourceView::constructFrame(false);
 
