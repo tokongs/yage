@@ -100,7 +100,7 @@ void Input::handleKey(int key_code, KEY_ACTION action)
 
     std::vector<std::function<void()>> callbacks;
 
-    for (int i = 0; i = mappings.size(); i++)
+    for (int i = 0; i < mappings.size(); i++)
     {
         switch (action)
         {
@@ -131,7 +131,7 @@ void Input::handleKey(int key_code, KEY_ACTION action)
 
 void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-    std::cout << "what?" << std::endl;
+
     Input::getInstance().handleKey(key, (KEY_ACTION)action);
 }
 

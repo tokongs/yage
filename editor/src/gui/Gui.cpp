@@ -11,7 +11,7 @@ Gui::Gui(GLFWwindow *glfw_window_handle, unsigned int glsl_version)
     ImGuiIO &io = ImGui::GetIO();
     (void)io;
 
-    ImGui_ImplGlfw_InitForOpenGL(m_glfw_window_handle, true);
+    ImGui_ImplGlfw_InitForOpenGL(m_glfw_window_handle, false);
     std::string verison_string = "#version " + std::to_string(m_glsl_version);
     ImGui_ImplOpenGL3_Init(verison_string.c_str());
 

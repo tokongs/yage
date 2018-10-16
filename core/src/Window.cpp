@@ -2,9 +2,6 @@
 namespace yage
 {
 DEFINE_LOGGERS(Window);
-    static void callback(GLFWwindow *window, int key, int scancode, int action, int mods){
-        std::cout <<" Whatr 22>" << std::endl;
-    }
 Window::Window(WindowDesc desc)
 {
     m_window_desc = desc;
@@ -44,7 +41,10 @@ Window::Window(WindowDesc desc)
         return;
     }
 
-    glfwSetKeyCallback(m_window_handle, callback);
+    glfwSetKeyCallback(m_window_handle, glfw_key_callback);
+    glfwSetCursorPosCallback(m_window_handle, glfw_cursor_position_callback);
+    glfwSetCursorEnterCallback(m_window_handle, glfw_cursor_enter_callback);
+    glfwSetMouseButtonCallback(m_window_handle, glfw_mouse_button_callback);
 
     //Make the created OpenGL context the current context
     glfwMakeContextCurrent(m_window_handle);
