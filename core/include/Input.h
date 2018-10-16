@@ -15,6 +15,13 @@ enum KEY_ACTION
   REPEAT = GLFW_REPEAT,
   NONE = 0
 };
+
+struct MouseState{
+  float x, y;
+  KEY_ACTION mouse_button_1;
+  KEY_ACTION mouse_button_2;
+  KEY_ACTION mouse_button_3;
+};
 /**
  * 
  * @brief This is where input is handled. A callback is registered with glfw
@@ -32,39 +39,55 @@ public:
   ~Input();
 
   void mapKey(int key, std::string action);
-  void registerCallback(KEY_ACTION action, std::string mapping, std::function<void()>);
+  void registerKeyCallBack(KEY_ACTION action, std::string mapping, std::function<void()>);
+
+  void registerMouseButtonCallBack(KEY_ACTION action, int button, std::function<void()>);
+  void registerMouseMoveCallBack(std::function<void(float, float)>);
+  void registerMouseLeaveCallBack(std::function<void()>);
+  void registerMouseEnterCallBack(std::function<void()>);
 
   KEY_ACTION getKeyStatus(std::string mapping);
   KEY_ACTION getKeyStatus(int key);
 
-  void handleKey(int key_code, KEY_ACTION action);
+  MouseState getMouseState();
 
 private:
-  //Input data
-  std::unordered_map<int, KEY_ACTION> m_keys;
-  float m_mouse_x, m_mouse_y;
+  static void handleKey(int key_code, KEY_ACTION action);
+  static void handleMouseMove(float x, float y);
+  static void handleMouseAction(int key_code, KEY_ACTION action);
+  static void handleMouseLeave();
+  static void handleMouseEnter();
+
+  //Input data. m_keys stores keyboard keys and mouse buttons
+  static std::unordered_map<int, KEY_ACTION> m_keys;
+  static float m_mouse_x, m_mouse_y;
 
   //Key callbacks
-  std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_press_callbacks;
-  std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_release_callbacks;
-  std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_repeat_callbacks;
+  static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_press_callbacks;
+  static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_release_callbacks;
+  static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_repeat_callbacks;
   //Mouse callbacks
-  std::vector<std::vector<std::function<void(float x, float y)>>> m_on_mouse_down_callback;
-  std::vector<std::vector<std::function<void(float x, float y)>>> m_on_mouse_up_callback;
-  std::vector<std::vector<std::function<void(float x, float y)>>> m_on_mouse_repeat_callback;
-  std::vector<std::vector<std::function<void(float x, float y)>>> m_on_mouse_enter_callback;
-  std::vector<std::vector<std::function<void(float x, float y)>>> m_on_mouse_leave_callback;
-  std::vector<std::vector<std::function<void(float x, float y)>>> m_on_mouse_move_callback;
+  //One vector for each mouse button indexed 0-2
+  static std::vector<std::vector<std::function<void()>>> m_on_mouse_down_callbacks;
+  static std::vector<std::vector<std::function<void()>>> m_on_mouse_up_callbacks;
+  static std::vector<std::vector<std::function<void()>>> m_on_mouse_repeat_callbacks;
+  static std::vector<std::function<void()>> m_on_mouse_enter_callbacks;
+  static std::vector<std::function<void()>> m_on_mouse_leave_callbacks;
+  static std::vector<std::function<void(float, float)>> m_on_mouse_move_callbacks;
 
-  
   //Key mappings
-  std::unordered_map<int, std::vector<std::string>> m_mappings;
-  std::unordered_map<std::string, unsigned int> m_reverse_mappings;
+  static std::unordered_map<int, std::vector<std::string>> m_mappings;
+  static std::unordered_map<std::string, unsigned int> m_reverse_mappings;
 
-}; // namespace yage
+
+  friend void glfw_cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+  friend void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+  friend void glfw_cursor_enter_callback(GLFWwindow *window, int entered);
+  friend void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
+
+};
 void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
-
-void glfw_cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-void glfw_cursor_enter_callback(GLFWwindow* window, int entered);
-void glfw_mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+void glfw_cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+void glfw_cursor_enter_callback(GLFWwindow *window, int entered);
+void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 } // namespace yage

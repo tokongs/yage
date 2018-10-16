@@ -40,8 +40,8 @@ int main(int argc, char **argv)
     //Set up Input
 
     yage::Input::getInstance().mapKey(GLFW_KEY_SPACE, "test");
-    yage::Input::getInstance().registerCallback(yage::KEY_ACTION::PRESS, "test", std::function<void()>([]() { std::cout << "test" << std::endl; }));
-
+    yage::Input::getInstance().registerKeyCallBack(yage::KEY_ACTION::PRESS, "test", std::function<void()>([]() { std::cout << "test" << std::endl; }));
+    yage::Input::getInstance().registerMouseButtonCallBack(yage::KEY_ACTION::PRESS, GLFW_MOUSE_BUTTON_1, std::function<void()>([]() { std::cout << "test" << std::endl; }));
     /////////////////////////////////////////////////////////////
 
     //Set resource dir and load resources
