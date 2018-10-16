@@ -20,7 +20,7 @@ VertexBufferPtr Mesh::getVertexBuffer()
     return m_vertex_buffer;
 }
 
-glm::vec3 Mesh::getAABB()
+aabb Mesh::getAABB()
 {
     return m_aabb;
 }

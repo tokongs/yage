@@ -7,10 +7,10 @@ Window::Window(WindowDesc desc)
     m_window_desc = desc;
 
     //Create loggers
-INIT_LOGGERS(Window);
+    INIT_LOGGERS(Window);
     //Initialize GLFW
     glfwSetErrorCallback(glfw_error_callback);
-    
+
     if (!glfwInit())
     {
         LOG(Window, error, "Failed to initialize GLFW");
@@ -41,6 +41,11 @@ INIT_LOGGERS(Window);
         return;
     }
 
+    glfwSetKeyCallback(m_window_handle, glfw_key_callback);
+    glfwSetCursorPosCallback(m_window_handle, glfw_cursor_position_callback);
+    glfwSetCursorEnterCallback(m_window_handle, glfw_cursor_enter_callback);
+    glfwSetMouseButtonCallback(m_window_handle, glfw_mouse_button_callback);
+
     //Make the created OpenGL context the current context
     glfwMakeContextCurrent(m_window_handle);
 
@@ -70,17 +75,19 @@ void Window::resize(int width, int height)
     glfwSetWindowSize(m_window_handle, width, height);
 }
 
-std::shared_ptr<GLDevice> Window::getGraphicsDevice(){
+std::shared_ptr<GLDevice> Window::getGraphicsDevice()
+{
     return m_device;
 }
 
-GLFWwindow* Window::getWindowHandle(){
+GLFWwindow *Window::getWindowHandle()
+{
     return m_window_handle;
 }
 
 void glfw_error_callback(int error, const char *description)
 {
     LOG(Window, error, "GLFW ERROR: " + std::to_string(error) + description);
-
 }
-}
+ 
+} // namespace yage

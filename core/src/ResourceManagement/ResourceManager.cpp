@@ -74,8 +74,8 @@ void ResourceManager::buildFilePathMap(std::string resource_overview)
     }
 }
 
-std::unordered_map<std::string, std::string> ResourceManager::getResourceMap()
+std::unordered_map<int, ResourcePtr> ResourceManager::getResourceMap()
 {
-    return m_file_paths;
+    return m_loaded_resources;
 }
 } // namespace yage

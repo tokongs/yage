@@ -42,7 +42,7 @@ void GLAPIENTRY gl_debug_message_callback(GLenum source, GLenum type, GLuint id,
     }
     
     else{
-        LOG(GLDevice, info, "OpenGL Debug Callback(type: " + std::to_string(type) + ", severity: " + std::to_string(severity)+ "): " + message);
+        FILE_LOGGER(GLDevice, info, "OpenGL Debug Callback(type: " + std::to_string(type) + ", severity: " + std::to_string(severity)+ "): " + message);
     }
 }
 

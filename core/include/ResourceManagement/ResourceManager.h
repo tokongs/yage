@@ -167,7 +167,7 @@ public:
    * @brief Returns an unordered map containing all the resources names as keys and file_paths as values
    * 
    */
-  std::unordered_map<std::string, std::string> getResourceMap();
+  std::unordered_map<int, ResourcePtr> getResourceMap();
 private:
   void buildFilePathMap(std::string resource_overview);
 

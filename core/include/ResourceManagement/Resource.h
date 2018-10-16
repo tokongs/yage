@@ -56,7 +56,7 @@ class Resource
     unsigned int m_id;
     std::string m_file_path;
     std::string m_name;
-    std::string m_resource_type = "No_Type_Base_Resource_Class";
+    std::string m_resource_type = "no_Type_Base_Resource_Class";
 };
 typedef std::shared_ptr<Resource> ResourcePtr;
 } // namespace yage
