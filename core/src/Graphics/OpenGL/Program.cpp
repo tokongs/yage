@@ -13,6 +13,7 @@ Program::Program()
 Program::~Program()
 {
     LOG(Program, info, "Deleting program with id: " + std::to_string(m_gl_object_id));
+    FLUSH_LOGGERS(Program);
     glDeleteProgram(m_gl_object_id);
 }
 
@@ -59,9 +60,12 @@ void Program::mapUniforms()
     {
         ShaderUniform uniform;
         uniform.index = i;
-        char *name;
-        glGetActiveUniform(m_gl_object_id, i, 30, nullptr, &(uniform.size), &(uniform.type), name);
+
+        char name[30];
+        int length = 0;
+        glGetActiveUniform(m_gl_object_id, i, 30, &length, &(uniform.size), &(uniform.type), name);
         uniform.name = name;
+        uniform.name = uniform.name.substr(0, length);
         uniform.location = getUniformLocation(uniform.name);
 
         m_uniforms[uniform.name] = uniform;
