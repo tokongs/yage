@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <glm/gtc/type_ptr.hpp>
 #include "imgui.h"
 #include "ResourceView.h"
 #include "Mesh.h"

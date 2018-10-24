@@ -19,8 +19,11 @@ void MeshResourceView::constructFrame(bool independent)
     }
     ResourceView::constructFrame(false);
 
-    ImGui::DragFloat3("AABB_max", mesh->getAABB().max.data.data);
-    ImGui::DragFloat3("AABB_min", mesh->getAABB().min.data.data);
+    glm::vec3 max = mesh->getAABB().max;
+    glm::vec3 min = mesh->getAABB().min;
+
+    ImGui::DragFloat3("AABB_max", glm::value_ptr(max));
+    ImGui::DragFloat3("AABB_min", glm::value_ptr(min));
     ImGui::LabelText("Vertex Buffer size", std::to_string(mesh->getVertexBuffer()->getSize()).c_str());
 
     if (independent)

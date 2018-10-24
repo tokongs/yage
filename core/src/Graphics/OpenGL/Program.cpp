@@ -150,9 +150,11 @@ bool Program::typeIsCorrect(unsigned int type, unsigned int requested_type)
 {
     if (type != requested_type)
     {
-        LOG(Program, warn, "Trying to set uniform of type " + std::to_string(type) + "d" + std::to_string(requested_type));
-        return;
+        LOG(Program, warn, "Trying to set uniform of type " + std::to_string(type) + "to value of type" + std::to_string(requested_type));
+        return false;
     }
+
+    return true;
 }
 
 std::string Program::getType()
