@@ -10,9 +10,19 @@
 namespace yage
 {
 
-enum ShaderType{
+enum ShaderType
+{
   VERTEX_SHADER,
   FRAGMENT_SHADER
+};
+
+struct ShaderUniform
+{
+  int size;
+  unsigned int type;
+  unsigned int index;
+  unsigned int location;
+  std::string name;
 };
 
 class Shader : public Resource
@@ -34,17 +44,15 @@ public:
 
 private:
   std::string m_code;
-  
-  GLuint m_gl_object_id;
-  
+
+  unsigned int m_gl_object_id;
+
   ShaderType m_type;
 
   std::string m_resource_type = "shader";
 
   DECLARE_LOGGERS;
 };
-
-
 
 typedef std::shared_ptr<Shader> ShaderPtr;
 } // namespace yage

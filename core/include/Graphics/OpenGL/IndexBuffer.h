@@ -45,7 +45,7 @@ class IndexBuffer{
 
     private:
 
-    GLuint m_gl_object_id;
+    unsigned int m_gl_object_id;
     unsigned int m_size;
     std::vector<unsigned int> m_shadow_copy;
 

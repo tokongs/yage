@@ -109,8 +109,8 @@ class VertexBuffer
      * @param desc 
      */
     void setupVao(VertexBufferDesc desc);
-    GLuint m_vb_object_id;
-    GLuint m_vao_object_id;
+    unsigned int m_vb_object_id;
+    unsigned int m_vao_object_id;
 
     unsigned int m_size;
 
