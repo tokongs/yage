@@ -17,6 +17,5 @@ yage is yet another 3D game engine with an OpenGL rendering engine. And it's jus
 
 
 # Build Status
-Don't know why this doesn't build
 [![Build Status](https://travis-ci.com/tokongs/yage.svg?token=zyxsTsKrmgPPu1T4JJky&branch=master)](https://travis-ci.com/tokongs/yage)
 
