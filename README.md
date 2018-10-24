@@ -1,5 +1,6 @@
 # Yet Another Game Engine
-yage is yet another 3D game engine with an OpenGL rendering engine and a about 2 low level features this far...
+yage is yet another 3D game engine with an OpenGL rendering engine. And it's just in the starting phase so not many features yet. It has just basic model loading functionality and very limitd shader functionality, but it will get better(If I can get some time to work on it).
+
 
 # Building
 ## Requirements
@@ -16,5 +17,6 @@ yage is yet another 3D game engine with an OpenGL rendering engine and a about 2
 
 
 # Build Status
+Don't know why this doesn't build
 [![Build Status](https://travis-ci.com/tokongs/yage.svg?token=zyxsTsKrmgPPu1T4JJky&branch=master)](https://travis-ci.com/tokongs/yage)
 
