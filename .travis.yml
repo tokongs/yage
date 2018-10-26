@@ -5,6 +5,7 @@ before_install:
     - ./install_glfw.sh
     - ./install_glm.sh
     - ./install_spdlog.sh
+    - ./install_soil.sh
 addons:
     apt:
         sources:
