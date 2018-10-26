@@ -22,6 +22,7 @@ void Renderer::render(std::shared_ptr<VertexBuffer> vb, std::shared_ptr<Program>
     program->activate();
     program->setMat4("projection_matrix", m_camera.getProjectionMatrix());
     program->setMat4("view_matrix", m_camera.getViewMatrix());
+    program->setMat4("model_matrix", glm::mat4(1));
     if (ib)
     {
         glDrawElements(GL_TRIANGLES, ib->getSize(), GL_UNSIGNED_INT, 0);
