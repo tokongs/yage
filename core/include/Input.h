@@ -16,7 +16,8 @@ enum KEY_ACTION
   NONE = 0
 };
 
-struct MouseState{
+struct MouseState
+{
   float x, y;
   KEY_ACTION mouse_button_1;
   KEY_ACTION mouse_button_2;
@@ -60,7 +61,7 @@ private:
 
   //Input data. m_keys stores keyboard keys and mouse buttons
   static std::unordered_map<int, KEY_ACTION> m_keys;
-  static float m_mouse_x, m_mouse_y;
+  static float m_mouse_x, m_mouse_y, m_mouse_delta_x, m_mouse_delta_y;
 
   //Key callbacks
   static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_press_callbacks;
@@ -79,12 +80,10 @@ private:
   static std::unordered_map<int, std::vector<std::string>> m_mappings;
   static std::unordered_map<std::string, unsigned int> m_reverse_mappings;
 
-
   friend void glfw_cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
   friend void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
   friend void glfw_cursor_enter_callback(GLFWwindow *window, int entered);
   friend void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
-
 };
 void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void glfw_cursor_position_callback(GLFWwindow *window, double xpos, double ypos);

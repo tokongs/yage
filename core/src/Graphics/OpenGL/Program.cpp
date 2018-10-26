@@ -121,7 +121,7 @@ void Program::setVec4(std::string name, glm::vec4 value)
 {
     auto uniform_it = m_uniforms.find(name);
     if (!uniformIsActive(uniform_it, name) ||
-        !typeIsCorrect(uniform_it->second.type, GL_FLOAT_VEC3))
+        !typeIsCorrect(uniform_it->second.type, GL_FLOAT_VEC4))
     {
         return;
     }
@@ -132,7 +132,7 @@ void Program::setMat4(std::string name, glm::mat4 value)
 {
     auto uniform_it = m_uniforms.find(name);
     if (!uniformIsActive(uniform_it, name) ||
-        !typeIsCorrect(uniform_it->second.type, GL_FLOAT_VEC3))
+        !typeIsCorrect(uniform_it->second.type, GL_FLOAT_MAT4))
     {
         return;
     }
