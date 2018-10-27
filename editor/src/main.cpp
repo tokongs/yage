@@ -44,26 +44,28 @@ int main(int argc, char **argv)
     Camera cam;
 
     //Set up Input
-    Input::getInstance().mapKey(GLFW_KEY_SPACE, "test");
-    Input::getInstance().registerKeyCallBack(KEY_ACTION::PRESS,
-                                             "test", function<void()>([]() { cout << "test" << endl; }));
-    Input::getInstance().registerMouseButtonCallBack(KEY_ACTION::PRESS,
-                                                     GLFW_MOUSE_BUTTON_1,
-                                                     function<void()>(bind(&Camera::move, &cam, glm::vec3(1, 0, 0))));
+    Input *input = &Input::getInstance();
+    input->mapKey(GLFW_KEY_SPACE, "test");
+    input->registerKeyCallBack(KEY_ACTION::PRESS,
+                               "test", function<void()>([]() { cout << "test" << endl; }));
+    input->registerMouseButtonCallBack(KEY_ACTION::PRESS,
+                                       GLFW_MOUSE_BUTTON_1,
+                                       function<void()>(bind(&Camera::move, &cam, glm::vec3(1, 0, 0))));
     /////////////////////////////////////////////////////////////
     //Set resource dir and load resources
-    ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
+    ResourceManager *res_manager = &ResourceManager::getInstance();
+    res_manager->setResourceDir("/home/tokongs/projects/personal/yage/assets/");
     shared_ptr<MeshLoader> mesh_loader = make_shared<MeshLoader>();
     shared_ptr<ShaderLoader> shader_loader = make_shared<ShaderLoader>();
     shared_ptr<TextureLoader> texture_loader = make_shared<TextureLoader>();
 
-    ResourceManager::getInstance().registerResourceLoader<Mesh>(mesh_loader);
-    ResourceManager::getInstance().registerResourceLoader<Shader>(shader_loader);
-    ResourceManager::getInstance().registerResourceLoader<Texture>(texture_loader);
+    res_manager->registerResourceLoader<Mesh>(mesh_loader);
+    res_manager->registerResourceLoader<Shader>(shader_loader);
+    res_manager->registerResourceLoader<Texture>(texture_loader);
 
-    int mesh = ResourceManager::getInstance().getHandle<Mesh>("box");
-    int vertex = ResourceManager::getInstance().getHandle<Shader>("basic_vertex_shader");
-    int fragment = ResourceManager::getInstance().getHandle<Shader>("basic_fragment_shader");
+    int mesh = res_manager->getHandle<Mesh>("box");
+    int vertex = res_manager->getHandle<Shader>("basic_vertex_shader");
+    int fragment = res_manager->getHandle<Shader>("basic_fragment_shader");
     //////////////////////////////////////////////////////////////////////7
 
     Renderer renderer;
@@ -72,8 +74,8 @@ int main(int argc, char **argv)
     ProgramPtr program = make_shared<Program>();
 
     vector<ShaderPtr> shaders;
-    shaders.push_back(ResourceManager::getInstance().getResource<Shader>(vertex));
-    shaders.push_back(ResourceManager::getInstance().getResource<Shader>(fragment));
+    shaders.push_back(res_manager->getResource<Shader>(vertex));
+    shaders.push_back(res_manager->getResource<Shader>(fragment));
     program->attachShaders(shaders);
     //////////////////////////////////////////////////
 
@@ -100,7 +102,7 @@ int main(int argc, char **argv)
         glfwPollEvents();
         device->clearBuffers();
         renderer.setCamera(cam);
-        renderer.render(ResourceManager::getInstance().getResource<Mesh>(mesh)->getVertexBuffer(), program);
+        renderer.render(res_manager->getResource<Mesh>(mesh)->getVertexBuffer(), program);
         gui.constructFrame();
 
         window->update();
