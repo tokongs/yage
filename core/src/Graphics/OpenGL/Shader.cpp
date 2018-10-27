@@ -46,10 +46,6 @@ Shader::~Shader()
     glDeleteShader(m_gl_object_id);
 }
 
-std::string Shader::getType(){
-    return m_resource_type;
-}
-
 unsigned int Shader::getGLObjectId()
 {
     return m_gl_object_id;

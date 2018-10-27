@@ -26,10 +26,6 @@ std::string Resource::getName(){
     return m_name;
 }
 
-std::string Resource::getType(){
-    return m_resource_type;
-}
-
 void Resource::setId(int id){
     m_id = id;
 }

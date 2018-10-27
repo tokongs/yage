@@ -25,8 +25,4 @@ aabb Mesh::getAABB()
     return m_aabb;
 }
 
-
-std::string Mesh::getType(){
-    return m_resource_type;
-}
 } // namespace yage

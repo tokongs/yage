@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <string>
+#include <typeinfo>
 #include "imgui.h"
 #include "ResourceManager.h"
 #include "ResourceView.h"
@@ -26,11 +27,11 @@ public:
      * @param resource_type Can be found in the header file of the resource
      * @param resource_view 
      */
-  void addResourceView(std::string resource_type, std::unique_ptr<ResourceView> resource_view);
+  void addResourceView(std::type_index resource_type, std::unique_ptr<ResourceView> resource_view);
 
 private:
   const std::string m_title = "Resource Browser";
   std::unordered_map<int, std::unique_ptr<bool>> m_selected_resource;
-  std::unordered_map<std::string, std::unique_ptr<ResourceView> > m_resource_views;
+  std::unordered_map<std::type_index, std::unique_ptr<ResourceView> > m_resource_views;
 };
 } // namespace yage

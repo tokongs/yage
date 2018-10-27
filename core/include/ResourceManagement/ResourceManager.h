@@ -82,47 +82,46 @@ public:
   std::shared_ptr<T> getResource(int id)
   {
     auto result = m_loaded_resources.find(id);
-    std::unique_ptr<T> t = std::make_unique<T>();
 
-    if (result->second->getType() != t->getType()) //Requested type of resource is different from what is connected to the id. Return placeholder.
-    {
-      LOG(ResourceManager, warn, "Trying to get Resource of type: " + t->getType() + ". The given id returns a Resource of type: " + result->second->getType());
+    if (typeid(*(result->second)) != typeid(T))//Requested type of resource is different from what is connected to the id. Return placeholder.
+      {
+      LOG(ResourceManager, warn, "Trying to get Resource of type: " + std::string(typeid(T).name()) + ". The given id returns a Resource of type: " + std::string(typeid(*(result->second)).name()));
       LOG(ResourceManager, warn, "Returning a placeholder instead")
 
-      auto placeholder = m_placeholders.find(t->getType());
+      auto placeholder = m_placeholders.find(std::type_index(typeid(T)));
       if (placeholder != m_placeholders.end())
       {
         return std::dynamic_pointer_cast<T>(placeholder->second);
       }
       else
       {
-        LOG(ResourceManager, error, "No placeholder registered for Resources of type: " + t->getType());
+        LOG(ResourceManager, error, "No placeholder registered for Resources of type: " + std::string(typeid(T).name()));
         return nullptr;
       }
-    }
+      }
 
-    if (result != m_loaded_resources.end()) //Resource found and is of right type
-    {
+      if (result != m_loaded_resources.end()) //Resource found and is of right type
+      {
       return std::dynamic_pointer_cast<T>(result->second);
-    }
-    else //Could not find resource, return placeholder
-    {
-      LOG(ResourceManager, warn, "Could not find resource with id: " + std::to_string(id) + ", and  type: " + t->getType());
+      }
+      else //Could not find resource, return placeholder
+      {
+      LOG(ResourceManager, warn, "Could not find resource with id: " + std::to_string(id) + ", and  type: " + std::string(typeid(T).name()));
       LOG(ResourceManager, warn, "Returning a placeholder instead")
-      auto placeholder = m_placeholders.find(t->getType());
+      auto placeholder = m_placeholders.find(std::type_index(typeid(T)));
       if (placeholder != m_placeholders.end())
       {
         return std::dynamic_pointer_cast<T>(placeholder->second);
       }
       else
       {
-        LOG(ResourceManager, error, "No placeholder register for Resources of type: " + t->getType());
+        LOG(ResourceManager, error, "No placeholder register for Resources of type: " + std::string(typeid(T).name()));
         return nullptr;
       }
-    }
+      }
 
-    LOG(ResourceManager, warn, "No resource with id: " + std::to_string(id));
-    return nullptr;
+      LOG(ResourceManager, warn, "No resource with id: " + std::to_string(id));
+      return nullptr;
   }
 
   /**
@@ -162,17 +161,18 @@ public:
    * @param res_dir 
    */
   void setResourceDir(std::string res_dir);
-  
+
   /**
    * @brief Returns an unordered map containing all the resources names as keys and file_paths as values
    * 
    */
   std::unordered_map<int, ResourcePtr> getResourceMap();
+
 private:
   void buildFilePathMap(std::string resource_overview);
 
   std::unordered_map<int, ResourcePtr> m_loaded_resources;
-  std::unordered_map<std::string, ResourcePtr> m_placeholders;
+  std::unordered_map<std::type_index, ResourcePtr> m_placeholders;
   std::unordered_map<std::string, int> m_indices;
 
   std::unordered_map<std::type_index, std::shared_ptr<ResourceLoader>> m_loaders;

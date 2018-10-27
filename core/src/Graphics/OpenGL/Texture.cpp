@@ -2,18 +2,39 @@
 
 namespace yage
 {
+DEFINE_LOGGERS(Texture);
 Texture::Texture(float width,
                  float height,
                  const void *data,
                  int format)
-
-    : m_wrapping(GL_REPEAT), m_filtering(GL_LINEAR)
+    : m_wrapping(GL_REPEAT), m_filtering(GL_LINEAR), m_texture_unit(0)
 {
+    INIT_LOGGERS(Texture)
+    LOG(Texture, info, "Creating Texture");
     glGenTextures(1, &m_gl_object_id);
     glBindTexture(GL_TEXTURE_2D, m_gl_object_id);
 
     setOptions();
     loadData(width, height, data, format);
+}
+
+Texture::Texture()
+    : m_wrapping(GL_REPEAT), m_filtering(GL_LINEAR)
+
+{
+    INIT_LOGGERS(Texture)
+    LOG(Texture, info, "Creating Texture");
+    glGenTextures(1, &m_gl_object_id);
+    glBindTexture(GL_TEXTURE_2D, m_gl_object_id);
+
+    setOptions();
+    LOG(Texture, info, "Texture created with OpenGL ID: " + std::to_string(m_gl_object_id));
+}
+
+Texture::~Texture()
+{
+    LOG(Texture, info, "deleting texture with OpenGL ID: " + std::to_string(m_gl_object_id));
+    glDeleteTextures(1, &m_gl_object_id);
 }
 
 void Texture::bind()
@@ -56,6 +77,11 @@ int Texture::getFiltering()
     return m_filtering;
 }
 
+int Texture::getGlObjectId()
+{
+    return m_gl_object_id;
+}
+
 void Texture::setTextureUnit(int unit)
 {
     m_texture_unit = unit;
@@ -64,11 +90,6 @@ void Texture::setTextureUnit(int unit)
 unsigned int Texture::getTextureUnit()
 {
     return m_texture_unit;
-}
-
-std::string Texture::getType()
-{
-    return m_resource_type;
 }
 
 } // namespace yage

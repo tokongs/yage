@@ -12,7 +12,9 @@
 #include "ResourceManager.h"
 #include "MeshLoader.h"
 #include "ShaderLoader.h"
+#include "TextureLoader.h"
 #include "Program.h"
+#include "Texture.h"
 #include "Renderer.h"
 #include "Gui.h"
 #include "ResourceBrowser.h"
@@ -23,69 +25,72 @@
 #include <functional>
 #include "Input.h"
 #include "Camera.h"
-
+using namespace yage;
+using namespace std;
 int main(int argc, char **argv)
 {
 
     //Set up window
-    yage::WindowDesc desc;
+    WindowDesc desc;
     desc.floating = true;
     desc.decorated = true;
     desc.height = 768;
     desc.width = 1024;
     desc.resizable = true;
     desc.title = "Test";
-    std::shared_ptr<yage::Window> window = std::make_shared<yage::Window>(desc);
-    std::shared_ptr<yage::GLDevice> device = window->getGraphicsDevice();
+    shared_ptr<Window> window = make_shared<Window>(desc);
+    shared_ptr<GLDevice> device = window->getGraphicsDevice();
     /////////////////////////////////////////////////////////////////////
-    yage::Camera cam;
+    Camera cam;
 
     //Set up Input
-    yage::Input::getInstance().mapKey(GLFW_KEY_SPACE, "test");
-    yage::Input::getInstance().registerKeyCallBack(yage::KEY_ACTION::PRESS,
-                                                   "test", std::function<void()>([]() { std::cout << "test" << std::endl; }));
-    yage::Input::getInstance().registerMouseButtonCallBack(yage::KEY_ACTION::PRESS,
-                                                           GLFW_MOUSE_BUTTON_1,
-                                                           std::function<void()>(std::bind(&yage::Camera::move, &cam, glm::vec3(1, 0, 0))));
+    Input::getInstance().mapKey(GLFW_KEY_SPACE, "test");
+    Input::getInstance().registerKeyCallBack(KEY_ACTION::PRESS,
+                                             "test", function<void()>([]() { cout << "test" << endl; }));
+    Input::getInstance().registerMouseButtonCallBack(KEY_ACTION::PRESS,
+                                                     GLFW_MOUSE_BUTTON_1,
+                                                     function<void()>(bind(&Camera::move, &cam, glm::vec3(1, 0, 0))));
     /////////////////////////////////////////////////////////////
     //Set resource dir and load resources
-    yage::ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
-    std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
-    std::shared_ptr<yage::ShaderLoader> shader_loader = std::make_shared<yage::ShaderLoader>();
+    ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
+    shared_ptr<MeshLoader> mesh_loader = make_shared<MeshLoader>();
+    shared_ptr<ShaderLoader> shader_loader = make_shared<ShaderLoader>();
+    shared_ptr<TextureLoader> texture_loader = make_shared<TextureLoader>();
 
-    yage::ResourceManager::getInstance().registerResourceLoader<yage::Mesh>(mesh_loader);
-    yage::ResourceManager::getInstance().registerResourceLoader<yage::Shader>(shader_loader);
+    ResourceManager::getInstance().registerResourceLoader<Mesh>(mesh_loader);
+    ResourceManager::getInstance().registerResourceLoader<Shader>(shader_loader);
+    ResourceManager::getInstance().registerResourceLoader<Texture>(texture_loader);
 
-    int mesh = yage::ResourceManager::getInstance().getHandle<yage::Mesh>("box");
-    int vertex = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_vertex_shader");
-    int fragment = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_fragment_shader");
+    int mesh = ResourceManager::getInstance().getHandle<Mesh>("box");
+    int vertex = ResourceManager::getInstance().getHandle<Shader>("basic_vertex_shader");
+    int fragment = ResourceManager::getInstance().getHandle<Shader>("basic_fragment_shader");
     //////////////////////////////////////////////////////////////////////7
 
-    yage::Renderer renderer;
+    Renderer renderer;
 
     //Set up shaders
-    yage::ProgramPtr program = std::make_shared<yage::Program>();
+    ProgramPtr program = make_shared<Program>();
 
-    std::vector<int> shaders;
-    shaders.push_back(vertex);
-    shaders.push_back(fragment);
+    vector<ShaderPtr> shaders;
+    shaders.push_back(ResourceManager::getInstance().getResource<Shader>(vertex));
+    shaders.push_back(ResourceManager::getInstance().getResource<Shader>(fragment));
     program->attachShaders(shaders);
     //////////////////////////////////////////////////
 
     //Set up gui
-    yage::Gui gui(window->getWindowHandle(), 460);
-    std::unique_ptr<yage::ResourceBrowser> resource_browser = std::make_unique<yage::ResourceBrowser>();
+    Gui gui(window->getWindowHandle(), 460);
+    unique_ptr<ResourceBrowser> resource_browser = make_unique<ResourceBrowser>();
 
-    resource_browser->addResourceView("mesh", std::make_unique<yage::MeshResourceView>());
-    resource_browser->addResourceView("shader", std::make_unique<yage::ShaderResourceView>());
+    resource_browser->addResourceView(std::type_index(typeid(Mesh)), make_unique<MeshResourceView>());
+    resource_browser->addResourceView(std::type_index(typeid(Shader)), make_unique<ShaderResourceView>());
 
-    std::function<void()> func(std::bind(&yage::ResourceBrowser::open, resource_browser.get())); // maybe(probably) bad i guess?
+    function<void()> func(bind(&ResourceBrowser::open, resource_browser.get())); // maybe(probably) bad i guess?
     func();
-    std::unique_ptr<yage::MainMenu> main_menu = std::make_unique<yage::MainMenu>();
-    std::unique_ptr<yage::MenuElement> view_rb = std::make_unique<yage::MenuElement>("Resource Browser", func);
-    main_menu->addMenuItem("View", std::move(view_rb));
-    gui.addGuiElement(std::move(main_menu));
-    gui.addGuiElement(std::move(resource_browser));
+    unique_ptr<MainMenu> main_menu = make_unique<MainMenu>();
+    unique_ptr<MenuElement> view_rb = make_unique<MenuElement>("Resource Browser", func);
+    main_menu->addMenuItem("View", move(view_rb));
+    gui.addGuiElement(move(main_menu));
+    gui.addGuiElement(move(resource_browser));
     ///////////////////////////////////////////////////////////
 
     device->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
@@ -95,7 +100,7 @@ int main(int argc, char **argv)
         glfwPollEvents();
         device->clearBuffers();
         renderer.setCamera(cam);
-        renderer.render(yage::ResourceManager::getInstance().getResource<yage::Mesh>(mesh)->getVertexBuffer(), program);
+        renderer.render(ResourceManager::getInstance().getResource<Mesh>(mesh)->getVertexBuffer(), program);
         gui.constructFrame();
 
         window->update();

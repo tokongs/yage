@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <GL/glew.h>
+#include "config.h"
 #include "Resource.h"
 
 namespace yage
@@ -16,6 +17,7 @@ class Texture : public Resource
 
 public:
   Texture(float width, float height, const void *data, int format);
+  Texture();
   ~Texture();
 
   void bind();
@@ -29,8 +31,7 @@ public:
   int getWrapping();
   int getFiltering();
   unsigned int getTextureUnit();
-
-  std::string getType() override;
+  int getGlObjectId();
 
 private:
   void setOptions();
@@ -42,7 +43,7 @@ private:
   unsigned int m_wrapping;
   unsigned int m_filtering;
 
-  std::string m_resource_type = "Texture_Resource";
+  DECLARE_LOGGERS;
 };
 
 typedef std::shared_ptr<Texture> TexturePtr;

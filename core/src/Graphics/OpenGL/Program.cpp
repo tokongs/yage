@@ -22,14 +22,13 @@ void Program::activate()
     glUseProgram(m_gl_object_id);
 }
 
-void Program::attachShaders(std::vector<int> shaders)
+void Program::attachShaders(std::vector<ShaderPtr> shaders)
 {
 
     for (int i = 0; i < shaders.size(); i++)
     {
-        ShaderPtr shader = ResourceManager::getInstance().getResource<Shader>(shaders[i]);
-        LOG(Program, info, "Linking " + shader->getName() + " to program " + std::to_string(m_gl_object_id));
-        glAttachShader(m_gl_object_id, shader->getGLObjectId());
+        LOG(Program, info, "Linking " + shaders[i]->getName() + " to program " + std::to_string(m_gl_object_id));
+        glAttachShader(m_gl_object_id, shaders[i]->getGLObjectId());
         glLinkProgram(m_gl_object_id);
     }
 
@@ -159,10 +158,5 @@ bool Program::typeIsCorrect(unsigned int type, unsigned int requested_type)
     }
 
     return true;
-}
-
-std::string Program::getType()
-{
-    return m_type;
 }
 } // namespace yage
