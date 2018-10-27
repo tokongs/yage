@@ -2,3 +2,5 @@
 #shader basic_vertex_shader shaders/basic.vs
 
 #mesh box meshes/box.obj
+
+#texture test textures/test.jpg
