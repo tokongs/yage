@@ -4,7 +4,7 @@ add_subdirectory(test)
 
 set(GraphicsSource src/Graphics/OpenGL/GLDevice.cpp src/Graphics/OpenGL/VertexBuffer.cpp
 src/Graphics/OpenGL/IndexBuffer.cpp src/Graphics/OpenGL/Shader.cpp src/Graphics/Renderer.cpp src/Graphics/Mesh.cpp
-src/Graphics/OpenGL/Program.cpp)
+src/Graphics/OpenGL/Program.cpp src/Graphics/Camera.cpp)
 
 set(UtilSource src/Util/FileReader.cpp src/Util/Util.cpp)
 set(ResourceManagementSource src/ResourceManagement/Resource.cpp src/ResourceManagement/ResourceManager.cpp

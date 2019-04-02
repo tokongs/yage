@@ -22,6 +22,7 @@
 #include "MenuElement.h"
 #include <functional>
 #include "Input.h"
+#include "Camera.h"
 
 int main(int argc, char **argv)
 {
@@ -37,13 +38,16 @@ int main(int argc, char **argv)
     std::shared_ptr<yage::Window> window = std::make_shared<yage::Window>(desc);
     std::shared_ptr<yage::GLDevice> device = window->getGraphicsDevice();
     /////////////////////////////////////////////////////////////////////
+    yage::Camera cam;
+
     //Set up Input
-
     yage::Input::getInstance().mapKey(GLFW_KEY_SPACE, "test");
-    yage::Input::getInstance().registerKeyCallBack(yage::KEY_ACTION::PRESS, "test", std::function<void()>([]() { std::cout << "test" << std::endl; }));
-    yage::Input::getInstance().registerMouseButtonCallBack(yage::KEY_ACTION::PRESS, GLFW_MOUSE_BUTTON_1, std::function<void()>([]() { std::cout << "test" << std::endl; }));
+    yage::Input::getInstance().registerKeyCallBack(yage::KEY_ACTION::PRESS,
+                                                   "test", std::function<void()>([]() { std::cout << "test" << std::endl; }));
+    yage::Input::getInstance().registerMouseButtonCallBack(yage::KEY_ACTION::PRESS,
+                                                           GLFW_MOUSE_BUTTON_1,
+                                                           std::function<void()>(std::bind(&yage::Camera::move, &cam, glm::vec3(1, 0, 0))));
     /////////////////////////////////////////////////////////////
-
     //Set resource dir and load resources
     yage::ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
     std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
@@ -85,11 +89,12 @@ int main(int argc, char **argv)
     ///////////////////////////////////////////////////////////
 
     device->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
+
     while (!window->shouldClose())
     {
         glfwPollEvents();
         device->clearBuffers();
-
+        renderer.setCamera(cam);
         renderer.render(yage::ResourceManager::getInstance().getResource<yage::Mesh>(mesh)->getVertexBuffer(), program);
         gui.constructFrame();
 

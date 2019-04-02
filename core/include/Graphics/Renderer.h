@@ -1,7 +1,9 @@
+#pragma once
 #include <GL/glew.h>
-#include <VertexBuffer.h>
-#include <Program.h>
 #include <memory>
+#include "VertexBuffer.h"
+#include "Program.h"
+#include "Camera.h"
 
 namespace yage
 {
@@ -27,6 +29,10 @@ class Renderer
      * @param shader 
      */
     void render(std::shared_ptr<VertexBuffer> vb, std::shared_ptr<Program> program);
+    void setCamera(Camera camera);
+
+    private:
+    Camera m_camera;
 
 };
 
