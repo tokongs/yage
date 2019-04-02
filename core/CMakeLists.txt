@@ -1,5 +1,7 @@
 project(yage_core)
 
+add_subdirectory(test)
+
 set(GraphicsSource src/Graphics/OpenGL/GLDevice.cpp src/Graphics/OpenGL/VertexBuffer.cpp
 src/Graphics/OpenGL/IndexBuffer.cpp src/Graphics/OpenGL/Shader.cpp src/Graphics/Renderer.cpp src/Graphics/Mesh.cpp
 src/Graphics/OpenGL/Program.cpp)

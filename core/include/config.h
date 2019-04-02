@@ -13,8 +13,6 @@
 #ifdef DEBUG
 #include <iostream>
 #include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
-#include <spdlog/sinks/basic_file_sink.h>
 #define DECLARE_LOGGERS                                    \
     static std::shared_ptr<spdlog::logger> console_logger; \
     static std::shared_ptr<spdlog::logger> file_logger;
