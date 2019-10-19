@@ -1,6 +1,6 @@
 #pragma once
 
-#define ROOT_DIR "/home/tokongs/projects/personal/yage/"
+#define ROOT_DIR "/home/tokongs/projects/yage/"
 #define LINUX
 #define DEBUG
 

@@ -1,14 +1,10 @@
 #include "Window.h"
 #include <GLFW/glfw3.h>
 #include "GLDevice.h"
-#include <glm/vec4.hpp>
 #include <memory>
-#include "VertexBuffer.h"
 #include "Shader.h"
-#include "Window.h"
 #include <iostream>
 #include "Util.h"
-#include "FileReader.h"
 #include "ResourceManager.h"
 #include "MeshLoader.h"
 #include "ShaderLoader.h"
@@ -23,10 +19,12 @@
 #include <functional>
 #include "Input.h"
 #include "Camera.h"
+#include "Configuration.h"
 
 int main(int argc, char **argv)
 {
 
+    Configuration::Load(argc, argv);
     //Set up window
     yage::WindowDesc desc;
     desc.floating = true;
@@ -49,7 +47,7 @@ int main(int argc, char **argv)
                                                            std::function<void()>(std::bind(&yage::Camera::move, &cam, glm::vec3(1, 0, 0))));
     /////////////////////////////////////////////////////////////
     //Set resource dir and load resources
-    yage::ResourceManager::getInstance().setResourceDir("/home/tokongs/projects/personal/yage/assets/");
+    yage::ResourceManager::getInstance().setResourceDir(Configuration::getAssetsFolderPath() + "/");
     std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
     std::shared_ptr<yage::ShaderLoader> shader_loader = std::make_shared<yage::ShaderLoader>();
 
