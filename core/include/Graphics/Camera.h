@@ -16,9 +16,12 @@ class Camera
 {
   public:
     Camera();
+    Camera(glm::vec3 position, glm::vec3 target);
     ~Camera();
 
-    void move(glm::vec3 movement);
+    void moveAbsolute(glm::vec3 movement);
+    void moveRelative(glm::vec3 movement);
+    void rotate(float pitch, float yaw);
     void setPosition(glm::vec3 position);
 
     void moveTarget(glm::vec3 movement);
@@ -45,14 +48,15 @@ class Camera
     glm::mat4 m_projection_matrix;
 
     glm::vec3 m_position;
+    glm::vec3 m_direction;
 
     float m_fov;
     float m_aspect_ratio;
     float m_near_clip;
     float m_far_clip;
 
-  private:
     glm::vec3 m_target;
     glm::vec3 m_up_dir;
+    glm::vec3 m_front;
 };
 } // namespace yage

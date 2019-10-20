@@ -47,7 +47,7 @@ void ResourceManager::registerPlaceholderResource(ResourcePtr resource)
         LOG(ResourceManager, error, "Trying to load nullptr as placeholder resource");
         return;
     }
-    m_placeholders[resource->getType()] = resource;
+    m_placeholders[typeid(*resource.get())] = resource;
 }
 
 void ResourceManager::buildFilePathMap(std::string resource_overview)

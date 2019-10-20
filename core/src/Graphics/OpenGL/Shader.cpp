@@ -33,7 +33,7 @@ Shader::Shader(std::string code, ShaderType type)
         LOG(Shader, error, info_log);
         return;
     };
-    LOG(Shader, info, "Shader successfully complied with id" + std::to_string(m_gl_object_id));
+    LOG(Shader, info, "Shader successfully complied with id: " + std::to_string(m_gl_object_id));
 }
 
 Shader::Shader(){
@@ -44,10 +44,6 @@ Shader::~Shader()
 {
     LOG(Shader, info, "Deleting shader with id: " + std::to_string(m_gl_object_id));
     glDeleteShader(m_gl_object_id);
-}
-
-std::string Shader::getType(){
-    return m_resource_type;
 }
 
 unsigned int Shader::getGLObjectId()

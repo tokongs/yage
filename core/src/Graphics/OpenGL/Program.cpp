@@ -161,8 +161,4 @@ bool Program::typeIsCorrect(unsigned int type, unsigned int requested_type)
     return true;
 }
 
-std::string Program::getType()
-{
-    return m_type;
-}
 } // namespace yage

@@ -1,5 +1,5 @@
 
-add_executable(tests test.cpp test_input.cpp)
+add_executable(tests test.cpp test_input.cpp ../../editor/src/MovingCamera.cpp ../../editor/src/MovingCamera.h)
 
 find_package(Catch2 REQUIRED)
 if(CATCH_FOUND)

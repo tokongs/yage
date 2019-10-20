@@ -3,6 +3,7 @@
 #include <functional>
 #include <unordered_map>
 #include <GLFW/glfw3.h>
+#include <Events/EventBus.h>
 #include "config.h"
 #include "Singleton.h"
 
@@ -46,18 +47,22 @@ public:
   void registerMouseMoveCallBack(std::function<void(float, float)>);
   void registerMouseLeaveCallBack(std::function<void()>);
   void registerMouseEnterCallBack(std::function<void()>);
+  void registerMouseScrollCallback(std::function<void(double, double)>);
 
+  void handleInputs();
   KEY_ACTION getKeyStatus(std::string mapping);
   KEY_ACTION getKeyStatus(int key);
 
   MouseState getMouseState();
 
+  static EventBus eventBus;
 private:
   static void handleKey(int key_code, KEY_ACTION action);
   static void handleMouseMove(float x, float y);
   static void handleMouseAction(int key_code, KEY_ACTION action);
   static void handleMouseLeave();
   static void handleMouseEnter();
+  static void handleMouseScrollAction(double x_offset, double y_offset);
 
   //Input data. m_keys stores keyboard keys and mouse buttons
   static std::unordered_map<int, KEY_ACTION> m_keys;
@@ -75,6 +80,7 @@ private:
   static std::vector<std::function<void()>> m_on_mouse_enter_callbacks;
   static std::vector<std::function<void()>> m_on_mouse_leave_callbacks;
   static std::vector<std::function<void(float, float)>> m_on_mouse_move_callbacks;
+  static std::vector<std::function<void(double, double)>> m_on_mouse_scroll_callbacks;
 
   //Key mappings
   static std::unordered_map<int, std::vector<std::string>> m_mappings;
@@ -84,9 +90,11 @@ private:
   friend void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
   friend void glfw_cursor_enter_callback(GLFWwindow *window, int entered);
   friend void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
+  friend void glfw_scroll_callback(GLFWwindow *window, double x_offset, double y_offset);
 };
 void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void glfw_cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
 void glfw_cursor_enter_callback(GLFWwindow *window, int entered);
 void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
+void glfw_scroll_callback(GLFWwindow *window, double x_offset, double y_offset);
 } // namespace yage

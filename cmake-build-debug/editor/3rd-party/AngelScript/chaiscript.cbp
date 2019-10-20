@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="chaiscript"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\editor\;CMake Files\editor\3rd-party\;CMake Files\editor\3rd-party\imgui\;CMake Files\editor\3rd-party\AngelScript\;CMake Files\editor\3rd-party\AngelScript\cmake\;CMake Files\editor\3rd-party\AngelScript\contrib\;CMake Files\editor\3rd-party\AngelScript\contrib\pkgconfig\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib64\;CMake Files\..\..\..\..\usr\lib64\cmake\;CMake Files\..\..\..\..\usr\lib64\cmake\glfw3\;CMake Files\..\..\..\..\usr\lib64\cmake\glm\;CMake Files\..\..\..\..\usr\lib64\cmake\Catch2\;CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.71.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.71.0\;CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.71.0\;CMake Files\..\..\..\..\usr\lib64\spdlog\;CMake Files\..\..\..\..\usr\lib64\spdlog\cmake\;CMake Files\core\;CMake Files\core\test\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="multifile_test">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/multifile_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 multifile_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="multifile_test/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/multifile_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 multifile_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="multithreaded_test">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/multithreaded_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 multithreaded_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="multithreaded_test/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/multithreaded_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 multithreaded_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="parser">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libparser.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 parser"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="parser/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libparser.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 parser/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_module">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libtest_module.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 test_module"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_module/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libtest_module.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 test_module/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stl_extra">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libstl_extra.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 stl_extra"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stl_extra/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libstl_extra.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 stl_extra/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stdlib">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libstdlib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 stdlib"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="stdlib/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libstdlib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 stdlib/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chaiscript_stdlib-6.1.0">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libchaiscript_stdlib-6.1.0.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 chaiscript_stdlib-6.1.0"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chaiscript_stdlib-6.1.0/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/lib/libchaiscript_stdlib-6.1.0.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 chaiscript_stdlib-6.1.0/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="static_chaiscript_test">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/static_chaiscript_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 static_chaiscript_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="static_chaiscript_test/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/static_chaiscript_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 static_chaiscript_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="compiled_tests">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/compiled_tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 compiled_tests"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="compiled_tests/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/compiled_tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 compiled_tests/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="boxed_cast_test">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/boxed_cast_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 boxed_cast_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="boxed_cast_test/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/boxed_cast_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 boxed_cast_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="integer_literal_test">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/integer_literal_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 integer_literal_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="integer_literal_test/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/integer_literal_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 integer_literal_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chai">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/chai" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 chai"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chai/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/chai" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 chai/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="type_info_test">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/type_info_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 type_info_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="type_info_test/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/type_info_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 type_info_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="c_linkage_test">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/c_linkage_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 c_linkage_test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="c_linkage_test/fast">
+				<Option output="/home/tokongs/projects/yage/cmake-build-debug/bin/c_linkage_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tokongs/projects/yage/cmake-build-debug/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DREADLINE_AVAILABLE"/>
+					<Add directory="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/../../../../include/c++/9.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/9.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 c_linkage_test/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/tokongs/projects/yage/cmake-build-debug/editor/3rd-party/AngelScript/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/chaiscript.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/chaiscript_threading.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/bad_boxed_cast.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/bind_first.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/bootstrap.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/bootstrap_stl.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/boxed_cast.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/boxed_cast_helper.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/boxed_number.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/boxed_value.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/dispatchkit.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/dynamic_object.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/exception_specification.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/function_call.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/function_call_detail.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/handle_return.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/operators.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/proxy_constructors.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/proxy_functions.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/proxy_functions_detail.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/register_function.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/type_conversions.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/dispatchkit/type_info.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/language/chaiscript_algebraic.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/language/chaiscript_common.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/language/chaiscript_engine.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/language/chaiscript_eval.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/language/chaiscript_parser.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/language/chaiscript_prelude.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/language/chaiscript_prelude_docs.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/utility/json.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/utility/json_wrap.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/include/chaiscript/utility/utility.hpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/src/chaiscript_stdlib_module.cpp">
+			<Option target="chaiscript_stdlib-6.1.0"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/src/main.cpp">
+			<Option target="chai"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/src/stl_extra.cpp">
+			<Option target="stl_extra"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/src/test_module.cpp">
+			<Option target="test_module"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/static_libs/chaiscript_parser.cpp">
+			<Option target="parser"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/static_libs/chaiscript_parser.hpp">
+			<Option target="parser"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/static_libs/chaiscript_stdlib.cpp">
+			<Option target="stdlib"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/static_libs/chaiscript_stdlib.hpp">
+			<Option target="stdlib"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/boxed_cast_test.cpp">
+			<Option target="boxed_cast_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/c_linkage_test.cpp">
+			<Option target="c_linkage_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/compiled_tests.cpp">
+			<Option target="compiled_tests"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/integer_literal_test.cpp">
+			<Option target="integer_literal_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/multifile_test_chai.cpp">
+			<Option target="multifile_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/multifile_test_chai.hpp">
+			<Option target="multifile_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/multifile_test_main.cpp">
+			<Option target="multifile_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/multifile_test_module.cpp">
+			<Option target="multifile_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/multifile_test_module.hpp">
+			<Option target="multifile_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/multithreaded_test.cpp">
+			<Option target="multithreaded_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/static_chaiscript.cpp">
+			<Option target="static_chaiscript_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/unittests/type_info_test.cpp">
+			<Option target="type_info_test"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\editor\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\editor\3rd-party\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/imgui/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\editor\3rd-party\imgui\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\editor\3rd-party\AngelScript\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/Doxyfile.in">
+			<Option virtualFolder="CMake Files\editor\3rd-party\AngelScript\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/cmake/Catch.cmake">
+			<Option virtualFolder="CMake Files\editor\3rd-party\AngelScript\cmake\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/editor/3rd-party/AngelScript/contrib/pkgconfig/chaiscript.pc.in">
+			<Option virtualFolder="CMake Files\editor\3rd-party\AngelScript\contrib\pkgconfig\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/BoostDetectToolset-1.71.0.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/glfw3/glfw3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\glfw3\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/glfw3/glfw3ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\glfw3\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/glfw3/glfw3Targets-noconfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\glfw3\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/glfw3/glfw3Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\glfw3\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/glm/glmConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\glm\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/glm/glmConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\glm\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/glm/glmTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\glm\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/Catch2/Catch.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Catch2\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/Catch2/Catch2Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Catch2\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/Catch2/Catch2ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Catch2\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/Catch2/Catch2Targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Catch2\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/Boost-1.71.0/BoostConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/Boost-1.71.0/BoostConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\Boost-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/boost_headers-1.71.0/boost_headers-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/boost_headers-1.71.0/boost_headers-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_headers-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/boost_program_options-1.71.0/boost_program_options-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/boost_program_options-1.71.0/boost_program_options-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/boost_program_options-1.71.0/libboost_program_options-variant-shared.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/cmake/boost_program_options-1.71.0/libboost_program_options-variant-static.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\cmake\boost_program_options-1.71.0\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/spdlog/cmake/spdlogConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\spdlog\cmake\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/spdlog/cmake/spdlogConfigTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\spdlog\cmake\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/spdlog/cmake/spdlogConfigTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\spdlog\cmake\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/../../../../usr/lib64/spdlog/cmake/spdlogConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib64\spdlog\cmake\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/core/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\core\"/>
+		</Unit>
+		<Unit filename="/home/tokongs/projects/yage/core/test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\core\test\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

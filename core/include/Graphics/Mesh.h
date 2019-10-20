@@ -22,12 +22,9 @@ class Mesh : public Resource
     VertexBufferPtr getVertexBuffer();
     aabb getAABB();
 
-    std::string getType() override;
-
   private:
     VertexBufferPtr m_vertex_buffer;
     aabb m_aabb;
-    std::string m_resource_type = "mesh";
 
     DECLARE_LOGGERS;
 };

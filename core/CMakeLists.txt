@@ -1,21 +1,25 @@
 project(yage_core)
 
 add_subdirectory(test)
+subdirs(3rd_party)
 
-set(GraphicsSource src/Graphics/OpenGL/GLDevice.cpp src/Graphics/OpenGL/VertexBuffer.cpp
-src/Graphics/OpenGL/IndexBuffer.cpp src/Graphics/OpenGL/Shader.cpp src/Graphics/Renderer.cpp src/Graphics/Mesh.cpp
-src/Graphics/OpenGL/Program.cpp src/Graphics/Camera.cpp)
+file(GLOB SRC src/*.cpp)
+file(GLOB EVENTS_SRC src/Events/*.cpp include/Events/*.h)
+file(GLOB GRAPHICS_SRC src/Graphics/*.cpp inlclude/Graphics/*.h src/Graphics/OpenGL/*.cpp)
+file(GLOB UTIL_SRC src/Util/*.cpp inlclude/Util/*.h)
+file(GLOB RESOURCE_MANAGEMENT_SRC src/ResourceManagement/*.cpp include/ResourceManagement/*.h src/ResourceManagement/Loaders/*.cpp)
+file(GLOB SCRIPTING_SRC src/Scripting/*.cpp)
 
-set(UtilSource src/Util/FileReader.cpp src/Util/Util.cpp)
-set(ResourceManagementSource src/ResourceManagement/Resource.cpp src/ResourceManagement/ResourceManager.cpp
-src/ResourceManagement/Loaders/ResourceLoader.cpp src/ResourceManagement/Loaders/MeshLoader.cpp src/ResourceManagement/Loaders/WavefrontLoader.cpp
-src/ResourceManagement/Loaders/ShaderLoader.cpp)
-add_library(yage_core STATIC src/Window.cpp src/Input.cpp ${GraphicsSource} ${UtilSource} ${ResourceManagementSource})
+file(GLOB_RECURSE ANGEL_SCRIPT_ADDON_SRC 3rd_party/angelscript/add_on *.cpp)
+
+add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${ANGEL_SCRIPT_ADDON_SRC})
 
 target_include_directories(yage_core PUBLIC 
 ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics
 ${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics/OpenGL ${CMAKE_CURRENT_SOURCE_DIR}/include/Util ${CMAKE_CURRENT_SOURCE_DIR}/include/ResourceManagement
-${CMAKE_CURRENT_SOURCE_DIR}/include/ResourceManagement/Loaders) 
+${CMAKE_CURRENT_SOURCE_DIR}/include/ResourceManagement/Loaders ${CMAKE_CURRENT_SOURCE_DIR}/include/Scripting ${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/angelscript/add_on)
+
+target_link_libraries(yage_core angelscript)
 
 find_package(glfw3 REQUIRED)
 if(glfw3_FOUND)

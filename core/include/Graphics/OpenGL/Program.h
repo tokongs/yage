@@ -39,7 +39,6 @@ public:
    */
   void activate();
 
-  std::string getType() override;
 
   /**
    * @brief Set an int uniform
@@ -128,7 +127,6 @@ private:
   unsigned int m_gl_object_id;
   ShaderPtr m_vertex_shader = nullptr;
   ShaderPtr m_fragment_shader = nullptr;
-  std::string m_type;
   DECLARE_LOGGERS;
 
   std::unordered_map<std::string, ShaderUniform> m_uniforms;

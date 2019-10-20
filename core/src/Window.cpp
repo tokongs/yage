@@ -45,6 +45,7 @@ Window::Window(WindowDesc desc)
     glfwSetCursorPosCallback(m_window_handle, glfw_cursor_position_callback);
     glfwSetCursorEnterCallback(m_window_handle, glfw_cursor_enter_callback);
     glfwSetMouseButtonCallback(m_window_handle, glfw_mouse_button_callback);
+    glfwSetScrollCallback(m_window_handle, glfw_scroll_callback);
 
     //Make the created OpenGL context the current context
     glfwMakeContextCurrent(m_window_handle);

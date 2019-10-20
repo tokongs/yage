@@ -1,3 +1,4 @@
+#include <Events/InputEvent.h>
 #include "Input.h"
 
 namespace yage
@@ -17,12 +18,15 @@ std::vector<std::vector<std::function<void()>>> Input::m_on_mouse_repeat_callbac
 std::vector<std::function<void()>> Input::m_on_mouse_leave_callbacks = std::vector<std::function<void()>>();
 std::vector<std::function<void()>> Input::m_on_mouse_enter_callbacks = std::vector<std::function<void()>>();
 std::vector<std::function<void(float, float)>> Input::m_on_mouse_move_callbacks = std::vector<std::function<void(float, float)>>();
+std::vector<std::function<void(double, double)>> Input::m_on_mouse_scroll_callbacks = std::vector<std::function<void(double, double)>>();
+
 
 std::unordered_map<int, std::vector<std::string>> Input::m_mappings = std::unordered_map<int, std::vector<std::string>>();
 std::unordered_map<std::string, unsigned int> Input::m_reverse_mappings = std::unordered_map<std::string, unsigned int>();
+
+EventBus Input::eventBus = EventBus();
 Input::Input()
 {
-
     for (int i = GLFW_MOUSE_BUTTON_1; i < GLFW_MOUSE_BUTTON_8; i++)
     {
         m_keys[i] = KEY_ACTION::NONE;
@@ -157,6 +161,9 @@ void Input::registerMouseEnterCallBack(std::function<void()> callback)
     m_on_mouse_enter_callbacks.push_back(callback);
 }
 
+void Input::registerMouseScrollCallback(std::function<void(double, double)> callback){
+    m_on_mouse_scroll_callbacks.push_back(callback);
+}
 void Input::registerMouseLeaveCallBack(std::function<void()> callback)
 {
     m_on_mouse_leave_callbacks.push_back(callback);
@@ -169,6 +176,10 @@ KEY_ACTION Input::getKeyStatus(std::string mapping)
 KEY_ACTION Input::getKeyStatus(int key)
 {
     return m_keys[key];
+}
+
+void Input::handleInputs() {
+    eventBus.handleEvents();
 }
 
 void Input::handleKey(int key_code, KEY_ACTION action)
@@ -265,10 +276,22 @@ void Input::handleMouseAction(int key_code, KEY_ACTION action)
     }
 }
 
+void Input::handleMouseScrollAction(double x_offset, double y_offset){
+    Input::eventBus.publish(new MouseScrollEvent(glm::vec2(x_offset, y_offset)));
+}
+
 void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
 
     Input::handleKey(key, (KEY_ACTION)action);
+    switch(action){
+        case GLFW_PRESS:
+            Input::eventBus.publish(new KeyPressEvent(key));
+        case GLFW_RELEASE:
+            Input::eventBus.publish(new KeyReleaseEvent(key));
+        case GLFW_REPEAT:
+            Input::eventBus.publish(new KeyRepeatEvent(key));
+    }
 }
 
 void glfw_cursor_position_callback(GLFWwindow *window, double xpos, double ypos)
@@ -291,6 +314,10 @@ void glfw_cursor_enter_callback(GLFWwindow *window, int entered)
 void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
 {
     Input::handleMouseAction(button, (KEY_ACTION)action);
+}
+
+void glfw_scroll_callback(GLFWwindow *window, double x_offset, double y_offset){
+    Input::handleMouseScrollAction(x_offset, y_offset);
 }
 
 } // namespace yage

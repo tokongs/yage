@@ -40,16 +40,12 @@ public:
 
   unsigned int getGLObjectId();
 
-  std::string getType() override;
-
 private:
   std::string m_code;
 
   unsigned int m_gl_object_id;
 
   ShaderType m_type;
-
-  std::string m_resource_type = "shader";
 
   DECLARE_LOGGERS;
 };

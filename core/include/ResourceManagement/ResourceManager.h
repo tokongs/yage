@@ -13,6 +13,8 @@
 
 namespace yage
 {
+
+    typedef std::unordered_map<std::string, ResourcePtr> ResourceMap;
 class ResourceManager : public Singleton<ResourceManager>
 {
 public:
@@ -82,21 +84,35 @@ public:
   std::shared_ptr<T> getResource(int id)
   {
     auto result = m_loaded_resources.find(id);
-    std::unique_ptr<T> t = std::make_unique<T>();
 
-    if (result->second->getType() != t->getType()) //Requested type of resource is different from what is connected to the id. Return placeholder.
+      if( result == m_loaded_resources.end())//Could not find resource, return placeholder
+      {
+          LOG(ResourceManager, warn, "Could not find resource with id: " + std::to_string(id) + ", and  type: " + std::string(typeid(T).name()));
+          LOG(ResourceManager, warn, "Returning a placeholder instead")
+          auto placeholder = m_placeholders.find(typeid(T));
+          if (placeholder != m_placeholders.end())
+          {
+              return std::dynamic_pointer_cast<T>(placeholder->second);
+          }
+          else
+          {
+              LOG(ResourceManager, error, "No placeholder register for Resources of type: " + std::string(typeid(T).name()));
+              return nullptr;
+          }
+      }
+    if (typeid(*result->second) != typeid(T)) //Requested type of resource is different from what is connected to the id. Return placeholder.
     {
-      LOG(ResourceManager, warn, "Trying to get Resource of type: " + t->getType() + ". The given id returns a Resource of type: " + result->second->getType());
+      LOG(ResourceManager, warn, "Trying to get Resource of type: " + std::string(typeid(T).name()) + ". The given id returns a Resource of type: " + typeid(result->second).name());
       LOG(ResourceManager, warn, "Returning a placeholder instead")
 
-      auto placeholder = m_placeholders.find(t->getType());
+      auto placeholder = m_placeholders.find(typeid(T));
       if (placeholder != m_placeholders.end())
       {
         return std::dynamic_pointer_cast<T>(placeholder->second);
       }
       else
       {
-        LOG(ResourceManager, error, "No placeholder registered for Resources of type: " + t->getType());
+        LOG(ResourceManager, error, "No placeholder registered for Resources of type: " + std::string(typeid(T).name()));
         return nullptr;
       }
     }
@@ -105,22 +121,6 @@ public:
     {
       return std::dynamic_pointer_cast<T>(result->second);
     }
-    else //Could not find resource, return placeholder
-    {
-      LOG(ResourceManager, warn, "Could not find resource with id: " + std::to_string(id) + ", and  type: " + t->getType());
-      LOG(ResourceManager, warn, "Returning a placeholder instead")
-      auto placeholder = m_placeholders.find(t->getType());
-      if (placeholder != m_placeholders.end())
-      {
-        return std::dynamic_pointer_cast<T>(placeholder->second);
-      }
-      else
-      {
-        LOG(ResourceManager, error, "No placeholder register for Resources of type: " + t->getType());
-        return nullptr;
-      }
-    }
-
     LOG(ResourceManager, warn, "No resource with id: " + std::to_string(id));
     return nullptr;
   }
@@ -139,7 +139,7 @@ public:
       LOG(ResourceManager, error, "Trying to register nullptr as a resource loader");
       return;
     }
-    m_loaders[std::type_index(typeid(T))] = loader;
+    m_loaders[typeid(T)] = loader;
   }
 
   /**
@@ -172,7 +172,7 @@ private:
   void buildFilePathMap(std::string resource_overview);
 
   std::unordered_map<int, ResourcePtr> m_loaded_resources;
-  std::unordered_map<std::string, ResourcePtr> m_placeholders;
+  std::unordered_map<std::type_index, ResourcePtr> m_placeholders;
   std::unordered_map<std::string, int> m_indices;
 
   std::unordered_map<std::type_index, std::shared_ptr<ResourceLoader>> m_loaders;
