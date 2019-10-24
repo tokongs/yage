@@ -18,7 +18,7 @@
 #include "MenuElement.h"
 #include <functional>
 #include <Events/EventBus.h>
-#include <ResourceManagement/Loaders/AngelScriptLoader.h>
+#include <ResourceManagement/Loaders/ScriptLoader.h>
 #include <GameObjects/GameObject.h>
 #include "Input.h"
 #include "Camera.h"
@@ -58,16 +58,16 @@ int main(int argc, char **argv)
     yage::ResourceManager::getInstance().setResourceDir(Configuration::getAssetsFolderPath() + "/");
     std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
     std::shared_ptr<yage::ShaderLoader> shader_loader = std::make_shared<yage::ShaderLoader>();
-    //std::shared_ptr<yage::AngelScriptLoader> script_loader = std::make_shared<yage::AngelScriptLoader>();
+    std::shared_ptr<yage::ScriptLoader> script_loader = std::make_shared<yage::ScriptLoader>();
 
     yage::ResourceManager::getInstance().registerResourceLoader<yage::Mesh>(mesh_loader);
     yage::ResourceManager::getInstance().registerResourceLoader<yage::Shader>(shader_loader);
-   // yage::ResourceManager::getInstance().registerResourceLoader<yage::Script>(script_loader);
+    yage::ResourceManager::getInstance().registerResourceLoader<yage::Script>(script_loader);
 
     int mesh = yage::ResourceManager::getInstance().getHandle<yage::Mesh>("lego");
     int vertex = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_vertex_shader");
     int fragment = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_fragment_shader");
-   // int script = yage::ResourceManager::getInstance().getHandle<yage::Script>("test");
+   int script = yage::ResourceManager::getInstance().getHandle<yage::Script>("test");
     //////////////////////////////////////////////////////////////////////7
 
 
@@ -110,6 +110,7 @@ int main(int argc, char **argv)
         yage::Input::getInstance().handleInputs();
         device->clearBuffers();
         renderer.setCamera(*cam);
+        yage::ScriptingEngine::ExecuteScript(yage::ResourceManager::getInstance().getResource<yage::Script>(script));
         renderer.render(yage::ResourceManager::getInstance().getResource<yage::Mesh>(mesh)->getVertexBuffer(), program);
         gui.constructFrame();
 
