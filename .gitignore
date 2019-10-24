@@ -45,3 +45,7 @@ imgui.ini
 
 *.cmake
 MakeFile
+
+*.cbp
+cmake-build-debug/
+

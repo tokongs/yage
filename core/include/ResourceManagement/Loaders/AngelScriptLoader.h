@@ -1,7 +1,6 @@
-#pragma once
+/*#pragma once
 
 #include <scriptbuilder/scriptbuilder.h>
-#include <Scripting/ScriptingEngine.h>
 #include "ResourceLoader.h"
 
 namespace yage {
@@ -10,9 +9,9 @@ public:
     AngelScriptLoader();
     ~AngelScriptLoader();
 
-    ResourcePtr load(std::string file_path) override;
+    ResourcePtr load(int id, std::string name, std::string file_path) override;
 
 };
 
 
-}
+}*/

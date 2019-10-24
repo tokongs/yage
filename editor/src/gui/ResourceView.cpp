@@ -2,15 +2,12 @@
 
 namespace yage
 {
-DEFINE_LOGGERS(ResourceView);
 ResourceView::ResourceView()
 {
-    INIT_LOGGERS(ResourceView);
 }
 
 ResourceView::~ResourceView()
 {
-    FLUSH_LOGGERS(ResourceView);
 }
 
 void ResourceView::setResource(ResourcePtr resource)
@@ -21,7 +18,7 @@ void ResourceView::setResource(ResourcePtr resource)
 void ResourceView::constructFrame(bool independent)
 {
     if(!m_resource){
-        LOG(ResourceView, warn, "Trying to show a resource gui with no resource.");
+        yage::YAGE_WARN("Trying to show a resource gui with no resource.");
     }
     if(independent){
         ImGui::Begin("Resource View", m_open.get());

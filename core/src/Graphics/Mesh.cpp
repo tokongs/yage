@@ -2,8 +2,8 @@
 
 namespace yage
 {
-Mesh::Mesh(VertexBufferPtr buffer)
-    : m_vertex_buffer(buffer)
+Mesh::Mesh(int id, std::string name, std::string file_path, VertexBufferPtr buffer)
+    :Resource(id, name, file_path), m_vertex_buffer(buffer)
 {
 }
 

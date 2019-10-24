@@ -2,18 +2,16 @@
 
 namespace yage
 {
-DEFINE_LOGGERS(VertexBuffer);
 VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data)
 {
-    INIT_LOGGERS(VertexBuffer);
     m_buffer_desc = desc;
     glGenVertexArrays(1, &m_vao_object_id);
-    LOG(VertexBuffer, info, "Created Vertex Array Object, ID: " + std::to_string(m_vao_object_id));
+    YAGE_INFO("Created Vertex Array Object, ID: " + std::to_string(m_vao_object_id));
 
     bind();
     glGenBuffers(1, &m_vb_object_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_vb_object_id);
-    LOG(VertexBuffer, info, "Created Vertex Buffer Object, ID: " + std::to_string(m_vb_object_id));
+    YAGE_INFO("Created Vertex Buffer Object, ID: " + std::to_string(m_vb_object_id));
 
     //calculate size of one vertex
     int size_of_vertex = sizeOfVertex(desc);
@@ -40,8 +38,8 @@ VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data)
 
 VertexBuffer::~VertexBuffer()
 {
-    LOG(VertexBuffer, info, "Deleting Vertex Buffer Object, ID: " + std::to_string(m_vb_object_id));
-    LOG(VertexBuffer, info, "Deleting Vertex Array Object, ID: " + std::to_string(m_vao_object_id));
+    YAGE_INFO("Deleting Vertex Buffer Object, ID: " + std::to_string(m_vb_object_id));
+    YAGE_INFO("Deleting Vertex Array Object, ID: " + std::to_string(m_vao_object_id));
     glDeleteBuffers(1, &m_vb_object_id);
     glDeleteVertexArrays(1, &m_vao_object_id);
 }
@@ -58,7 +56,7 @@ void VertexBuffer::unbind()
 
 void VertexBuffer::attachIndexBuffer(std::shared_ptr<IndexBuffer> index_buffer)
 {
-    LOG(VertexBuffer, info, "Attaching Index Buffer Object " + std::to_string(index_buffer->getGlId()) + " to Vertex Array Object " + std::to_string(m_vao_object_id));
+    YAGE_INFO("Attaching Index Buffer Object " + std::to_string(index_buffer->getGlId()) + " to Vertex Array Object " + std::to_string(m_vao_object_id));
     bool m_indexed = true;
     bind();
     index_buffer->bind();

@@ -4,6 +4,8 @@
 #include "imgui_impl_opengl3.h"
 #include "config.h"
 #include "functional"
+#include "Logger.h"
+#include <memory>
 namespace yage
 {
 /**
@@ -45,7 +47,5 @@ protected:
   std::unique_ptr<bool> m_open;
   std::function<void()> m_action;
 
-private:
-  DECLARE_LOGGERS;
 };
 } // namespace yage

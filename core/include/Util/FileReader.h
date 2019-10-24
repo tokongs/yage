@@ -5,7 +5,7 @@
 #include <Util.h>
 #include <memory>
 #include <config.h>
-
+#include "Logger.h"
 
 namespace yage
 {
@@ -54,6 +54,5 @@ class FileReader
   private:
     std::string m_root_dir;
 
-    DECLARE_LOGGERS;
 };
 } // namespace yage

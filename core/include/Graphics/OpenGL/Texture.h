@@ -11,7 +11,7 @@ class Texture : public Resource
     static const int TextureUnit0 = GL_TEXTURE0;
 
   public:
-    Texture();
+    Texture(int id, std::string name, std::string file_path);
     ~Texture();
 
   private:

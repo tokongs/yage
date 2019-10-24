@@ -3,6 +3,7 @@
 #include <vector>
 #include <config.h>
 #include <memory>
+#include "Logger.h"
 namespace yage
 {
     /**
@@ -48,8 +49,6 @@ class IndexBuffer{
     unsigned int m_gl_object_id;
     unsigned int m_size;
     std::vector<unsigned int> m_shadow_copy;
-
-    DECLARE_LOGGERS;
 };
     typedef std::shared_ptr<IndexBuffer> IndexBufferPtr;
 }

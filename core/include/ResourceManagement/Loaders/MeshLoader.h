@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <WavefrontLoader.h>
+#include "Logger.h"
 
 namespace yage{
     /**
@@ -23,14 +24,12 @@ namespace yage{
          * @param file_path 
          * @return ResourcePtr 
          */
-        ResourcePtr load(std::string file_path) override;
+        ResourcePtr load(int id, std::string name, std::string file_path) override;
 
         private:
         FileReader m_file_reader;
 
         //Loaders
         WavefrontLoader m_wavefront_loader;
-
-        DECLARE_LOGGERS;
     };
 }

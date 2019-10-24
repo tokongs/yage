@@ -19,11 +19,22 @@ enum KEY_ACTION
 
 struct MouseState
 {
+    static void Constructor(void *memory){
+        new(memory) MouseState();
+    }
+
+    static void Destructor(void *memory){
+        ((MouseState*)memory)->~MouseState();
+    }
   float x, y;
-  KEY_ACTION mouse_button_1;
-  KEY_ACTION mouse_button_2;
-  KEY_ACTION mouse_button_3;
+  int mouse_button_1;
+  int mouse_button_2;
+  int mouse_button_3;
+
+
 };
+
+
 /**
  * 
  * @brief This is where input is handled. A callback is registered with glfw
@@ -50,8 +61,7 @@ public:
   void registerMouseScrollCallback(std::function<void(double, double)>);
 
   void handleInputs();
-  KEY_ACTION getKeyStatus(std::string mapping);
-  KEY_ACTION getKeyStatus(int key);
+  int getKeyStatus(int key);
 
   MouseState getMouseState();
 
@@ -66,7 +76,7 @@ private:
 
   //Input data. m_keys stores keyboard keys and mouse buttons
   static std::unordered_map<int, KEY_ACTION> m_keys;
-  static float m_mouse_x, m_mouse_y, m_mouse_delta_x, m_mouse_delta_y;
+  static MouseState m_mouse_state;
 
   //Key callbacks
   static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_press_callbacks;

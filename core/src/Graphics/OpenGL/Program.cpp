@@ -2,18 +2,16 @@
 
 namespace yage
 {
-DEFINE_LOGGERS(Program)
-Program::Program()
+Program::Program(int id, std::string name, std::string file_path)
+: Resource(id, name, file_path)
 {
-    INIT_LOGGERS(Program);
     m_gl_object_id = glCreateProgram();
-    LOG(Program, info, "Created program with id: " + std::to_string(m_gl_object_id));
+   YAGE_INFO("Created program with id: " + std::to_string(m_gl_object_id));
 }
 
 Program::~Program()
 {
-    LOG(Program, info, "Deleting program with id: " + std::to_string(m_gl_object_id));
-    FLUSH_LOGGERS(Program);
+   YAGE_INFO("Deleting program with id: " + std::to_string(m_gl_object_id));
     glDeleteProgram(m_gl_object_id);
 }
 
@@ -28,7 +26,7 @@ void Program::attachShaders(std::vector<int> shaders)
     for (int i = 0; i < shaders.size(); i++)
     {
         ShaderPtr shader = ResourceManager::getInstance().getResource<Shader>(shaders[i]);
-        LOG(Program, info, "Linking " + shader->getName() + " to program " + std::to_string(m_gl_object_id));
+        YAGE_INFO("Linking " + shader->getName() + " to program " + std::to_string(m_gl_object_id));
         glAttachShader(m_gl_object_id, shader->getGLObjectId());
         glLinkProgram(m_gl_object_id);
     }
@@ -40,12 +38,12 @@ void Program::attachShaders(std::vector<int> shaders)
     if (!success)
     {
         glGetProgramInfoLog(m_gl_object_id, 512, NULL, info_log);
-        LOG(Program, error, info_log);
+        YAGE_ERROR(info_log);
         return;
     }
     else
     {
-        LOG(Program, info, "Shader linking successfull.");
+       YAGE_INFO("Shader linking successfull.");
     }
 
     mapUniforms();
@@ -143,7 +141,7 @@ bool Program::uniformIsActive(std::unordered_map<std::string, ShaderUniform>::it
 {
     if (uniform_it == m_uniforms.end())
     {
-        LOG(Program, warn, "Trying to set inactive or non-existent uniform (int) with name: " + name);
+        YAGE_WARN("Trying to set inactive or non-existent uniform (int) with name: " + name);
         return false;
     }
 
@@ -154,7 +152,7 @@ bool Program::typeIsCorrect(unsigned int type, unsigned int requested_type)
 {
     if (type != requested_type)
     {
-        LOG(Program, warn, "Trying to set uniform of type " + std::to_string(type) + "to value of type" + std::to_string(requested_type));
+        YAGE_WARN("Trying to set uniform of type " + std::to_string(type) + "to value of type" + std::to_string(requested_type));
         return false;
     }
 

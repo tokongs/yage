@@ -5,6 +5,7 @@
 #include "Resource.h"
 #include <memory>
 #include <string>
+#include "Logger.h"
 
 namespace yage
 {
@@ -15,7 +16,7 @@ struct aabb
 class Mesh : public Resource
 {
   public:
-    Mesh(VertexBufferPtr);
+    Mesh(int id, std::string name, std::string file_path, VertexBufferPtr vertexBufferPtr);
     Mesh();
     ~Mesh();
 
@@ -25,8 +26,6 @@ class Mesh : public Resource
   private:
     VertexBufferPtr m_vertex_buffer;
     aabb m_aabb;
-
-    DECLARE_LOGGERS;
 };
 
 typedef std::shared_ptr<Mesh> MeshPtr;

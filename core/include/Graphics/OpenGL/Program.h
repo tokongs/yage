@@ -13,7 +13,7 @@
 #include "Shader.h"
 #include "Resource.h"
 #include "ResourceManager.h"
-
+#include "Logger.h"
 namespace yage
 {
 /**
@@ -23,7 +23,7 @@ namespace yage
 class Program : public Resource
 {
 public:
-  Program();
+  Program(int id, std::string name, std::string file_path);
   ~Program();
 
   /**
@@ -127,7 +127,6 @@ private:
   unsigned int m_gl_object_id;
   ShaderPtr m_vertex_shader = nullptr;
   ShaderPtr m_fragment_shader = nullptr;
-  DECLARE_LOGGERS;
 
   std::unordered_map<std::string, ShaderUniform> m_uniforms;
 };

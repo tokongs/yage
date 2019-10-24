@@ -4,9 +4,7 @@
 namespace yage
 {
 std::unordered_map<int, KEY_ACTION> Input::m_keys = std::unordered_map<int, KEY_ACTION>();
-float Input::m_mouse_x = 0;
-float Input::m_mouse_y = 0;
-
+MouseState Input::m_mouse_state = MouseState();
 std::unordered_map<std::string, std::vector<std::function<void()>>> Input::m_on_press_callbacks = std::unordered_map<std::string, std::vector<std::function<void()>>>();
 std::unordered_map<std::string, std::vector<std::function<void()>>> Input::m_on_release_callbacks = std::unordered_map<std::string, std::vector<std::function<void()>>>();
 std::unordered_map<std::string, std::vector<std::function<void()>>> Input::m_on_repeat_callbacks = std::unordered_map<std::string, std::vector<std::function<void()>>>();
@@ -72,15 +70,7 @@ void Input::mapKey(int key, std::string action)
 }
 
 MouseState Input::getMouseState(){
-    MouseState result;
-    result.x = Input::m_mouse_x;
-    result.x = Input::m_mouse_y; 
-
-    result.mouse_button_1 = m_keys[GLFW_MOUSE_BUTTON_1];
-    result.mouse_button_2 = m_keys[GLFW_MOUSE_BUTTON_2];
-    result.mouse_button_3 = m_keys[GLFW_MOUSE_BUTTON_3];
-
-    return result;   
+   return m_mouse_state;
 }
 
 void Input::registerKeyCallBack(KEY_ACTION action, std::string mapping, std::function<void()> callback)
@@ -168,12 +158,8 @@ void Input::registerMouseLeaveCallBack(std::function<void()> callback)
 {
     m_on_mouse_leave_callbacks.push_back(callback);
 }
-KEY_ACTION Input::getKeyStatus(std::string mapping)
-{
-    return m_keys[m_reverse_mappings[mapping]];
-}
 
-KEY_ACTION Input::getKeyStatus(int key)
+int Input::getKeyStatus(int key)
 {
     return m_keys[key];
 }
@@ -225,8 +211,8 @@ void Input::handleKey(int key_code, KEY_ACTION action)
 
 void Input::handleMouseMove(float x, float y)
 {
-    m_mouse_x = x;
-    m_mouse_y = y;
+    m_mouse_state.x = x;
+    m_mouse_state.y = y;
 
     for (int i = 0; i < m_on_mouse_move_callbacks.size(); i++)
     {
@@ -252,28 +238,17 @@ void Input::handleMouseLeave()
 
 void Input::handleMouseAction(int key_code, KEY_ACTION action)
 {
-    if (key_code < GLFW_MOUSE_BUTTON_1 || key_code > GLFW_MOUSE_BUTTON_3)
-    {
-        return;
+
+    if(key_code == GLFW_MOUSE_BUTTON_1){
+        m_mouse_state.mouse_button_1 = action;
+    }
+    if(key_code == GLFW_MOUSE_BUTTON_2){
+        m_mouse_state.mouse_button_2 = action;
+    }
+    if(key_code == GLFW_MOUSE_BUTTON_3){
+        m_mouse_state.mouse_button_3 = action;
     }
 
-    std::vector<std::function<void()>> callbacks;
-    switch (action)
-    {
-    case KEY_ACTION::PRESS:
-        callbacks = m_on_mouse_down_callbacks[key_code];
-        break;
-    case KEY_ACTION::RELEASE:
-        callbacks = m_on_mouse_up_callbacks[key_code];
-        break;
-    case KEY_ACTION::REPEAT:
-        callbacks = m_on_mouse_repeat_callbacks[key_code];
-        break;
-    }
-
-    for(int i = 0; i < callbacks.size(); i++){
-        callbacks[i]();
-    }
 }
 
 void Input::handleMouseScrollAction(double x_offset, double y_offset){

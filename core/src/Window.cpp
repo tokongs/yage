@@ -1,19 +1,17 @@
 #include <Window.h>
 namespace yage
 {
-DEFINE_LOGGERS(Window);
 Window::Window(WindowDesc desc)
 {
     m_window_desc = desc;
 
-    //Create loggers
-    INIT_LOGGERS(Window);
+
     //Initialize GLFW
     glfwSetErrorCallback(glfw_error_callback);
 
     if (!glfwInit())
     {
-        LOG(Window, error, "Failed to initialize GLFW");
+        YAGE_CRITICAL("Failed to initialize GLFW");
         return;
     }
 
@@ -37,7 +35,7 @@ Window::Window(WindowDesc desc)
     if (!m_window_handle)
     {
         glfwTerminate();
-        LOG(Window, error, "Failed to create GLFW window");
+        YAGE_CRITICAL("Failed to create GLFW window");
         return;
     }
 
@@ -88,7 +86,7 @@ GLFWwindow *Window::getWindowHandle()
 
 void glfw_error_callback(int error, const char *description)
 {
-    LOG(Window, error, "GLFW ERROR: " + std::to_string(error) + description);
+    YAGE_ERROR("GLFW ERROR: " + std::to_string(error) + description);
 }
  
 } // namespace yage

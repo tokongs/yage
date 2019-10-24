@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 #include <config.h>
-
+#include "Logger.h"
 
 namespace yage
 {
@@ -118,8 +118,6 @@ class VertexBuffer
     IndexBufferPtr m_index_buffer;
     bool m_indexed = false;
     std::vector<float> m_shadow_copy;
-
-    DECLARE_LOGGERS;
 
     private:
     /**

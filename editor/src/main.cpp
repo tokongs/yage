@@ -19,15 +19,21 @@
 #include <functional>
 #include <Events/EventBus.h>
 #include <ResourceManagement/Loaders/AngelScriptLoader.h>
+#include <GameObjects/GameObject.h>
 #include "Input.h"
 #include "Camera.h"
 #include "Configuration.h"
 #include "MovingCamera.h"
+#include "Components/TransformComponent.h"
+#include "Script.h"
+#include "yage.h"
 
 int main(int argc, char **argv)
 {
 
+    yage::InitYage();
     Configuration::Load(argc, argv);
+
 
     //Set up window
     yage::WindowDesc desc;
@@ -47,35 +53,28 @@ int main(int argc, char **argv)
     yage::Input::eventBus.subscribe(cam.get(), EventType::KeyRepeatEvent);
     yage::Input::eventBus.subscribe(cam.get(), EventType::MouseScrollEvent);
 
-    auto zoomIm =  [](double x, double y){ if(y > 0) std::cout << "resr";};
-    std::function<void(double s, double)> cameraZoom = std::function<void(double, double)>(std::bind(zoomIm, 1, 1));
-    yage::Input::getInstance().registerMouseScrollCallback(std::function<void(double, double)>(zoomIm));
     /////////////////////////////////////////////////////////////
     //Set resource dir and load resources
     yage::ResourceManager::getInstance().setResourceDir(Configuration::getAssetsFolderPath() + "/");
     std::shared_ptr<yage::MeshLoader> mesh_loader = std::make_shared<yage::MeshLoader>();
     std::shared_ptr<yage::ShaderLoader> shader_loader = std::make_shared<yage::ShaderLoader>();
-    std::shared_ptr<yage::AngelScriptLoader> script_loader = std::make_shared<yage::AngelScriptLoader>();
+    //std::shared_ptr<yage::AngelScriptLoader> script_loader = std::make_shared<yage::AngelScriptLoader>();
 
     yage::ResourceManager::getInstance().registerResourceLoader<yage::Mesh>(mesh_loader);
     yage::ResourceManager::getInstance().registerResourceLoader<yage::Shader>(shader_loader);
-    yage::ResourceManager::getInstance().registerResourceLoader<yage::Script>(script_loader);
+   // yage::ResourceManager::getInstance().registerResourceLoader<yage::Script>(script_loader);
 
     int mesh = yage::ResourceManager::getInstance().getHandle<yage::Mesh>("lego");
     int vertex = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_vertex_shader");
     int fragment = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_fragment_shader");
-    int script = yage::ResourceManager::getInstance().getHandle<yage::Script>("test");
-
-    yage::ScriptingEngine engine;
-    engine.addScript("MyModule", yage::ResourceManager::getInstance().getResource<yage::Script>(script));
-    engine.execute();
-
+   // int script = yage::ResourceManager::getInstance().getHandle<yage::Script>("test");
     //////////////////////////////////////////////////////////////////////7
+
 
     yage::Renderer renderer;
 
     //Set up shaders
-    yage::ProgramPtr program = std::make_shared<yage::Program>();
+    yage::ProgramPtr program = std::make_shared<yage::Program>(1, "program", "./program");
 
     std::vector<int> shaders;
     shaders.push_back(vertex);
@@ -100,6 +99,10 @@ int main(int argc, char **argv)
     ///////////////////////////////////////////////////////////
 
     device->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
+
+    yage::GameObjectPtr object = std::make_shared<yage::GameObject>(0);
+    yage::TransformComponentPtr trans = std::make_shared<yage::TransformComponent>(0);
+    yage::GameObject::AttachComponent(object, trans);
 
     while (!window->shouldClose())
     {

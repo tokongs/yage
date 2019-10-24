@@ -6,6 +6,7 @@
 #include <memory>
 #include "config.h"
 #include "Input.h"
+#include "Logger.h"
 
 namespace yage
 {
@@ -87,8 +88,6 @@ private:
 
   //pointer to the internal glfw window
   GLFWwindow *m_window_handle;
-
-  DECLARE_LOGGERS;
 
   //Graphics Device
   std::shared_ptr<GLDevice> m_device;

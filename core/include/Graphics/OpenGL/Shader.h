@@ -6,7 +6,7 @@
 #include <memory>
 #include "config.h"
 #include "Resource.h"
-
+#include "Logger.h"
 namespace yage
 {
 
@@ -34,7 +34,7 @@ public:
      * @param vertexCode as a string
      * @param fragmentCode as a string
      */
-  Shader(std::string code, ShaderType type);
+  Shader(int id, std::string name, std::string file_path, std::string code, ShaderType type);
   Shader();
   ~Shader();
 
@@ -46,8 +46,6 @@ private:
   unsigned int m_gl_object_id;
 
   ShaderType m_type;
-
-  DECLARE_LOGGERS;
 };
 
 typedef std::shared_ptr<Shader> ShaderPtr;

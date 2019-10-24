@@ -18,8 +18,6 @@ public:
     void subscribe(EventListener* listener, EventType type);
     void handleEvents();
 
-
-
 private:
     std::unordered_map<EventType, ListenerList> m_listeners;
     std::queue<Event*> m_event_queue;

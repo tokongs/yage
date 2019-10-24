@@ -9,17 +9,23 @@ file(GLOB GRAPHICS_SRC src/Graphics/*.cpp inlclude/Graphics/*.h src/Graphics/Ope
 file(GLOB UTIL_SRC src/Util/*.cpp inlclude/Util/*.h)
 file(GLOB RESOURCE_MANAGEMENT_SRC src/ResourceManagement/*.cpp include/ResourceManagement/*.h src/ResourceManagement/Loaders/*.cpp)
 file(GLOB SCRIPTING_SRC src/Scripting/*.cpp)
+file(GLOB_RECURSE GAME_OBJECTS_SRC src/GameObjects *.cpp)
 
-file(GLOB_RECURSE ANGEL_SCRIPT_ADDON_SRC 3rd_party/angelscript/add_on *.cpp)
+add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${GAME_OBJECTS_SRC})
 
-add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${ANGEL_SCRIPT_ADDON_SRC})
+file(GLOB_RECURSE INCLUDE include *.h)
 
-target_include_directories(yage_core PUBLIC 
-${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics
-${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics/OpenGL ${CMAKE_CURRENT_SOURCE_DIR}/include/Util ${CMAKE_CURRENT_SOURCE_DIR}/include/ResourceManagement
-${CMAKE_CURRENT_SOURCE_DIR}/include/ResourceManagement/Loaders ${CMAKE_CURRENT_SOURCE_DIR}/include/Scripting ${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/angelscript/add_on)
+target_include_directories(yage_core PUBLIC
+include include/Graphics include/GameObjects
+include/Graphics/OpenGL include/Util include/ResourceManagement
+include/ResourceManagement/Loaders include/Scripting  include/GameObjects 3rd_party/sol/)
 
-target_link_libraries(yage_core angelscript)
+
+find_package(Lua REQUIRED)
+if(LUA_FOUND)
+    target_include_directories(yage_core PUBLIC ${LUA_INCLUDE_DIRS})
+    target_link_libraries(yage_core ${LUA_LIBRARIES})
+endif()
 
 find_package(glfw3 REQUIRED)
 if(glfw3_FOUND)

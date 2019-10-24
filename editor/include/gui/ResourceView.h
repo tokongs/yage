@@ -5,6 +5,7 @@
 #include "Resource.h"
 #include "GuiElement.h"
 #include "config.h"
+#include "Logger.h"
 
 namespace yage
 {
@@ -35,8 +36,5 @@ class ResourceView : public GuiElement
 
     protected:
     ResourcePtr m_resource;
-
-    private:
-    DECLARE_LOGGERS;
 };
 } // namespace yage

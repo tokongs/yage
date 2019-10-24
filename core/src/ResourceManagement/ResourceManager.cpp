@@ -2,15 +2,12 @@
 
 namespace yage
 {
-DEFINE_LOGGERS(ResourceManager);
 ResourceManager::ResourceManager()
 {
-    INIT_LOGGERS(ResourceManager);
 }
 
 ResourceManager::~ResourceManager()
 {
-    FLUSH_LOGGERS(ResourceManager);
 }
 
 void ResourceManager::setResourceDir(std::string resource_dir)
@@ -21,7 +18,7 @@ void ResourceManager::setResourceDir(std::string resource_dir)
 
     if (resource_overview.empty())
     {
-        LOG(ResourceManager, warn, "Resource Overview File is empty");
+        YAGE_WARN("Resource Overview File is empty");
     }
     buildFilePathMap(resource_overview);
 }
@@ -44,7 +41,7 @@ void ResourceManager::registerPlaceholderResource(ResourcePtr resource)
 {
     if (!resource)
     {
-        LOG(ResourceManager, error, "Trying to load nullptr as placeholder resource");
+        YAGE_ERROR("Trying to load nullptr as placeholder resource");
         return;
     }
     m_placeholders[typeid(*resource.get())] = resource;
