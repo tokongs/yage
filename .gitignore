@@ -48,4 +48,6 @@ MakeFile
 
 *.cbp
 cmake-build-debug/
+default.txt
+log.txt
 
