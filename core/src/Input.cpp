@@ -23,8 +23,8 @@ std::unordered_map<int, std::vector<std::string>> Input::m_mappings = std::unord
 std::unordered_map<std::string, unsigned int> Input::m_reverse_mappings = std::unordered_map<std::string, unsigned int>();
 
 EventBus Input::eventBus = EventBus();
-Input::Input()
-{
+
+void Input::Init() {
     for (int i = GLFW_MOUSE_BUTTON_1; i < GLFW_MOUSE_BUTTON_8; i++)
     {
         m_keys[i] = KEY_ACTION::NONE;
@@ -48,10 +48,6 @@ Input::Input()
     m_on_mouse_repeat_callbacks.push_back(std::vector<std::function<void()>>());
 }
 
-Input::~Input()
-{
-}
-
 void Input::mapKey(int key, std::string action)
 {
     //If a mapping already exists just insert a new one,
@@ -69,7 +65,7 @@ void Input::mapKey(int key, std::string action)
     m_reverse_mappings[action] = key;
 }
 
-MouseState Input::getMouseState(){
+MouseState Input::GetMouseState(){
    return m_mouse_state;
 }
 
@@ -159,7 +155,7 @@ void Input::registerMouseLeaveCallBack(std::function<void()> callback)
     m_on_mouse_leave_callbacks.push_back(callback);
 }
 
-int Input::getKeyStatus(int key)
+int Input::GetKeyState(int key)
 {
     return m_keys[key];
 }

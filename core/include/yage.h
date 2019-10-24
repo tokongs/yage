@@ -6,6 +6,7 @@
 namespace yage{
     void InitYage(){
         Logger::Init();
+        Input::Init();
         ScriptingEngine::Init();
     }
 }

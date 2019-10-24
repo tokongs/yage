@@ -107,7 +107,7 @@ int main(int argc, char **argv)
     while (!window->shouldClose())
     {
         glfwPollEvents();
-        yage::Input::getInstance().handleInputs();
+        yage::Input::handleInputs();
         device->clearBuffers();
         renderer.setCamera(*cam);
         yage::ScriptingEngine::ExecuteScript(yage::ResourceManager::getInstance().getResource<yage::Script>(script));

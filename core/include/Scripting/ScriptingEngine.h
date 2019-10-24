@@ -3,12 +3,14 @@
 #include <sol.hpp>
 #include "Logger.h"
 #include "Script.h"
+#include "Input.h"
 
 namespace yage{
 class ScriptingEngine {
 public:
     static void Init();
     static void OpenLibs();
+    static void SetupInputAPI();
     static void ExecuteScript(ScriptPtr script);
 
 private:
