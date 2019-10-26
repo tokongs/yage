@@ -34,19 +34,17 @@ public:
      * @param vertexCode as a string
      * @param fragmentCode as a string
      */
-  Shader(int id, std::string name, std::string file_path, std::string code, ShaderType type);
+  Shader(std::string code, ShaderType type);
   Shader();
   ~Shader();
 
   unsigned int getGLObjectId();
 
 private:
-  std::string m_code;
+  std::string mCode;
 
-  unsigned int m_gl_object_id;
+  unsigned int mGlObjectId;
 
-  ShaderType m_type;
+  ShaderType mType;
 };
-
-typedef std::shared_ptr<Shader> ShaderPtr;
 } // namespace yage

@@ -10,6 +10,4 @@ namespace yage{
         Transform transform;
 
     };
-
-    typedef std::shared_ptr<TransformComponent> TransformComponentPtr;
 }

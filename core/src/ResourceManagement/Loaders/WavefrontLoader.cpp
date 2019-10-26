@@ -11,10 +11,10 @@ WavefrontLoader::~WavefrontLoader()
 }
 
 // TODO: make better. this is for testin purposes
-VertexBufferPtr WavefrontLoader::loadWavefront(std::string file)
+VertexBuffer* WavefrontLoader::loadWavefront(std::string file)
 {
     VertexBufferDesc desc;
-    desc.has_position = true;
+    desc.hasPosition = true;
     std::vector<glm::vec3> positions;
     std::vector<Vertex> vertices;
 
@@ -86,7 +86,7 @@ VertexBufferPtr WavefrontLoader::loadWavefront(std::string file)
         start_of_line = file.find("\nf ", start_of_line + 1);
         end_of_line = file.find_first_of('\n', start_of_line + 1);
     }
-
-    return std::make_shared<VertexBuffer>(desc, vertices);
+    VertexBuffer* result = new VertexBuffer(desc, vertices);
+    return result;
 }
 } // namespace yage

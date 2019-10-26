@@ -73,7 +73,7 @@ public:
      * 
      * @return GLDevice* 
      */
-  std::shared_ptr<GLDevice> getGraphicsDevice();
+  GLDevice* getGraphicsDevice();
 
   /**
      * @brief Get a pointer to the glfw window internal window handle
@@ -84,13 +84,13 @@ public:
 
 private:
   //Window properties
-  WindowDesc m_window_desc;
+  WindowDesc mWindowDesc;
 
   //pointer to the internal glfw window
-  GLFWwindow *m_window_handle;
+  GLFWwindow *mWindowHandle;
 
   //Graphics Device
-  std::shared_ptr<GLDevice> m_device;
+  GLDevice* mDevice;
 
 private:
   /**

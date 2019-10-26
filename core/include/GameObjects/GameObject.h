@@ -7,18 +7,16 @@
 namespace yage{
 class GameObject {
 public:
-    GameObject(int id);
+    GameObject(int id, std::string name);
 
     int getId();
-    static void  AttachComponent(GameObjectPtr object, ComponentPtr component);
-    ComponentPtr getComponentOfType(ComponentType type);
-    ComponentPtr getComponent(int id);
+    std::string getName();
+    void attachComponent(Component* component);
+    Component *getComponentOfType(ComponentType type);
+    Component *getComponent(int id);
 private:
     int m_id;
-    std::unordered_map<ComponentType, ComponentPtr> m_components;
+    std::string m_name;
+    std::unordered_map<ComponentType, Component*> m_components;
 };
-
-typedef std::shared_ptr<GameObject> GameObjectPtr;
-
-
 }

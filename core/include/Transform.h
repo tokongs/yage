@@ -8,7 +8,6 @@
 namespace yage{
 
     class Transform{
-        typedef std::shared_ptr<Transform> TransformPtr;
     public:
         Transform();
 
@@ -19,19 +18,17 @@ namespace yage{
         void setPosition(glm::vec3 position);
         void setScale(glm::vec3 scale);
 
-        TransformPtr getParent();
-        std::vector<TransformPtr> getChildren();
+        Transform* getParent();
+        std::vector<Transform*> getChildren();
 
     private:
-        glm::vec3 m_position;
-        glm::vec3 m_right_dir;
-        glm::vec3 m_up_dir;
+        glm::vec3 mPosition;
+        glm::vec3 mRightDir;
+        glm::vec3 mUpDir;
 
-        glm::vec3 m_scale;
+        glm::vec3 mScale;
 
-        TransformPtr m_parent;
-        std::vector<TransformPtr> m_children;
+        Transform* mParent;
+        std::vector<Transform*> mChildren;
     };
-
-    typedef std::shared_ptr<Transform> TransformPtr;
 }

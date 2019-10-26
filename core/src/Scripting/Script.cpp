@@ -2,8 +2,12 @@
 #include "Script.h"
 
 namespace yage{
-    Script::Script(int id, std::string name, std::string file_path, std::string content)
-    : Resource(id, name, file_path), m_content(content)
+    Script::Script() {
+
+    }
+
+    Script::Script(std::string content)
+    : mContent(content)
     {
 
     }
@@ -13,11 +17,11 @@ namespace yage{
     }
 
     void Script::setContent(std::string content) {
-        m_content = content;
+        mContent = content;
     }
 
     std::string Script::getContent() {
-        return m_content;
+        return mContent;
     }
 
 }

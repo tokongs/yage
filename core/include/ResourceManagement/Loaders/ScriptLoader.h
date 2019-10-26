@@ -10,7 +10,7 @@ public:
     ScriptLoader();
     ~ScriptLoader();
 
-    ResourcePtr load(int id, std::string name, std::string file_path) override;
+    Resource* load(std::string filePath) override;
 
 };
 

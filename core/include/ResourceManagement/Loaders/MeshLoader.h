@@ -24,12 +24,12 @@ namespace yage{
          * @param file_path 
          * @return ResourcePtr 
          */
-        ResourcePtr load(int id, std::string name, std::string file_path) override;
+        Resource* load(std::string filePath) override;
 
         private:
-        FileReader m_file_reader;
+        FileReader mFileReader;
 
         //Loaders
-        WavefrontLoader m_wavefront_loader;
+        WavefrontLoader mWavefrontLoader;
     };
 }

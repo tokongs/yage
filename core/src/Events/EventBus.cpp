@@ -4,29 +4,29 @@ EventBus::EventBus() {
 
 }
 EventBus::~EventBus() {
-    while(!m_event_queue.empty()){
-        Event *event = m_event_queue.front();
-        m_event_queue.pop();
+    while(!mEventQueue.empty()){
+        Event *event = mEventQueue.front();
+        mEventQueue.pop();
         delete event;
     }
 }
 void EventBus::publish(Event* event) {
-    m_event_queue.push(event);
+    mEventQueue.push(event);
 }
 void EventBus::subscribe(EventListener* listener, EventType type) {
-    m_listeners[type].push_back(listener);
+    mListeners[type].push_back(listener);
 }
 
 
 void EventBus::handleEvents() {
-    while(!m_event_queue.empty()){
-        Event *event = m_event_queue.front();
+    while(!mEventQueue.empty()){
+        Event *event = mEventQueue.front();
 
-        ListenerList listeners = m_listeners[event->getEventType()];
+        ListenerList listeners = mListeners[event->getEventType()];
         for(auto it : listeners){
             it->handleEvent(event);
         }
-        m_event_queue.pop();
+        mEventQueue.pop();
         delete event;
     }
 }

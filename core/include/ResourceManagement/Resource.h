@@ -14,7 +14,7 @@ class Resource
 {
 
   public:
-    Resource(unsigned int id, std::string name, std::string file_path);
+    Resource(unsigned int id, std::string name, std::string filePath);
     Resource();
     
     virtual ~Resource();
@@ -42,12 +42,11 @@ class Resource
 
     void setId(int id);
     void setName(std::string name);
-    void setFilePath(std::string file_path);
+    void setFilePath(std::string filePath);
     
   protected:
-    unsigned int m_id;
-    std::string m_file_path;
-    std::string m_name;
+    unsigned int mID;
+    std::string mFilePath;
+    std::string mName;
 };
-typedef std::shared_ptr<Resource> ResourcePtr;
 } // namespace yage

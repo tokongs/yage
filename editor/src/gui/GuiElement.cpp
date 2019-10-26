@@ -3,9 +3,9 @@
 namespace yage
 {
 GuiElement::GuiElement(std::function<void()> action)
-    : m_action(action)
+    : mAction(action)
 {
-    m_open = std::make_unique<bool>(false);
+    mOpen = true;
 
 }
 
@@ -14,27 +14,22 @@ GuiElement::~GuiElement()
 
 }
 
-void GuiElement::constructFrame(bool independent)
-{
-    YAGE_INFO("Trying to construct gui element with base class. Which has not gui implemented. See GuiElement::constructFrame");
-}
-
 void GuiElement::setAction(std::function<void()> action)
 {
-    m_action = action;
+    mAction = action;
 }
 
 bool GuiElement::isOpen()
 {
-    return *m_open;
+    return mOpen;
 }
 
 void GuiElement::open()
 {
-    *m_open = true;
+    mOpen = true;
 }
 void GuiElement::close()
 {
-    *m_open = false;
+    mOpen = false;
 }
 } // namespace yage

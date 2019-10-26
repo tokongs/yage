@@ -75,26 +75,26 @@ namespace yage {
         static void handleMouseScrollAction(double x_offset, double y_offset);
 
         //Input data. m_keys stores keyboard keys and mouse buttons
-        static std::unordered_map<int, KEY_ACTION> m_keys;
-        static MouseState m_mouse_state;
+        static std::unordered_map<int, KEY_ACTION> mKeys;
+        static MouseState mMouseState;
 
         //Key callbacks
-        static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_press_callbacks;
-        static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_release_callbacks;
-        static std::unordered_map<std::string, std::vector<std::function<void()>>> m_on_repeat_callbacks;
+        static std::unordered_map<std::string, std::vector<std::function<void()>>> mOnPressCallbacks;
+        static std::unordered_map<std::string, std::vector<std::function<void()>>> mOnReleaseCallbacks;
+        static std::unordered_map<std::string, std::vector<std::function<void()>>> mOnRepeatCallbacks;
         //Mouse callbacks
         //One vector for each mouse button indexed 0-2
-        static std::vector<std::vector<std::function<void()>>> m_on_mouse_down_callbacks;
-        static std::vector<std::vector<std::function<void()>>> m_on_mouse_up_callbacks;
-        static std::vector<std::vector<std::function<void()>>> m_on_mouse_repeat_callbacks;
-        static std::vector<std::function<void()>> m_on_mouse_enter_callbacks;
-        static std::vector<std::function<void()>> m_on_mouse_leave_callbacks;
-        static std::vector<std::function<void(float, float)>> m_on_mouse_move_callbacks;
-        static std::vector<std::function<void(double, double)>> m_on_mouse_scroll_callbacks;
+        static std::vector<std::vector<std::function<void()>>> mOnMouseDownCallbacks;
+        static std::vector<std::vector<std::function<void()>>> mOnMouseUpCallbacks;
+        static std::vector<std::vector<std::function<void()>>> mOnMouseRepeatCallbacks;
+        static std::vector<std::function<void()>> mOnMouseEnterCallbacks;
+        static std::vector<std::function<void()>> mOnMouseLeaveCallbacks;
+        static std::vector<std::function<void(float, float)>> mOnMouseMoveCallbacks;
+        static std::vector<std::function<void(double, double)>> mOnMouseScrollCallbacks;
 
         //Key mappings
-        static std::unordered_map<int, std::vector<std::string>> m_mappings;
-        static std::unordered_map<std::string, unsigned int> m_reverse_mappings;
+        static std::unordered_map<int, std::vector<std::string>> mMappings;
+        static std::unordered_map<std::string, unsigned int> mReverseMappings;
 
         friend void glfw_cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
 
@@ -104,7 +104,7 @@ namespace yage {
 
         friend void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 
-        friend void glfw_scroll_callback(GLFWwindow *window, double x_offset, double y_offset);
+        friend void glfw_scroll_callback(GLFWwindow *window, double xOffset, double yOffset);
     };
 
     void glfw_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -115,5 +115,5 @@ namespace yage {
 
     void glfw_mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 
-    void glfw_scroll_callback(GLFWwindow *window, double x_offset, double y_offset);
+    void glfw_scroll_callback(GLFWwindow *window, double xOffset, double yOffset);
 } // namespace yage

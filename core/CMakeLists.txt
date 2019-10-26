@@ -10,15 +10,16 @@ file(GLOB UTIL_SRC src/Util/*.cpp inlclude/Util/*.h)
 file(GLOB RESOURCE_MANAGEMENT_SRC src/ResourceManagement/*.cpp include/ResourceManagement/*.h src/ResourceManagement/Loaders/*.cpp)
 file(GLOB SCRIPTING_SRC src/Scripting/*.cpp)
 file(GLOB_RECURSE GAME_OBJECTS_SRC src/GameObjects *.cpp)
+file(GLOB SCENE_SRC src/Scene/*.cpp)
 
-add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${GAME_OBJECTS_SRC})
+add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${GAME_OBJECTS_SRC} ${SCENE_SRC})
 
 file(GLOB_RECURSE INCLUDE include *.h)
 
 target_include_directories(yage_core PUBLIC
 include include/Graphics include/GameObjects
 include/Graphics/OpenGL include/Util include/ResourceManagement
-include/ResourceManagement/Loaders include/Scripting  include/GameObjects 3rd_party/sol/)
+include/ResourceManagement/Loaders include/Scripting  include/GameObjects include/Scene 3rd_party/sol/)
 
 
 find_package(Lua REQUIRED)

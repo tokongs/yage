@@ -25,6 +25,6 @@ class ResourceLoader
      * 
      * @return ResourcePtr 
      */
-    virtual ResourcePtr load(int id, std::string name, std::string filepath) = 0;
+    virtual Resource* load(std::string filePath) = 0;
 };
 } // namespace yage

@@ -21,28 +21,28 @@ namespace yage {
 
         static void SetLogLevel(int level);
 
-        static std::shared_ptr<spdlog::logger> m_console_logger;
-        static std::shared_ptr<spdlog::logger> m_file_logger;
+        static std::shared_ptr<spdlog::logger> mConsoleLogger;
+        static std::shared_ptr<spdlog::logger> mFileLogger;
 
 
 #ifndef YAGE_NO_LOGGING
-#define YAGE_TRACE(...) Logger::m_console_logger->trace(__VA_ARGS__); \
+#define YAGE_TRACE(...) Logger::mConsoleLogger->trace(__VA_ARGS__); \
                         Logger::m_file_logger->trace(__VA_ARGS__);
 
-#define YAGE_DEBUG(...) Logger::m_console_logger->debug(__VA_ARGS__); \
+#define YAGE_DEBUG(...) Logger::mConsoleLogger->debug(__VA_ARGS__); \
                         Logger::m_file_logger->debug(__VA_ARGS__);
 
-#define YAGE_INFO(...) Logger::m_console_logger->info(__VA_ARGS__); \
-                        Logger::m_file_logger->info(__VA_ARGS__);
+#define YAGE_INFO(...) Logger::mConsoleLogger->info(__VA_ARGS__); \
+                        Logger::mFileLogger->info(__VA_ARGS__);
 
-#define YAGE_WARN(...) Logger::m_console_logger->warn(__VA_ARGS__); \
-                        Logger::m_file_logger->warn(__VA_ARGS__);
+#define YAGE_WARN(...) Logger::mConsoleLogger->warn(__VA_ARGS__); \
+                        Logger::mFileLogger->warn(__VA_ARGS__);
 
-#define YAGE_ERROR(...) Logger::m_console_logger->error(__VA_ARGS__); \
-                        Logger::m_file_logger->error(__VA_ARGS__);
+#define YAGE_ERROR(...) Logger::mConsoleLogger->error(__VA_ARGS__); \
+                        Logger::mFileLogger->error(__VA_ARGS__);
 
-#define YAGE_CRITICAL(...) Logger::m_console_logger->critical(__VA_ARGS__); \
-                            Logger::m_file_logger->critical(__VA_ARGS__); \
+#define YAGE_CRITICAL(...) Logger::mConsoleLogger->critical(__VA_ARGS__); \
+                            Logger::mFileLogger->critical(__VA_ARGS__); \
 
 #else
 #define YAGE_TRACE(__VA_ARGS__)

@@ -22,9 +22,9 @@ class MainMenu : public GuiElement
 
     void constructFrame(bool independent = false) override;
 
-    void addMenuItem(std::string menu, std::unique_ptr<MenuElement> element);
+    void addMenuItem(std::string menu, MenuElement element);
 
   private:
-    std::map<std::string, std::vector<std::unique_ptr<MenuElement> > > m_elements;
+    std::map<std::string, std::vector<MenuElement > > mElements;
 };
 } // namespace yage

@@ -19,6 +19,6 @@ public:
     void handleEvents();
 
 private:
-    std::unordered_map<EventType, ListenerList> m_listeners;
-    std::queue<Event*> m_event_queue;
+    std::unordered_map<EventType, ListenerList> mListeners;
+    std::queue<Event*> mEventQueue;
 };

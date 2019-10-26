@@ -29,7 +29,7 @@ class Camera
 
     void setUpDirection(glm::vec3 direction);
     void setFoV(float fov);
-    void setAspectRatio(float aspect_ratio);
+    void setAspectRatio(float aspectRatio);
     void setNearClipPlane(float clip);
     void setFarClipPlane(float clip);
 
@@ -44,19 +44,19 @@ class Camera
     void calculateProjectionMatrix();
 
   protected:
-    glm::mat4 m_view_matrix;
-    glm::mat4 m_projection_matrix;
+    glm::mat4 mViewMatrix;
+    glm::mat4 mProjectionMatrix;
 
-    glm::vec3 m_position;
-    glm::vec3 m_direction;
+    glm::vec3 mPosition;
+    glm::vec3 mDirection;
 
-    float m_fov;
-    float m_aspect_ratio;
-    float m_near_clip;
-    float m_far_clip;
+    float mFov;
+    float mAspectRatio;
+    float mNearClip;
+    float mFarClip;
 
-    glm::vec3 m_target;
-    glm::vec3 m_up_dir;
-    glm::vec3 m_front;
+    glm::vec3 mTarget;
+    glm::vec3 mUpDir;
+    glm::vec3 mFront;
 };
 } // namespace yage

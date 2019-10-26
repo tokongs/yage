@@ -5,30 +5,30 @@ Transform::Transform(){
 }
 
 glm::vec3 Transform::getPosition(){
-    return m_position;
+    return mPosition;
 }
 
     glm::vec3 Transform::getScale(){
-        return m_scale;
+        return mScale;
     }
 
     glm::vec3 Transform::getDirection(){
-        return glm::cross(m_up_dir, m_right_dir);
+        return glm::cross(mUpDir, mRightDir);
     }
 
     void Transform::setPosition(glm::vec3 position) {
-        m_position = position;
+        mPosition = position;
     }
 
     void Transform::setScale(glm::vec3 scale) {
-        m_scale = scale;
+        mScale = scale;
     }
 
-    TransformPtr Transform::getParent() {
-        return m_parent;
+    Transform* Transform::getParent() {
+        return mParent;
     }
 
-    std::vector<TransformPtr> Transform::getChildren(){
-    return m_children;
+    std::vector<Transform*> Transform::getChildren(){
+    return mChildren;
 }
 }

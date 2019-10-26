@@ -10,22 +10,22 @@ ResourceView::~ResourceView()
 {
 }
 
-void ResourceView::setResource(ResourcePtr resource)
+void ResourceView::setResource(Resource* resource)
 {
-    m_resource = resource;
+    mResource = resource;
 }
 
 void ResourceView::constructFrame(bool independent)
 {
-    if(!m_resource){
+    if(!mResource){
         yage::YAGE_WARN("Trying to show a resource gui with no resource.");
     }
     if(independent){
-        ImGui::Begin("Resource View", m_open.get());
+        ImGui::Begin("Resource View", &mOpen);
     }
-    ImGui::LabelText("Name:", m_resource->getName().c_str());
-    ImGui::LabelText("File path:", m_resource->getFilePath().c_str());
-    ImGui::LabelText("Resource ID:", std::to_string(m_resource->getResourceId()).c_str());
+    ImGui::LabelText("Name:", mResource->getName().c_str());
+    ImGui::LabelText("File path:", mResource->getFilePath().c_str());
+    ImGui::LabelText("Resource ID:", std::to_string(mResource->getResourceId()).c_str());
 
 
     if(independent){

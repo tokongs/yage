@@ -16,17 +16,14 @@ struct aabb
 class Mesh : public Resource
 {
   public:
-    Mesh(int id, std::string name, std::string file_path, VertexBufferPtr vertexBufferPtr);
-    Mesh();
+    Mesh(VertexBuffer* buffer);
     ~Mesh();
 
-    VertexBufferPtr getVertexBuffer();
+    VertexBuffer *getVertexBuffer();
     aabb getAABB();
 
   private:
-    VertexBufferPtr m_vertex_buffer;
-    aabb m_aabb;
+    VertexBuffer *mVertexBuffer;
+    aabb mAABB;
 };
-
-typedef std::shared_ptr<Mesh> MeshPtr;
 } // namespace yage

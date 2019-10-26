@@ -15,7 +15,7 @@
 
 namespace yage {
 
-    typedef std::unordered_map<std::string, ResourcePtr> ResourceMap;
+    typedef std::unordered_map<std::string, Resource*> ResourceMap;
 
     class ResourceManager : public Singleton<ResourceManager> {
     public:
@@ -28,44 +28,44 @@ namespace yage {
          *
          * @param name of the reource
          * @param type
-         * @return ResourcePtr returns nullptr if it cannot find the resource
+         * @return Resource* returns nullptr if it cannot find the resource
          */
         template<typename T>
         int getHandle(std::string name) {
-            auto it = m_indices.find(name);
-            if (it != m_indices.end()) // Returns the handle if the resource is already loaded
+            auto it = mIndices.find(name);
+            if (it != mIndices.end()) // Returns the handle if the resource is already loaded
             {
                 return it->second;
             }
 
-            std::string file_path = m_file_paths[name];
+            std::string file_path = mFilePaths[name];
 
             //find the associated loader and load the resource
-            std::shared_ptr<ResourceLoader> loader = m_loaders[std::type_index(typeid(T))];
+            ResourceLoader* loader = mLoaders[std::type_index(typeid(T))];
 
             int result = -1;
-            if (m_free_ids.empty()) {
-                result = m_current_id;
-                m_current_id++;
+            if (mFreeIds.empty()) {
+                result = mCurrentId;
+                mCurrentId++;
             } else {
-                result = m_free_ids.top();
+                result = mFreeIds.top();
             }
 
-            ResourcePtr resource = loader->load(result, name, file_path);
+            T* resource =  (T*)loader->load(file_path);
             if (resource != nullptr) {
-                if(!m_free_ids.empty()){
-                    m_free_ids.pop();
+                if(!mFreeIds.empty()){
+                    mFreeIds.pop();
                 }
 
-                m_indices[name] = result;
-                m_loaded_resources[result] = resource;
+                mIndices[name] = result;
+                mLoadedResources[result] = resource;
                 resource->setId(result);
                 resource->setName(name);
                 resource->setFilePath(file_path);
             }
 
             if (result == -1) {
-                YAGE_ERROR("Failed to load resource: " + name + " from " + m_file_paths[name]);
+                YAGE_ERROR("Failed to load resource: " + name + " from " + mFilePaths[name]);
             }
             return result;
         }
@@ -80,17 +80,17 @@ namespace yage {
        * @return std::shared_ptr<T>
        */
         template<typename T>
-        std::shared_ptr<T> getResource(int id) {
-            auto result = m_loaded_resources.find(id);
+        T* getResource(int id) {
+            auto result = mLoadedResources.find(id);
 
-            if (result == m_loaded_resources.end())//Could not find resource, return placeholder
+            if (result == mLoadedResources.end())//Could not find resource, return placeholder
             {
                 YAGE_WARN("Could not find resource with id: " + std::to_string(id) + ", and  type: " +
                           std::string(typeid(T).name()));
                 YAGE_WARN("Returning a placeholder instead")
-                auto placeholder = m_placeholders.find(typeid(T));
-                if (placeholder != m_placeholders.end()) {
-                    return std::dynamic_pointer_cast<T>(placeholder->second);
+                auto placeholder = mPlaceholders.find(typeid(T));
+                if (placeholder != mPlaceholders.end()) {
+                    return (T*)(placeholder->second);
                 } else {
                     YAGE_ERROR("No placeholder register for Resources of type: " + std::string(typeid(T).name()));
                     return nullptr;
@@ -103,18 +103,18 @@ namespace yage {
                           ". The given id returns a Resource of type: " + typeid(result->second).name());
                 YAGE_WARN("Returning a placeholder instead")
 
-                auto placeholder = m_placeholders.find(typeid(T));
-                if (placeholder != m_placeholders.end()) {
-                    return std::dynamic_pointer_cast<T>(placeholder->second);
+                auto placeholder = mPlaceholders.find(typeid(T));
+                if (placeholder != mPlaceholders.end()) {
+                    return (T*)(placeholder->second);
                 } else {
                     YAGE_ERROR("No placeholder registered for Resources of type: " + std::string(typeid(T).name()));
                     return nullptr;
                 }
             }
 
-            if (result != m_loaded_resources.end()) //Resource found and is of right type
+            if (result != mLoadedResources.end()) //Resource found and is of right type
             {
-                return std::dynamic_pointer_cast<T>(result->second);
+                return (T*)(result->second);
             }
             YAGE_WARN("No resource with id: " + std::to_string(id));
             return nullptr;
@@ -127,12 +127,12 @@ namespace yage {
          * @param loader
          */
         template<typename T>
-        void registerResourceLoader(std::shared_ptr<ResourceLoader> loader) {
+        void registerResourceLoader(ResourceLoader* loader) {
             if (!loader) {
                 YAGE_ERROR("Trying to register nullptr as a resource loader");
                 return;
             }
-            m_loaders[typeid(T)] = loader;
+            mLoaders[typeid(T)] = loader;
         }
 
         /**
@@ -140,10 +140,10 @@ namespace yage {
          *
          * @param resource
          */
-        void registerPlaceholderResource(ResourcePtr resource);
+        void registerPlaceholderResource(Resource* resource);
 
         /**
-         * @brief Destroys the ResourcePtr of the given item
+         * @brief Destroys the Resource* of the given item
          *
          * @param id
          */
@@ -160,21 +160,21 @@ namespace yage {
          * @brief Returns an unordered map containing all the resources names as keys and file_paths as values
          *
          */
-        std::unordered_map<int, ResourcePtr> getResourceMap();
+        std::unordered_map<int, Resource*> getResourceMap();
 
     private:
         void buildFilePathMap(std::string resource_overview);
 
-        std::unordered_map<int, ResourcePtr> m_loaded_resources;
-        std::unordered_map<std::type_index, ResourcePtr> m_placeholders;
-        std::unordered_map<std::string, int> m_indices;
+        std::unordered_map<int, Resource*> mLoadedResources;
+        std::unordered_map<std::type_index, Resource*> mPlaceholders;
+        std::unordered_map<std::string, int> mIndices;
 
-        std::unordered_map<std::type_index, std::shared_ptr<ResourceLoader>> m_loaders;
-        std::unordered_map<std::string, std::string> m_file_paths;
+        std::unordered_map<std::type_index, ResourceLoader*> mLoaders;
+        std::unordered_map<std::string, std::string> mFilePaths;
 
-        int m_current_id = 0;
-        std::stack<int> m_free_ids;
+        int mCurrentId = 0;
+        std::stack<int> mFreeIds;
 
-        std::string m_resource_dir;
+        std::string mResourceDir = "";
     };
 } // namespace yage

@@ -45,12 +45,12 @@ bool FileReader::fileExists(std::string file){
 
 void FileReader::changeRootDir(std::string dir)
 {
-    m_root_dir = dir;
+    mRootDir = dir;
 }
 
 std::string FileReader::getRootDir()
 {
-    return m_root_dir;
+    return mRootDir;
 }
 
 } // namespace yage

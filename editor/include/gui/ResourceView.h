@@ -31,10 +31,10 @@ class ResourceView : public GuiElement
      * 
      * @param resource 
      */
-    void setResource(ResourcePtr resource);
+    void setResource(Resource* resource);
     void constructFrame(bool independent) override;
 
     protected:
-    ResourcePtr m_resource;
+    Resource* mResource;
 };
 } // namespace yage

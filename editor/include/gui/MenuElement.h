@@ -15,7 +15,7 @@ public:
   void constructFrame(bool independent = false) override;
 
 private:
-  std::string m_name;
-  std::unique_ptr<bool> m_selected = nullptr;
+  std::string mName;
+  bool  mSelected = false;
 };
 } // namespace yage

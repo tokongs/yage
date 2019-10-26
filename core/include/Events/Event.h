@@ -20,5 +20,5 @@ public:
     virtual const char* getName() const = 0;
     virtual std::string toString() const {return getName(); }
 protected:
-    bool m_handled = false;
+    bool mHandled = false;
 };

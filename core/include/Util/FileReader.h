@@ -26,7 +26,7 @@ class FileReader
          * @param file_name 
          * @return std::string 
          */
-    std::string readAsString(std::string file_name);
+    std::string readAsString(std::string filePath);
 
     /**
      * @brief Changes the root directory
@@ -52,7 +52,7 @@ class FileReader
     std::string getRootDir();
 
   private:
-    std::string m_root_dir;
+    std::string mRootDir;
 
 };
 } // namespace yage

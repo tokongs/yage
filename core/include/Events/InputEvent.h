@@ -5,39 +5,39 @@
 
 class KeyEvent : public Event {
 public:
-    KeyEvent(int key_code) : m_key_code(key_code){};
+    KeyEvent(int keyCode) : mKeyCode(keyCode){};
 
-    int getKeyCode() const { return m_key_code;};
+    int getKeyCode() const { return mKeyCode;};
 protected:
-    const int m_key_code;
+    const int mKeyCode;
 };
 
 class KeyPressEvent : public KeyEvent {
 public:
-    KeyPressEvent(int key_code) : KeyEvent(key_code){};
+    KeyPressEvent(int keyCode) : KeyEvent(keyCode){};
     EVENT_CLASS_TYPE(KeyPressEvent);
 };
 
 class KeyReleaseEvent : public KeyEvent {
 public:
-    KeyReleaseEvent(int key_code) : KeyEvent(key_code){};
+    KeyReleaseEvent(int keyCode) : KeyEvent(keyCode){};
     EVENT_CLASS_TYPE(KeyReleaseEvent);
 };
 
 class KeyRepeatEvent : public KeyEvent {
 public:
-    KeyRepeatEvent(int key_code) : KeyEvent(key_code){};
+    KeyRepeatEvent(int keyCode) : KeyEvent(keyCode){};
     EVENT_CLASS_TYPE(KeyRepeatEvent);
 };
 
 class MouseButtonEvent : public Event{
 public:
-    MouseButtonEvent(int button) : m_button(button){};
+    MouseButtonEvent(int button) : mButton(button){};
 
-    int getButton() const { return m_button;};
+    int getButton() const { return mButton;};
 
 protected:
-    const int m_button;
+    const int mButton;
 };
 
 class MouseButtonPressEvent : public MouseButtonEvent{
@@ -60,22 +60,22 @@ public:
 
 class MouseMoveEvent : public Event{
 public:
-    MouseMoveEvent(glm::vec2 pos) : m_mouse_pos(pos){};
+    MouseMoveEvent(glm::vec2 pos) : mMousePos(pos){};
     EVENT_CLASS_TYPE(MouseMoveEvent);
 
-    glm::vec2 getMousePosition() const {return m_mouse_pos;};
+    glm::vec2 getMousePosition() const {return mMousePos;};
 private:
-    const glm::vec2 m_mouse_pos;
+    const glm::vec2 mMousePos;
 };
 
 class MouseScrollEvent : public Event{
 public:
-    MouseScrollEvent(glm::vec2 delta) : m_delta(delta){};
+    MouseScrollEvent(glm::vec2 delta) : mDelta(delta){};
     EVENT_CLASS_TYPE(MouseScrollEvent);
 
-    glm::vec2 getScrollDelta() const {return m_delta;};
+    glm::vec2 getScrollDelta() const {return mDelta;};
 
 protected:
-    const glm::vec2 m_delta;
+    const glm::vec2 mDelta;
 
 };

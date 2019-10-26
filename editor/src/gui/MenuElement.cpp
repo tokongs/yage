@@ -3,9 +3,9 @@
 namespace yage
 {
 MenuElement::MenuElement(std::string name, std::function<void()> action)
-    : GuiElement(action), m_name(name)
+    : GuiElement(action), mName(name)
 {
-    m_selected = std::make_unique<bool>(false);
+    mSelected = false;
 }
 
 MenuElement::~MenuElement()
@@ -14,15 +14,15 @@ MenuElement::~MenuElement()
 
 void MenuElement::constructFrame(bool independent)
 {
-    ImGui::MenuItem(m_name.c_str(), nullptr, m_selected.get());
+    ImGui::MenuItem(mName.c_str(), nullptr, mSelected);
 
-    if (*m_selected)
+    if (mSelected)
     {
-        if (m_action)
+        if (mAction)
         {
-            m_action();
+            mAction();
         }
-        *m_selected = false;
+        mSelected = false;
     }
 }
 

@@ -22,6 +22,6 @@ namespace yage{
          * @param file Content of a wavefront file as a string
          * @return VertexBufferPtr 
          */
-        VertexBufferPtr loadWavefront(std::string file);
+        VertexBuffer* loadWavefront(std::string file);
     };
 }

@@ -14,9 +14,9 @@ class ShaderLoader : public ResourceLoader
     ShaderLoader();
     ~ShaderLoader();
 
-    ResourcePtr load(int id, std::string name, std::string file_path) override;
+    Resource* load(std::string filePath) override;
 
   private:
-    FileReader m_file_reader;
+    FileReader mFileReader;
 };
 } // namespace yage

@@ -28,11 +28,11 @@ class Renderer
      * @param vb 
      * @param shader 
      */
-    void render(std::shared_ptr<VertexBuffer> vb, std::shared_ptr<Program> program);
+    void render(VertexBuffer* vb, Program* program);
     void setCamera(Camera camera);
 
     private:
-    Camera m_camera;
+    Camera mCamera;
 
 };
 

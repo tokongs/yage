@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include "Script.h"
 #include "Input.h"
+#include "GameObject.h"
 
 namespace yage{
 class ScriptingEngine {
@@ -11,10 +12,11 @@ public:
     static void Init();
     static void OpenLibs();
     static void SetupInputAPI();
-    static void ExecuteScript(ScriptPtr script);
+    static void SetupGameObjectsAPI();
+    static void ExecuteScript(Script* script);
 
 private:
-    static sol::state m_lua_state;
+    static sol::state mLuaState;
 };
 
 }

@@ -14,14 +14,9 @@ class Material : public Resource
     void activate();
 
     private:
-    glm::vec4 m_ambient_color;
-    glm::vec4 m_diffuse_color;
-    glm::vec4 m_specular_color;
-
-    //Texture m_ambient_texture;
-    //Texture m_diffuse_texture;
-    //Texture m_specular_texture;
-
+    glm::vec4 mAmbientColor;
+    glm::vec4 mDiffuseColor;
+    glm::vec4 mSpecularColor;
 
 
     Program m_shader_program;

@@ -11,7 +11,7 @@ ShaderLoader::~ShaderLoader()
 {
 }
 
-ResourcePtr ShaderLoader::load(int id, std::string name, std::string file_path)
+Resource* ShaderLoader::load(std::string file_path)
 {
 
     YAGE_INFO("Loading shader form file: " + file_path);
@@ -24,14 +24,14 @@ ResourcePtr ShaderLoader::load(int id, std::string name, std::string file_path)
 
     }
 
-    std::string code = m_file_reader.readAsString(file_path);
+    std::string code = mFileReader.readAsString(file_path);
 
     if(code.empty()){
         YAGE_ERROR("Trying to load shader from empty file: " + file_path);
         return nullptr;
     }
-    ShaderPtr result = std::make_shared<Shader>(id, name, file_path, code, type);
+    Shader* result = new Shader(code, type);
 
-    return std::dynamic_pointer_cast<Resource>(result);
+    return result;
 }
 } // namespace yage

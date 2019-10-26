@@ -2,22 +2,21 @@
 
 namespace yage
 {
-Program::Program(int id, std::string name, std::string file_path)
-: Resource(id, name, file_path)
+Program::Program()
 {
-    m_gl_object_id = glCreateProgram();
-   YAGE_INFO("Created program with id: " + std::to_string(m_gl_object_id));
+    mGlObjectId = glCreateProgram();
+   YAGE_INFO("Created program with id: " + std::to_string(mGlObjectId));
 }
 
 Program::~Program()
 {
-   YAGE_INFO("Deleting program with id: " + std::to_string(m_gl_object_id));
-    glDeleteProgram(m_gl_object_id);
+   YAGE_INFO("Deleting program with id: " + std::to_string(mGlObjectId));
+    glDeleteProgram(mGlObjectId);
 }
 
 void Program::activate()
 {
-    glUseProgram(m_gl_object_id);
+    glUseProgram(mGlObjectId);
 }
 
 void Program::attachShaders(std::vector<int> shaders)
@@ -25,19 +24,19 @@ void Program::attachShaders(std::vector<int> shaders)
 
     for (int i = 0; i < shaders.size(); i++)
     {
-        ShaderPtr shader = ResourceManager::getInstance().getResource<Shader>(shaders[i]);
-        YAGE_INFO("Linking " + shader->getName() + " to program " + std::to_string(m_gl_object_id));
-        glAttachShader(m_gl_object_id, shader->getGLObjectId());
-        glLinkProgram(m_gl_object_id);
+        Shader* shader = ResourceManager::getInstance().getResource<Shader>(shaders[i]);
+        YAGE_INFO("Linking " + shader->getName() + " to program " + std::to_string(mGlObjectId));
+        glAttachShader(mGlObjectId, shader->getGLObjectId());
+        glLinkProgram(mGlObjectId);
     }
 
     GLint success;
     char info_log[512];
 
-    glGetProgramiv(m_gl_object_id, GL_LINK_STATUS, &success);
+    glGetProgramiv(mGlObjectId, GL_LINK_STATUS, &success);
     if (!success)
     {
-        glGetProgramInfoLog(m_gl_object_id, 512, NULL, info_log);
+        glGetProgramInfoLog(mGlObjectId, 512, NULL, info_log);
         YAGE_ERROR(info_log);
         return;
     }
@@ -52,7 +51,7 @@ void Program::attachShaders(std::vector<int> shaders)
 void Program::mapUniforms()
 {
     int num_uniforms;
-    glGetProgramiv(m_gl_object_id, GL_ACTIVE_UNIFORMS, &num_uniforms);
+    glGetProgramiv(mGlObjectId, GL_ACTIVE_UNIFORMS, &num_uniforms);
 
     for (int i = 0; i < num_uniforms; i++)
     {
@@ -61,85 +60,85 @@ void Program::mapUniforms()
 
         char name[30];
         int length = 0;
-        glGetActiveUniform(m_gl_object_id, i, 30, &length, &(uniform.size), &(uniform.type), name);
+        glGetActiveUniform(mGlObjectId, i, 30, &length, &(uniform.size), &(uniform.type), name);
         uniform.name = name;
         uniform.name = uniform.name.substr(0, length);
         uniform.location = getUniformLocation(uniform.name);
 
-        m_uniforms[uniform.name] = uniform;
+        mUniforms[uniform.name] = uniform;
     }
 }
 
 int Program::getUniformLocation(std::string name)
 {
-    return glGetUniformLocation(m_gl_object_id, name.c_str());
+    return glGetUniformLocation(mGlObjectId, name.c_str());
 }
 
 void Program::setInt(std::string name, int value)
 {
-    auto uniform_it = m_uniforms.find(name);
+    auto uniform_it = mUniforms.find(name);
 
-    glProgramUniform1i(m_gl_object_id, uniform_it->second.location, value);
+    glProgramUniform1i(mGlObjectId, uniform_it->second.location, value);
 }
 
 void Program::setFloat(std::string name, float value)
 {
-    auto uniform_it = m_uniforms.find(name);
+    auto uniform_it = mUniforms.find(name);
     if (!uniformIsActive(uniform_it, name) ||
         !typeIsCorrect(uniform_it->second.type, GL_FLOAT))
     {
         return;
     }
-    glProgramUniform1f(m_gl_object_id, uniform_it->second.location, value);
+    glProgramUniform1f(mGlObjectId, uniform_it->second.location, value);
 }
 
 void Program::setVec2(std::string name, glm::vec2 value)
 {
-    auto uniform_it = m_uniforms.find(name);
+    auto uniform_it = mUniforms.find(name);
     if (!uniformIsActive(uniform_it, name) ||
         !typeIsCorrect(uniform_it->second.type, GL_FLOAT_VEC2))
     {
         return;
     }
-    glProgramUniform2f(m_gl_object_id, uniform_it->second.location, value.x, value.y);
+    glProgramUniform2f(mGlObjectId, uniform_it->second.location, value.x, value.y);
 }
 
 void Program::setVec3(std::string name, glm::vec3 value)
 {
-    auto uniform_it = m_uniforms.find(name);
+    auto uniform_it = mUniforms.find(name);
     if (!uniformIsActive(uniform_it, name) ||
         !typeIsCorrect(uniform_it->second.type, GL_FLOAT_VEC3))
     {
         return;
     }
-    glProgramUniform3f(m_gl_object_id, uniform_it->second.location, value.x, value.y, value.z);
+    glProgramUniform3f(mGlObjectId, uniform_it->second.location, value.x, value.y, value.z);
 }
 
 void Program::setVec4(std::string name, glm::vec4 value)
 {
-    auto uniform_it = m_uniforms.find(name);
+    auto uniform_it = mUniforms.find(name);
     if (!uniformIsActive(uniform_it, name) ||
         !typeIsCorrect(uniform_it->second.type, GL_FLOAT_VEC4))
     {
         return;
     }
-    glProgramUniform4f(m_gl_object_id, uniform_it->second.location, value.x, value.y, value.z, value.w);
+    glProgramUniform4f(mGlObjectId, uniform_it->second.location, value.x, value.y, value.z, value.w);
 }
 
 void Program::setMat4(std::string name, glm::mat4 value)
 {
-    auto uniform_it = m_uniforms.find(name);
+    auto uniform_it = mUniforms.find(name);
     if (!uniformIsActive(uniform_it, name) ||
         !typeIsCorrect(uniform_it->second.type, GL_FLOAT_MAT4))
     {
         return;
     }
-    glProgramUniformMatrix4fv(m_gl_object_id, uniform_it->second.location, 1, false, glm::value_ptr(value));
+    glProgramUniformMatrix4fv(mGlObjectId, uniform_it->second.location, 1, false, glm::value_ptr(value));
 }
 
 bool Program::uniformIsActive(std::unordered_map<std::string, ShaderUniform>::iterator uniform_it, std::string name)
 {
-    if (uniform_it == m_uniforms.end())
+    if (uniform_it == mUniforms.end())
     {
         YAGE_WARN("Trying to set inactive or non-existent uniform (int) with name: " + name);
         return false;

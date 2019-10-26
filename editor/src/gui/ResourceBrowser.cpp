@@ -2,9 +2,9 @@
 
 namespace yage {
     ResourceBrowser::ResourceBrowser() {
-        std::unordered_map<int, ResourcePtr> resource_map = ResourceManager::getInstance().getResourceMap();
+        std::unordered_map<int, Resource*> resource_map = ResourceManager::getInstance().getResourceMap();
         for (auto it = resource_map.begin(); it != resource_map.end(); it++) {
-            m_selected_resource[it->second->getResourceId()] = std::make_unique<bool>(false);
+            mSelectedResource[it->second->getResourceId()] = false;
         }
     }
 
@@ -14,28 +14,28 @@ namespace yage {
     void ResourceBrowser::constructFrame(bool independent) {
 
         ResourceView rg;
-        if (!*m_open) {
+        if (!mOpen) {
             return;
         }
 
-        ImGui::Begin(m_title.c_str(), m_open.get());
+        ImGui::Begin(m_title.c_str(), &mOpen);
 
 
-        std::unordered_map<int, ResourcePtr> resource_map = ResourceManager::getInstance().getResourceMap();
-        if (m_selected_resource.size() < resource_map.size()) {
-            m_selected_resource.clear();
+        std::unordered_map<int, Resource*> resource_map = ResourceManager::getInstance().getResourceMap();
+        if (mSelectedResource.size() < resource_map.size()) {
+            mSelectedResource.clear();
             for (auto it = resource_map.begin(); it != resource_map.end(); it++) {
-                if (m_selected_resource.find(it->second->getResourceId()) == m_selected_resource.end()) {
-                    m_selected_resource[it->second->getResourceId()] = std::make_unique<bool>(false);
+                if (mSelectedResource.find(it->second->getResourceId()) == mSelectedResource.end()) {
+                    mSelectedResource[it->second->getResourceId()] = false;
                 }
             }
         }
         for (auto it = resource_map.begin(); it != resource_map.end(); it++) {
-            ImGui::Selectable(it->second->getName().c_str(), m_selected_resource[it->second->getResourceId()].get());
-            if (*m_selected_resource[it->second->getResourceId()].get()) {
-                if (m_resource_views.find(typeid(*it->second.get())) != m_resource_views.end()) {
-                    m_resource_views[typeid(*it->second.get())]->setResource(it->second);
-                    m_resource_views[typeid(*it->second.get())]->constructFrame(false);
+            ImGui::Selectable(it->second->getName().c_str(), &(mSelectedResource[it->second->getResourceId()]));
+            if (mSelectedResource[it->second->getResourceId()]) {
+                if (mResourceViews.find(typeid(*it->second)) != mResourceViews.end()) {
+                    mResourceViews[typeid(*it->second)].setResource(it->second);
+                    mResourceViews[typeid(*it->second)].constructFrame(false);
                 } else {
                     ResourceView rv;
                     rv.setResource(it->second);

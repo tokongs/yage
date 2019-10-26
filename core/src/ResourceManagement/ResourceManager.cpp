@@ -8,13 +8,18 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
+    for(auto it : mLoadedResources){
+        if(it.second){
+            delete it.second;
+        }
+    }
 }
 
 void ResourceManager::setResourceDir(std::string resource_dir)
 {
     FileReader reader;
     std::string resource_overview = reader.readAsString(resource_dir + "resource_overview");
-    m_resource_dir = resource_dir;
+    mResourceDir = resource_dir;
 
     if (resource_overview.empty())
     {
@@ -25,26 +30,26 @@ void ResourceManager::setResourceDir(std::string resource_dir)
 
 void ResourceManager::unloadResource(int id)
 {
-    for (auto it = m_indices.begin(); it != m_indices.end(); it++)
+    for (auto it = mIndices.begin(); it != mIndices.end(); it++)
     {
         if (it->second == id)
         {
-            m_indices.erase(it);
+            mIndices.erase(it);
             break;
         }
     }
-    m_loaded_resources.erase(id);
-    m_free_ids.push(id);
+    mLoadedResources.erase(id);
+    mFreeIds.push(id);
 }
 
-void ResourceManager::registerPlaceholderResource(ResourcePtr resource)
+void ResourceManager::registerPlaceholderResource(Resource* resource)
 {
     if (!resource)
     {
         YAGE_ERROR("Trying to load nullptr as placeholder resource");
         return;
     }
-    m_placeholders[typeid(*resource.get())] = resource;
+    mPlaceholders[typeid(*resource)] = resource;
 }
 
 void ResourceManager::buildFilePathMap(std::string resource_overview)
@@ -63,16 +68,16 @@ void ResourceManager::buildFilePathMap(std::string resource_overview)
         std::string name = resource_overview.substr(start_of_name, start_of_path - start_of_name - 1);
         std::string path = resource_overview.substr(start_of_path, end_of_path - start_of_path - 1);
 
-        path = m_resource_dir + path;
+        path = mResourceDir + path;
 
-        m_file_paths[name] = path;
+        mFilePaths[name] = path;
 
         start_of_type = resource_overview.find_first_of('#', start_of_type + 1);
     }
 }
 
-std::unordered_map<int, ResourcePtr> ResourceManager::getResourceMap()
+std::unordered_map<int, Resource*> ResourceManager::getResourceMap()
 {
-    return m_loaded_resources;
+    return mLoadedResources;
 }
 } // namespace yage

@@ -1,198 +1,183 @@
 #include <VertexBuffer.h>
 
-namespace yage
-{
-VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data)
-{
-    m_buffer_desc = desc;
-    glGenVertexArrays(1, &m_vao_object_id);
-    YAGE_INFO("Created Vertex Array Object, ID: " + std::to_string(m_vao_object_id));
+namespace yage {
 
-    bind();
-    glGenBuffers(1, &m_vb_object_id);
-    glBindBuffer(GL_ARRAY_BUFFER, m_vb_object_id);
-    YAGE_INFO("Created Vertex Buffer Object, ID: " + std::to_string(m_vb_object_id));
+    VertexBuffer::VertexBuffer() {
 
-    //calculate size of one vertex
-    int size_of_vertex = sizeOfVertex(desc);
-    m_size = data.size();
+    }
 
-    int buffer_size = size_of_vertex / sizeof(float) * data.size();
-    float *buffer = new float[buffer_size];
+    VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data) {
+        mBufferDesc = desc;
+        glGenVertexArrays(1, &mVaoObjectId);
+        YAGE_INFO("Created Vertex Array Object, ID: " + std::to_string(mVaoObjectId));
 
-    cleanData(desc, data, buffer);
+        bind();
+        glGenBuffers(1, &mVbObjectId);
+        glBindBuffer(GL_ARRAY_BUFFER, mVbObjectId);
+        YAGE_INFO("Created Vertex Buffer Object, ID: " + std::to_string(mVbObjectId));
 
-    if (desc.keep_shadow_buffer)
-        m_shadow_copy = std::vector<float>(buffer, buffer + buffer_size);
+        //calculate size of one vertex
+        int size_of_vertex = sizeOfVertex(desc);
+        mSize = data.size();
 
-    glBufferData(GL_ARRAY_BUFFER, buffer_size * sizeof(float), buffer, GL_STATIC_DRAW);
-    setupVao(desc);
+        int buffer_size = size_of_vertex / sizeof(float) * data.size();
+        float *buffer = new float[buffer_size];
 
-    unbind();
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+        cleanData(desc, data, buffer);
 
-    //Save a copy of the buffer to normal memory
+        if (desc.keepShadowBuffer)
+            mShadowCopy = std::vector<float>(buffer, buffer + buffer_size);
 
-    delete[] buffer;
-}
+        glBufferData(GL_ARRAY_BUFFER, buffer_size * sizeof(float), buffer, GL_STATIC_DRAW);
+        setupVao(desc);
 
-VertexBuffer::~VertexBuffer()
-{
-    YAGE_INFO("Deleting Vertex Buffer Object, ID: " + std::to_string(m_vb_object_id));
-    YAGE_INFO("Deleting Vertex Array Object, ID: " + std::to_string(m_vao_object_id));
-    glDeleteBuffers(1, &m_vb_object_id);
-    glDeleteVertexArrays(1, &m_vao_object_id);
-}
+        unbind();
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-void VertexBuffer::bind()
-{
-    glBindVertexArray(m_vao_object_id);
-}
+        //Save a copy of the buffer to normal memory
 
-void VertexBuffer::unbind()
-{
-    glBindVertexArray(0);
-}
+        delete[] buffer;
+    }
 
-void VertexBuffer::attachIndexBuffer(std::shared_ptr<IndexBuffer> index_buffer)
-{
-    YAGE_INFO("Attaching Index Buffer Object " + std::to_string(index_buffer->getGlId()) + " to Vertex Array Object " + std::to_string(m_vao_object_id));
-    bool m_indexed = true;
-    bind();
-    index_buffer->bind();
-    unbind();
-    index_buffer->unbind();
-}
+    VertexBuffer::~VertexBuffer() {
+        YAGE_INFO("Deleting Vertex Buffer Object, ID: " + std::to_string(mVbObjectId));
+        YAGE_INFO("Deleting Vertex Array Object, ID: " + std::to_string(mVaoObjectId));
+        glDeleteBuffers(1, &mVbObjectId);
+        glDeleteVertexArrays(1, &mVaoObjectId);
+    }
 
-void VertexBuffer::cleanData(VertexBufferDesc desc, std::vector<Vertex> data, float *result)
-{
-    int num_elements = sizeOfVertex(desc) / sizeof(float);
+    void VertexBuffer::bind() {
+        glBindVertexArray(mVaoObjectId);
+    }
 
-    //fill the array with only populated values
-    for (int i = 0; i < data.size(); i++)
-    {
+    void VertexBuffer::unbind() {
+        glBindVertexArray(0);
+    }
+
+    void VertexBuffer::attachIndexBuffer(IndexBuffer* index_buffer) {
+        YAGE_INFO("Attaching Index Buffer Object " + std::to_string(index_buffer->getGlId()) +
+                  " to Vertex Array Object " + std::to_string(mVaoObjectId));
+        bool m_indexed = true;
+        bind();
+        index_buffer->bind();
+        unbind();
+        index_buffer->unbind();
+    }
+
+    void VertexBuffer::cleanData(VertexBufferDesc desc, std::vector<Vertex> data, float *result) {
+        int num_elements = sizeOfVertex(desc) / sizeof(float);
+
+        //fill the array with only populated values
+        for (int i = 0; i < data.size(); i++) {
+            int offset = 0;
+            if (desc.hasPosition) {
+                result[i * num_elements + offset] = data[i].position.x;
+                offset++;
+                result[i * num_elements + offset] = data[i].position.y;
+                offset++;
+                result[i * num_elements + offset] = data[i].position.z;
+                offset++;
+            }
+            if (desc.hasNormal) {
+                result[i * num_elements + offset] = data[i].normal.x;
+                offset++;
+                result[i * num_elements + offset] = data[i].normal.y;
+                offset++;
+                result[i * num_elements + offset] = data[i].normal.z;
+                offset++;
+            }
+            if (desc.hasColor) {
+                result[i * num_elements + offset] = data[i].color.x;
+                offset++;
+                result[i * num_elements + offset] = data[i].color.y;
+                offset++;
+                result[i * num_elements + offset] = data[i].color.z;
+                offset++;
+            }
+            if (desc.hasTexCoord) {
+                result[i * num_elements + offset] = data[i].texCoord.x;
+                offset++;
+                result[i * num_elements + offset] = data[i].texCoord.y;
+                offset++;
+            }
+            if (desc.hasBones) {
+                result[i * num_elements + offset] = (float) data[i].boneId.x;
+                offset++;
+                result[i * num_elements + offset] = (float) data[i].boneId.y;
+                offset++;
+                result[i * num_elements + offset] = (float) data[i].boneId.z;
+                offset++;
+                result[i * num_elements + offset] = (float) data[i].boneId.w;
+                offset++;
+                result[i * num_elements + offset] = data[i].boneWeight.x;
+                offset++;
+                result[i * num_elements + offset] = data[i].boneWeight.y;
+                offset++;
+                result[i * num_elements + offset] = data[i].boneWeight.z;
+                offset++;
+                result[i * num_elements + offset] = data[i].boneWeight.w;
+                offset++;
+            }
+        }
+    }
+
+    void VertexBuffer::setupVao(VertexBufferDesc desc) {
+        bind();
+
+        int stride = sizeOfVertex(desc);
         int offset = 0;
-        if (desc.has_position)
-        {
-            result[i * num_elements + offset] = data[i].position.x;
-            offset++;
-            result[i * num_elements + offset] = data[i].position.y;
-            offset++;
-            result[i * num_elements + offset] = data[i].position.z;
-            offset++;
+        if (desc.hasPosition) {
+            glEnableVertexAttribArray(POSITION_BUFFER_INDEX);
+            glVertexAttribPointer(POSITION_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
+            offset = 3 * sizeof(float);
         }
-        if (desc.has_normal)
-        {
-            result[i * num_elements + offset] = data[i].normal.x;
-            offset++;
-            result[i * num_elements + offset] = data[i].normal.y;
-            offset++;
-            result[i * num_elements + offset] = data[i].normal.z;
-            offset++;
+        if (desc.hasNormal) {
+            glEnableVertexAttribArray(NORMAL_BUFFER_INDEX);
+            glVertexAttribPointer(NORMAL_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
+            offset = 3 * sizeof(float);
         }
-        if (desc.has_color)
-        {
-            result[i * num_elements + offset] = data[i].color.x;
-            offset++;
-            result[i * num_elements + offset] = data[i].color.y;
-            offset++;
-            result[i * num_elements + offset] = data[i].color.z;
-            offset++;
+        if (desc.hasColor) {
+            glEnableVertexAttribArray(COLOR_BUFFER_INDEX);
+            glVertexAttribPointer(COLOR_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
+            offset = 3 * sizeof(float);
         }
-        if (desc.has_tex_coord)
-        {
-            result[i * num_elements + offset] = data[i].tex_coord.x;
-            offset++;
-            result[i * num_elements + offset] = data[i].tex_coord.y;
-            offset++;
+        if (desc.hasTexCoord) {
+            glEnableVertexAttribArray(TEX_COORD_BUFFER_INDEX);
+            glVertexAttribPointer(TEX_COORD_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
+            offset = 2 * sizeof(float);
         }
-        if (desc.has_bones)
-        {
-            result[i * num_elements + offset] = (float)data[i].bone_id.x;
-            offset++;
-            result[i * num_elements + offset] = (float)data[i].bone_id.y;
-            offset++;
-            result[i * num_elements + offset] = (float)data[i].bone_id.z;
-            offset++;
-            result[i * num_elements + offset] = (float)data[i].bone_id.w;
-            offset++;
-            result[i * num_elements + offset] = data[i].bone_weight.x;
-            offset++;
-            result[i * num_elements + offset] = data[i].bone_weight.y;
-            offset++;
-            result[i * num_elements + offset] = data[i].bone_weight.z;
-            offset++;
-            result[i * num_elements + offset] = data[i].bone_weight.w;
-            offset++;
+        if (desc.hasBones) {
+            glEnableVertexAttribArray(BONE_ID_BUFFER_INDEX);
+            glVertexAttribPointer(BONE_ID_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
+            offset = 4 * sizeof(float);
+            glEnableVertexAttribArray(BONE_WEIGHT_BUFFER_INDEX);
+            glVertexAttribPointer(BONE_WEIGHT_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
+            offset = 4 * sizeof(float);
         }
     }
-}
 
-void VertexBuffer::setupVao(VertexBufferDesc desc)
-{
-    bind();
+    int VertexBuffer::sizeOfVertex(VertexBufferDesc desc) {
+        int size = 0;
+        if (desc.hasPosition)
+            size += 3 * sizeof(float);
+        if (desc.hasNormal)
+            size += 3 * sizeof(float);
+        if (desc.hasColor)
+            size += 3 * sizeof(float);
+        if (desc.hasTexCoord)
+            size += 2 * sizeof(float);
+        if (desc.hasBones)
+            size += 8 * sizeof(float);
 
-    int stride = sizeOfVertex(desc);
-    int offset = 0;
-    if (desc.has_position)
-    {
-        glEnableVertexAttribArray(POSITION_BUFFER_INDEX);
-        glVertexAttribPointer(POSITION_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *)offset);
-        offset = 3 * sizeof(float);
+        return size;
     }
-    if (desc.has_normal)
-    {
-        glEnableVertexAttribArray(NORMAL_BUFFER_INDEX);
-        glVertexAttribPointer(NORMAL_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *)offset);
-        offset = 3 * sizeof(float);
-    }
-    if (desc.has_color)
-    {
-        glEnableVertexAttribArray(COLOR_BUFFER_INDEX);
-        glVertexAttribPointer(COLOR_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *)offset);
-        offset = 3 * sizeof(float);
-    }
-    if (desc.has_tex_coord)
-    {
-        glEnableVertexAttribArray(TEX_COORD_BUFFER_INDEX);
-        glVertexAttribPointer(TEX_COORD_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *)offset);
-        offset = 2 * sizeof(float);
-    }
-    if (desc.has_bones)
-    {
-        glEnableVertexAttribArray(BONE_ID_BUFFER_INDEX);
-        glVertexAttribPointer(BONE_ID_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *)offset);
-        offset = 4 * sizeof(float);
-        glEnableVertexAttribArray(BONE_WEIGHT_BUFFER_INDEX);
-        glVertexAttribPointer(BONE_WEIGHT_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *)offset);
-        offset = 4 * sizeof(float);
-    }
-}
 
-int VertexBuffer::sizeOfVertex(VertexBufferDesc desc)
-{
-    int size = 0;
-    if (desc.has_position)
-        size += 3 * sizeof(float);
-    if (desc.has_normal)
-        size += 3 * sizeof(float);
-    if (desc.has_color)
-        size += 3 * sizeof(float);
-    if (desc.has_tex_coord)
-        size += 2 * sizeof(float);
-    if (desc.has_bones)
-        size += 8 * sizeof(float);
+    IndexBuffer *VertexBuffer::getIndexBuffer() {
+        return mIndexBuffer;
+    }
 
-    return size;
-}
-std::shared_ptr<IndexBuffer> VertexBuffer::getIndexBuffer()
-{
-    return m_index_buffer;
-}
-
-unsigned int VertexBuffer::getSize()
-{
-    return m_size;
-}
+    unsigned int VertexBuffer::getSize() {
+        return mSize;
+    }
 
 } // namespace yage

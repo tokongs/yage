@@ -16,14 +16,14 @@ struct Component {
 
     int getId() {return m_id;};
 
-    void setGameObject(GameObjectPtr object) {m_GameObject = object;};
+    void setGameObject(GameObject *object) {mGameObject = object;};
+    GameObject *getGameObject() {return mGameObject;};
 
     virtual ComponentType getComponentType() const = 0;
     virtual const char* getName() const = 0;
     virtual std::string toString() const {return getName(); }
 private:
     int m_id;
-    GameObjectPtr m_GameObject = nullptr;
+    GameObject *mGameObject;
 };
-    typedef std::shared_ptr<Component> ComponentPtr;
 }

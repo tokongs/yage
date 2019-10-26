@@ -3,15 +3,14 @@
 namespace yage {
 class Script : public Resource {
 public:
-    Script(int id, std::string name, std::string file_path, std::string content);
+    Script();
+    Script(std::string content);
 
     ~Script();
 
     std::string getContent();
     void setContent(std::string content);
 private:
-    std::string m_content;
+    std::string mContent;
 };
-typedef std::shared_ptr<Script> ScriptPtr;
-
 }

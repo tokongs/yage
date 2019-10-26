@@ -3,33 +3,46 @@
 //
 
 #include "ScriptingEngine.h"
-namespace yage{
-sol::state ScriptingEngine::m_lua_state = sol::state();
 
-void ScriptingEngine::Init() {
-    OpenLibs();
-    SetupInputAPI();
-}
+namespace yage {
+    sol::state ScriptingEngine::mLuaState = sol::state();
 
-void ScriptingEngine::OpenLibs() {
-    m_lua_state.open_libraries(sol::lib::base, sol::lib::package);
-}
+    void ScriptingEngine::Init() {
+        OpenLibs();
+        SetupInputAPI();
+        SetupGameObjectsAPI();
+    }
 
-void ScriptingEngine::ExecuteScript(yage::ScriptPtr script) {
-    m_lua_state.script(script->getContent());
-}
+    void ScriptingEngine::OpenLibs() {
+        mLuaState.open_libraries(sol::lib::base, sol::lib::package);
+    }
 
-void ScriptingEngine::SetupInputAPI() {
+    void ScriptingEngine::ExecuteScript(yage::Script* script) {
+        mLuaState.script(script->getContent());
+    }
 
-    m_lua_state.new_usertype<MouseState>("MouseState",
-            "x", &MouseState::x,
-            "y", &MouseState::y,
-            "MouseButton1", &MouseState::mouse_button_1,
-            "MouseButton2", &MouseState::mouse_button_2,
-            "MouseButton3", &MouseState::mouse_button_3);
+    void ScriptingEngine::SetupInputAPI() {
 
-    auto input = m_lua_state["Input"].get_or_create<sol::table>();
-    input.set_function("GetKeyState", &Input::GetKeyState);
-    input.set_function("GetMouseState", &Input::GetMouseState);
-}
+
+        mLuaState.new_usertype<MouseState>("MouseState",
+                                           "x", &MouseState::x,
+                                           "y", &MouseState::y,
+                                           "MouseButton1", &MouseState::mouse_button_1,
+                                           "MouseButton2", &MouseState::mouse_button_2,
+                                           "MouseButton3", &MouseState::mouse_button_3);
+        auto input = mLuaState["Input"].get_or_create<sol::table>();
+
+        input.set_function("GetKeyState", &Input::GetKeyState);
+        input.set_function("GetMouseState", &Input::GetMouseState);
+    }
+
+    void ScriptingEngine::SetupGameObjectsAPI() {
+        mLuaState.new_usertype<GameObject>("GameObject",
+                                           "new", sol::no_constructor,
+                                           "getComponent", &GameObject::getComponent);
+        mLuaState.new_usertype<Component>("Component",
+                                          "new", sol::no_constructor,
+                                          "setGameObject", &Component::setGameObject,
+                                          "getGameObject", &Component::getGameObject);
+    }
 }

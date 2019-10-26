@@ -23,7 +23,7 @@ namespace yage
 class Program : public Resource
 {
 public:
-  Program(int id, std::string name, std::string file_path);
+  Program();
   ~Program();
 
   /**
@@ -114,7 +114,7 @@ private:
    * 
    * @param requested_type 
    */
-  bool uniformIsActive(std::unordered_map<std::string, ShaderUniform>::iterator uniform_it, std::string name);
+  bool uniformIsActive(std::unordered_map<std::string, ShaderUniform>::iterator uniformIt, std::string name);
 
   /**
  * @brief Check if the uniform is the same as the requested type
@@ -122,13 +122,12 @@ private:
  * @param uniform 
  * @param requested_type 
  */
-  bool typeIsCorrect(unsigned int type, unsigned int requested_type);
+  bool typeIsCorrect(unsigned int type, unsigned int requestedType);
 
-  unsigned int m_gl_object_id;
-  ShaderPtr m_vertex_shader = nullptr;
-  ShaderPtr m_fragment_shader = nullptr;
+  unsigned int mGlObjectId;
+  Shader *mVertexShader = nullptr;
+  Shader *mFragmentShader = nullptr;
 
-  std::unordered_map<std::string, ShaderUniform> m_uniforms;
+  std::unordered_map<std::string, ShaderUniform> mUniforms;
 };
-typedef std::shared_ptr<Program> ProgramPtr;
 } // namespace yage
