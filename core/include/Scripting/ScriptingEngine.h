@@ -1,6 +1,6 @@
 #pragma once
 #define SOL_ALL_SAFETIES_ON 1
-#include <sol.hpp>
+#include <sol/sol.hpp>
 #include "Logger.h"
 #include "Script.h"
 #include "Input.h"

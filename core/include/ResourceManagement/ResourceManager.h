@@ -13,6 +13,8 @@
 #include "Singleton.h"
 #include "Logger.h"
 #include "Reference.h"
+#include <rapidxml/rapidxml.hpp>
+#include <filesystem>
 
 namespace yage {
 
@@ -52,14 +54,14 @@ namespace yage {
                 result = mFreeIds.top();
             }
 
-            T* resource =  (T*)loader->load(file_path);
-            if (resource != nullptr) {
+            Resource* resource =  (T*)loader->load(file_path);
+            if (resource) {
                 if(!mFreeIds.empty()){
                     mFreeIds.pop();
                 }
 
                 mIndices[name] = result;
-                mLoadedResources[result] = resource;
+                mLoadedResources[result] = Ref<Resource>(resource);
                 resource->setId(result);
                 resource->setName(name);
                 resource->setFilePath(file_path);
@@ -96,10 +98,11 @@ namespace yage {
          * @brief Specify how the given Resource will be loaded
          *
          * @tparam T Derived from Resource class
+         * @param resourceTypeName type the xml file
          * @param loader
          */
         template<typename T>
-        void registerResourceLoader(ResourceLoader* loader) {
+        void registerResourceLoader(std::string resourceTypeName, ResourceLoader* loader) {
             if (!loader) {
                 YAGE_ERROR("Trying to register nullptr as a resource loader");
                 return;
@@ -107,19 +110,8 @@ namespace yage {
             mLoaders[typeid(T)] = loader;
         }
 
-        /**
-         * @brief Register a placholder resource that will be return by getResource if the requested resource is not loaded
-         *
-         * @param resource
-         */
-        void registerPlaceholderResource(Resource* resource);
-
-        /**
-         * @brief Destroys the Resource* of the given item
-         *
-         * @param id
-         */
-        void unloadResource(int id);
+        void loadAllResources();
+        std::vector<std::string> traverseDirectories(std::string baseDir);
 
         /**
          * @brief The resource dir needs to be set before using the manager
@@ -127,11 +119,6 @@ namespace yage {
          * @param res_dir
          */
         void setResourceDir(std::string res_dir);
-
-        /**
-         * @brief Returns an unordered map containing all the resources names as keys and file_paths as values
-         *
-         */
         std::unordered_map<int, Ref<Resource>> getResourceMap() const;
 
     private:
@@ -142,6 +129,7 @@ namespace yage {
         std::unordered_map<std::string, int> mIndices;
 
         std::unordered_map<std::type_index, ResourceLoader*> mLoaders;
+        std::unordered_map<std::string, std::type_index> xmlTypeToTypeIndex;
         std::unordered_map<std::string, std::string> mFilePaths;
 
         int mCurrentId = 0;

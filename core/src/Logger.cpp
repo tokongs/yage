@@ -17,7 +17,7 @@ namespace yage {
         catch (const spdlog::spdlog_ex &ex) {
             mFileLogger->warn("Failed to init file logger");
         }
-
+        mFileLogger->info("", "");
        SetLogLevel(YAGE_LOG_LEVEL_DEBUG);
     }
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Logger.h"
 namespace yage {
     class Reference {
 
@@ -23,27 +24,43 @@ namespace yage {
             mReference = nullptr;
         }
 
-        Ref(T *reference)
-                : mReference(reference) {
+        Ref(T *reference){
+            if(mReference == reference) return;
+            if(mReference){
+                mReference->release();
+                if (mReference->getRefCount() <= 0) {
+                    delete mReference;
+                    mReference = nullptr;
+                }
+            }
+            mReference = reference;
             if (mReference)
                 mReference->addRef();
         };
 
         template<typename U>
         Ref(Ref<U> &other) {
+            if(mReference){
+                mReference->release();
+                if (mReference->getRefCount() <= 0) {
+                    delete mReference;
+                    mReference = nullptr;
+                }
+            }
             mReference = (T *) other.get();
             if (mReference)
                 mReference->addRef();
         }
 
-        Ref(const T &other) {
-
-            mReference = other.get();
-            if (mReference)
-                mReference->addRef();
-        }
-
         Ref(const Ref& other){
+            if(this == &other) return;
+            if(mReference){
+                mReference->release();
+                if (mReference->getRefCount() <= 0) {
+                    delete mReference;
+                    mReference = nullptr;
+                }
+            }
             mReference = other.get();
             if (mReference)
                 mReference->addRef();
@@ -72,7 +89,15 @@ namespace yage {
         Ref &operator=(const Ref &other) {
 
             if(this == &other) return *this;
+            if(mReference){
+                mReference->release();
+                if (mReference->getRefCount() <= 0) {
+                    delete mReference;
+                    mReference = nullptr;
+                }
+            }
             mReference = other.get();
+
             if (mReference)
                 mReference->addRef();
             return *this;
@@ -83,6 +108,6 @@ namespace yage {
         }
 
     private:
-        T *mReference;
+        T *mReference = nullptr;
     };
 }

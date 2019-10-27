@@ -29,8 +29,7 @@
 #include "Script.h"
 #include "yage.h"
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 
     yage::InitYage();
     Configuration::Load(argc, argv);
@@ -45,7 +44,7 @@ int main(int argc, char **argv)
     desc.resizable = true;
     desc.title = "Test";
     yage::Window window(desc);
-    yage::GLDevice* device = window.getGraphicsDevice();
+    yage::GLDevice *device = window.getGraphicsDevice();
     /////////////////////////////////////////////////////////////////////
     std::shared_ptr<MovingCamera> cam = std::make_shared<MovingCamera>();
 
@@ -57,39 +56,42 @@ int main(int argc, char **argv)
     /////////////////////////////////////////////////////////////
     //Set resource dir and load resources
     yage::ResourceManager::getInstance().setResourceDir(Configuration::getAssetsFolderPath() + "/");
-    yage::MeshLoader* meshLoader = new yage::MeshLoader();
-    yage::ShaderLoader* shaderLoader = new yage::ShaderLoader();
-   yage::ScriptLoader* scriptLoader = new yage::ScriptLoader();
+    yage::ResourceManager::getInstance().loadAllResources();
+    yage::MeshLoader *meshLoader = new yage::MeshLoader();
+    yage::ShaderLoader *shaderLoader = new yage::ShaderLoader();
+    yage::ScriptLoader *scriptLoader = new yage::ScriptLoader();
 
-    yage::ResourceManager::getInstance().registerResourceLoader<yage::Mesh>(meshLoader);
-    yage::ResourceManager::getInstance().registerResourceLoader<yage::Shader>(shaderLoader);
-    yage::ResourceManager::getInstance().registerResourceLoader<yage::Script>(scriptLoader);
+    yage::ResourceManager::getInstance().registerResourceLoader<yage::Mesh>("mesh", meshLoader);
+    yage::ResourceManager::getInstance().registerResourceLoader<yage::Shader>("shader", shaderLoader);
+    yage::ResourceManager::getInstance().registerResourceLoader<yage::Script>("script", scriptLoader);
 
     int mesh = yage::ResourceManager::getInstance().getHandle<yage::Mesh>("lego");
     int vertex = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_vertex_shader");
     int fragment = yage::ResourceManager::getInstance().getHandle<yage::Shader>("basic_fragment_shader");
-   int script = yage::ResourceManager::getInstance().getHandle<yage::Script>("test");
+    int script = yage::ResourceManager::getInstance().getHandle<yage::Script>("test");
     //////////////////////////////////////////////////////////////////////7
 
     //Set up shaders
-    yage::Program* program = new yage::Program(yage::ResourceManager::getInstance().getResource<yage::Shader>(vertex), yage::ResourceManager::getInstance().getResource<yage::Shader>(fragment));
-    yage::Material* material = new yage::Material(program);
+    yage::Program *program = new yage::Program(yage::ResourceManager::getInstance().getResource<yage::Shader>(vertex),
+                                               yage::ResourceManager::getInstance().getResource<yage::Shader>(
+                                                       fragment));
+    yage::Material *material = new yage::Material(program);
     //////////////////////////////////////////////////
 
-    yage::Scene* scene = new yage::Scene("My Scene");
-    yage::GameObject* object = scene->createGameObject("MyObject");
-    yage::MeshComponent* meshComp = scene->createComponent<yage::MeshComponent>(object);
-    yage::MaterialComponent* materialComp = scene->createComponent<yage::MaterialComponent>(object);
+    yage::Scene *scene = new yage::Scene("My Scene");
+    yage::GameObject *object = scene->createGameObject("MyObject");
+    yage::MeshComponent *meshComp = scene->createComponent<yage::MeshComponent>(object);
+    yage::MaterialComponent *materialComp = scene->createComponent<yage::MaterialComponent>(object);
     meshComp->mMesh = yage::ResourceManager::getInstance().getResource<yage::Mesh>(mesh);
     materialComp->mMaterial = yage::Ref<yage::Material>(material);
 
     //Set up gui
     yage::Gui gui(window.getWindowHandle(), 460);
-    yage::ResourceBrowser* resourceBrowser = new yage::ResourceBrowser();
+    yage::ResourceBrowser *resourceBrowser = new yage::ResourceBrowser();
     resourceBrowser->addResourceView<yage::Mesh>(yage::MeshResourceView());
     resourceBrowser->addResourceView<yage::Shader>(yage::ShaderResourceView());
 
-    yage::SceneView* sceneView = new yage::SceneView(scene);
+    yage::SceneView *sceneView = new yage::SceneView(scene);
 
     gui.addGuiElement(resourceBrowser);
     gui.addGuiElement(sceneView);
@@ -97,13 +99,7 @@ int main(int argc, char **argv)
 
     device->setClearColor(glm::vec4(1, 0.5, 0.25, 1));
 
-    for(int i = 0; i < 10; i++){
-        std::unordered_map<int, yage::Ref<yage::Resource>> resource_map = yage::ResourceManager::getInstance().getResourceMap();
-    }
-
-
-    while (!window.shouldClose())
-    {
+    while (!window.shouldClose()) {
         glfwPollEvents();
         yage::Input::handleInputs();
         device->clearBuffers();
@@ -115,11 +111,9 @@ int main(int argc, char **argv)
         window.update();
     }
 
-    delete material;
     delete resourceBrowser;
     delete sceneView;
     delete scene;
-    delete program;
     delete meshLoader;
     delete shaderLoader;
     delete scriptLoader;

@@ -10,6 +10,7 @@ yage is yet another 3D game engine with an OpenGL rendering engine. And it's jus
 * [spdlog 1.1.0](https://github.com/gabime/spdlog)
 * [Catch2](https://github.com/catchorg/Catch2)
 * [sol 3.0.3](https://github.com/ThePhD/sol2)
+* [RapidXml 1.13](http://rapidxml.sourceforge.net/)
 
 ## Build
     mkdir build

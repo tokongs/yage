@@ -4,10 +4,13 @@
 #include "Mesh.h"
 
 namespace yage {
-    struct MeshComponent : public Component{
-
+    class MeshComponent : public Component{
+    public:
         MeshComponent() {};
 
+        ~MeshComponent() {
+            YAGE_INFO("{}",  mMesh->getRefCount())
+        }
         COMPONENT_CLASS_TYPE(MeshComponent);
 
         Ref<Mesh> mMesh;

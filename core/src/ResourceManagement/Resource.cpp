@@ -10,9 +10,6 @@ Resource::Resource(unsigned int id, std::string name, std::string path)
 Resource::Resource(){
     
 }
-Resource::~Resource(){
-
-}
 
 unsigned int Resource::getResourceId(){
     return mID;

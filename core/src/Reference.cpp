@@ -2,7 +2,7 @@
 
 namespace yage{
     Reference::Reference() {
-        mRefCount = 1;
+        mRefCount = 0;
     }
 
     void Reference::addRef() {

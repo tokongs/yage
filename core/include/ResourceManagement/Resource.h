@@ -18,7 +18,7 @@ class Resource : public Reference
     Resource(unsigned int id, std::string name, std::string filePath);
     Resource();
     
-    virtual ~Resource();
+    virtual ~Resource() = default;
 
     /**
          * @brief Get the Resource Id

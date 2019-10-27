@@ -15,7 +15,6 @@ std::string FileReader::readAsString(std::string file_name)
 {
     std::string path = file_name;
     YAGE_INFO("Atempting to read file to string, file name: " + file_name);
-    YAGE_INFO("Atempting to read file to string, file name: " + file_name);
 
     std::ifstream file;
     try{
@@ -29,10 +28,8 @@ std::string FileReader::readAsString(std::string file_name)
     return stream.str();
     }catch(std::ifstream::failure e){
         YAGE_ERROR("Failed to read file: " + file_name);
-         YAGE_ERROR("Failed to read file: " + file_name);
     }
 
-    YAGE_INFO("File read successfully");
     YAGE_INFO("File read successfully");
 
     return "";

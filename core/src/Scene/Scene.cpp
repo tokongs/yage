@@ -11,11 +11,14 @@ namespace yage{
         for(auto it : mGameObjects){
             if(it)
                 delete it;
+
         }
 
         for(auto it : mComponents){
             for(auto pair : it.second){
-                delete pair.second;
+                Component* t = pair.second;
+                YAGE_INFO("Deleting")
+                delete t;
             }
         }
     }

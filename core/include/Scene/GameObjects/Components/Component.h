@@ -9,9 +9,10 @@ namespace yage {
 
     class GameObject;
 
-    struct Component {
+    class Component {
+    public:
         Component() {};
-
+        virtual ~Component() = default;
         void setGameObject(GameObject *object) { mGameObject = object; };
 
         GameObject *getGameObject() { return mGameObject; };

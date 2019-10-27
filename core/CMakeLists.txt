@@ -12,6 +12,7 @@ file(GLOB SCRIPTING_SRC src/Scripting/*.cpp)
 file(GLOB_RECURSE GAME_OBJECTS_SRC src/Scene/GameObjects *.cpp)
 file(GLOB_RECURSE SCENE_SRC src/Scene/*.cpp)
 
+
 add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${GAME_OBJECTS_SRC} ${SCENE_SRC})
 
 file(GLOB_RECURSE INCLUDE include *.h)
@@ -21,7 +22,7 @@ target_include_directories(yage_core PUBLIC
         include/Graphics/OpenGL include/Util include/ResourceManagement
         include/ResourceManagement/Loaders include/Scripting
         include/Scene include/Scene/GameObjects include/Scene/GameObjects/Components
-        include/Scene/GameObjects/Systems 3rd_party/sol/)
+        include/Scene/GameObjects/Systems 3rd_party)
 
 
 find_package(Lua REQUIRED)

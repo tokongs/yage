@@ -5,11 +5,62 @@ namespace yage {
     }
 
     ResourceManager::~ResourceManager() {
-        for (auto it : mLoadedResources) {
-            if (it.second.get()) {
-                delete it.second.get();
+    }
+
+    void ResourceManager::loadAllResources() {
+
+        std::vector<std::string> files = traverseDirectories(mResourceDir);
+        FileReader reader;
+        for (auto filePath : files) {
+            std::string fileConent = reader.readAsString(filePath);
+            rapidxml::xml_document<> document;
+            document.parse<0>(fileConent.data());
+            rapidxml::xml_node<> *node = document.first_node();
+
+            auto typeIndex = xmlTypeToTypeIndex.find(node->name());
+            if (typeIndex == xmlTypeToTypeIndex.end()) {
+                YAGE_WARN("Failed to find mapping between xml node type({}) and loader type.", node->name())
+                continue;
+            }
+            auto loader = mLoaders.find(typeIndex->second);
+            if (loader == mLoaders.end()) {
+                YAGE_WARN("Failed to find loader for resource of type {}.", node->name())
+                continue;
+            }
+
+            YAGE_INFO("Start loading resource (name: {}, filePath: {})", node->name(), filePath);
+            Resource *res = loader->second->load(fileConent);
+            if (res) {
+                int id = -1;
+                if (mFreeIds.empty()) {
+                    id = mCurrentId;
+                    mCurrentId++;
+                } else {
+                    id = mFreeIds.top();
+                }
+                mIndices[res->getName()] = id;
+                mLoadedResources[id] = Ref<Resource>(res);
+                res->setId(id);
+                res->setFilePath(filePath);
+                YAGE_INFO("Finished loading resource (name: {}, id: {}, filePath: {}", node->name(), id, filePath);
             }
         }
+    }
+
+    std::vector<std::string> ResourceManager::traverseDirectories(std::string baseDir) {
+        std::vector<std::string> result;
+        for (auto &entry : std::filesystem::directory_iterator(baseDir)) {
+            if (entry.is_directory()) {
+                std::vector<std::string> dirContents = traverseDirectories(entry.path());
+                result.insert(result.end(), dirContents.begin(), dirContents.end());
+            } else {
+                if (entry.is_regular_file() && entry.path().extension() == ".xml") {
+                    result.push_back(entry.path());
+                }
+            }
+        }
+
+        return result;
     }
 
     void ResourceManager::setResourceDir(std::string resource_dir) {
@@ -23,28 +74,6 @@ namespace yage {
         buildFilePathMap(resource_overview);
     }
 
-    void ResourceManager::unloadResource(int id) {
-        for (auto it = mIndices.begin(); it != mIndices.end(); it++) {
-            if (it->second == id) {
-                mIndices.erase(it);
-                break;
-            }
-        }
-        mLoadedResources.erase(id);
-        mFreeIds.push(id);
-    }
-
-/*
-void ResourceManager::registerPlaceholderResource(Ref<Resource> resource)
-{
-    if (!resource)
-    {
-        YAGE_ERROR("Trying to load nullptr as placeholder resource");
-        return;
-    }
-    mPlaceholders[typeid(*resource)] = resource;
-}
-*/
     void ResourceManager::buildFilePathMap(std::string resource_overview) {
         auto start_of_type = resource_overview.find_first_of('#');
         while (start_of_type != std::string::npos) {
