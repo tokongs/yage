@@ -1,4 +1,5 @@
 
+#include <Logger.h>
 #include "Script.h"
 
 namespace yage{
@@ -9,7 +10,6 @@ namespace yage{
     Script::Script(std::string content)
     : mContent(content)
     {
-
     }
 
     Script::~Script() {

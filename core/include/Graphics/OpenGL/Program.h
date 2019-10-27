@@ -1,4 +1,5 @@
 #pragma once
+
 #include <GL/glew.h>
 #include <memory>
 #include <vector>
@@ -14,120 +15,54 @@
 #include "Resource.h"
 #include "ResourceManager.h"
 #include "Logger.h"
-namespace yage
-{
+
+namespace yage {
+#define SHADER_VERTEX_POSITION_LOCATION = 0
+#define SHADER_VERTEX_NORMAL_LOCATION = 1
+#define SHADER_VERTEX_UV_POSITION = 2
+
+
 /**
      * @brief Takes in shaders and links them to a program
      * 
      */
-class Program : public Resource
-{
-public:
-  Program();
-  ~Program();
+    class Program : public Resource {
 
-  /**
-   * @brief Attaches a set of shaders to this program. The shaders need to 
-   * be of differing types.
-   * 
-   * @param shaders 
-   */
-  void attachShaders(std::vector<int> shaders);
-  /**
-   * @brief Activate this program for use in rendering
-   * 
-   */
-  void activate();
+    public:
+        Program(Ref <Shader> vs, Ref <Shader> fs);
+
+        ~Program();
 
 
-  /**
-   * @brief Set an int uniform
-   * 
-   * @param value
-   * @param name 
-   */
-  void setInt(std::string name, int value);
+        void attachShaders();
 
-  /**
-   * @brief Set a float uniform
-   * 
-   * @param value
-   * @param name 
-   */
-  void setFloat(std::string name, float value);
+        void activate();
 
-  /**
-   * @brief Set a vector2(f) uniform
-   * 
-   * @param name 
-   */
+        void setInt(std::string name, int value);
+        void setFloat(std::string name, float value);
+        void setVec2(std::string name, glm::vec2);
+        void setVec3(std::string name, glm::vec3);
+        void setVec4(std::string name, glm::vec4);
+        void setMat4(std::string name, glm::mat4);
 
-  void setVec2(std::string name, glm::vec2);
+    private:
 
-  /**
-   * @brief SSet a vector3(f) uniform
-   * 
-   * @param name 
-   */
-  void setVec3(std::string name, glm::vec3);
+        void enableInts();
+        void enableFloats();
+        void enableVec2s();
+        void enableVec3s();
+        void enableVec4s();
+        void enableMat4s();
 
-  /**
-   * @brief Set a vector4(f) uniform
-   * 
-   * @param name 
-   */
-  void setVec4(std::string name, glm::vec4);
+        unsigned int mGlObjectId;
+        Ref <Shader> mVertexShader;
+        Ref <Shader> mFragmentShader;
+        std::unordered_map<std::string, int> mInts;
+        std::unordered_map<std::string, int> mFloats;
+        std::unordered_map<std::string, glm::vec2> mVec2s;
+        std::unordered_map<std::string, glm::vec3> mVec3s;
+        std::unordered_map<std::string, glm::vec4> mVec4s;
+        std::unordered_map<std::string, glm::mat4> mMat4s;
 
-  /**
-   * @brief Set a 4x4 matrix uniform
-   * 
-   * @param name 
-   */
-  void setMat4(std::string name, glm::mat4);
-
-  /**
-   * @brief Returns a shader Uniform With the matching name.
-   * Return an empty object if there is no matching name
-   * 
-   * @param name 
-   * @return ShaderUniform 
-   */
-  ShaderUniform getUniform(std::string name);
-
-private:
-  /**
-   * @brief Makes a map of the available uniform variables in this program.
-   * 
-   */
-  void mapUniforms();
-
-  /**
-   * @brief Get the Uniform location. Wrapper around glGetUniformLocation
-   * 
-   * @param name 
-   * @return int 
-   */
-  int getUniformLocation(std::string name);
-
-  /**
-   * @brief Check if uniform is inactive of non-existent
-   * 
-   * @param requested_type 
-   */
-  bool uniformIsActive(std::unordered_map<std::string, ShaderUniform>::iterator uniformIt, std::string name);
-
-  /**
- * @brief Check if the uniform is the same as the requested type
- * 
- * @param uniform 
- * @param requested_type 
- */
-  bool typeIsCorrect(unsigned int type, unsigned int requestedType);
-
-  unsigned int mGlObjectId;
-  Shader *mVertexShader = nullptr;
-  Shader *mFragmentShader = nullptr;
-
-  std::unordered_map<std::string, ShaderUniform> mUniforms;
-};
+    };
 } // namespace yage

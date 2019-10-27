@@ -46,8 +46,8 @@ class IndexBuffer{
 
     private:
 
-    unsigned int m_gl_object_id;
-    unsigned int m_size;
+    unsigned int mGlObjectId;
+    unsigned int mSize;
     std::vector<unsigned int> m_shadow_copy;
 };
     typedef std::shared_ptr<IndexBuffer> IndexBufferPtr;

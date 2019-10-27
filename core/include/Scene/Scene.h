@@ -1,23 +1,53 @@
 #pragma once
+
 #include <vector>
 #include "GameObject.h"
+#include "TransformComponent.h"
+#include "MeshComponent.h"
+#include "MaterialComponent.h"
+#include "Renderer.h"
+#include "queue"
+
 namespace yage {
-    typedef std::vector<GameObject*> GameObjectList;
+    typedef std::vector<GameObject *> GameObjectList;
+    typedef std::unordered_map<std::type_index, std::unordered_map<int, Component *>> ComponentMap;
+
     class Scene {
 
     public:
         Scene(const std::string name);
+
         ~Scene();
 
-        void addGameObject(GameObject* object);
-        GameObject* getGameObject(std::string name);
-        GameObject* getGameObject(int id);
+        GameObject *createGameObject(std::string name);
+
+        GameObject *getGameObject(std::string name);
+
+        GameObject *getGameObject(int id);
+
+        template<typename T>
+        T *createComponent(GameObject *object) {
+            auto component = mComponents[typeid(T)].find(object->getId());
+            if (component != mComponents[typeid(T)].end()) {
+                delete component->second;
+            }
+            T *result = new T();
+            mComponents[typeid(T)][object->getId()] = result;
+            object->attachComponent(result);
+            return result;
+        }
+
+        void render() const;
 
         GameObjectList getGameObjects() const;
+
         std::string getName() const;
 
     private:
         const std::string mName;
         GameObjectList mGameObjects;
+        ComponentMap mComponents;
+        std::queue<int> mFreeIds;
+        int mNextId = 0;
     };
 }

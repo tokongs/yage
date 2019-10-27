@@ -12,7 +12,7 @@ ShaderResourceView::~ShaderResourceView()
 
 void ShaderResourceView::constructFrame(bool independent)
 {
-    Shader* shader =(Shader*)(mResource);
+    Ref<Shader> shader = mResource;
     if (independent)
     {
        ImGui::Begin("Shader Resource View", &mOpen);

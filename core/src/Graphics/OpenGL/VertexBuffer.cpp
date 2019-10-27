@@ -41,8 +41,8 @@ namespace yage {
 
     VertexBuffer::~VertexBuffer() {
         YAGE_INFO("Deleting Vertex Buffer Object, ID: " + std::to_string(mVbObjectId));
-        YAGE_INFO("Deleting Vertex Array Object, ID: " + std::to_string(mVaoObjectId));
         glDeleteBuffers(1, &mVbObjectId);
+        YAGE_INFO("Deleting Vertex Array Object, ID: " + std::to_string(mVaoObjectId));
         glDeleteVertexArrays(1, &mVaoObjectId);
     }
 

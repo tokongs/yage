@@ -18,7 +18,7 @@ namespace yage {
             mFileLogger->warn("Failed to init file logger");
         }
 
-       SetLogLevel(YAGE_LOG_LEVEL_ERROR);
+       SetLogLevel(YAGE_LOG_LEVEL_DEBUG);
     }
 
     void Logger::SetLogLevel(int level) {

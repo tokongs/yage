@@ -10,5 +10,6 @@ namespace yage{
         Input::Init();
         SceneManager::Init();
         ScriptingEngine::Init();
+        Renderer::Init();
     }
 }

@@ -1,25 +1,23 @@
 #pragma once
+
 #include <glm/vec4.hpp>
 #include "Resource.h"
 #include "Program.h"
 
-namespace yage
-{
-class Material : public Resource
-{
+namespace yage {
+    class Material : public Resource {
     public:
-    Material();
-    ~Material();
+        Material(Ref <Program> program);
 
-    void activate();
+        Ref<Program> getShaderProgram();
 
     private:
-    glm::vec4 mAmbientColor;
-    glm::vec4 mDiffuseColor;
-    glm::vec4 mSpecularColor;
+        glm::vec4 mAmbientColor;
+        glm::vec4 mDiffuseColor;
+        glm::vec4 mSpecularColor;
 
 
-    Program m_shader_program;
-    
-};
+        Ref <Program> mShaderProgram;
+
+    };
 } // namespace yage

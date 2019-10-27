@@ -12,6 +12,7 @@
 #include "FileReader.h"
 #include "Singleton.h"
 #include "Logger.h"
+#include "Reference.h"
 
 namespace yage {
 
@@ -80,41 +81,12 @@ namespace yage {
        * @return std::shared_ptr<T>
        */
         template<typename T>
-        T* getResource(int id) {
+        Ref<T> getResource(int id) {
             auto result = mLoadedResources.find(id);
 
-            if (result == mLoadedResources.end())//Could not find resource, return placeholder
+            if (result != mLoadedResources.end())
             {
-                YAGE_WARN("Could not find resource with id: " + std::to_string(id) + ", and  type: " +
-                          std::string(typeid(T).name()));
-                YAGE_WARN("Returning a placeholder instead")
-                auto placeholder = mPlaceholders.find(typeid(T));
-                if (placeholder != mPlaceholders.end()) {
-                    return (T*)(placeholder->second);
-                } else {
-                    YAGE_ERROR("No placeholder register for Resources of type: " + std::string(typeid(T).name()));
-                    return nullptr;
-                }
-            }
-            if (typeid(*result->second) !=
-                typeid(T)) //Requested type of resource is different from what is connected to the id. Return placeholder.
-            {
-                YAGE_WARN("Trying to get Resource of type: " + std::string(typeid(T).name()) +
-                          ". The given id returns a Resource of type: " + typeid(result->second).name());
-                YAGE_WARN("Returning a placeholder instead")
-
-                auto placeholder = mPlaceholders.find(typeid(T));
-                if (placeholder != mPlaceholders.end()) {
-                    return (T*)(placeholder->second);
-                } else {
-                    YAGE_ERROR("No placeholder registered for Resources of type: " + std::string(typeid(T).name()));
-                    return nullptr;
-                }
-            }
-
-            if (result != mLoadedResources.end()) //Resource found and is of right type
-            {
-                return (T*)(result->second);
+                return result->second;
             }
             YAGE_WARN("No resource with id: " + std::to_string(id));
             return nullptr;
@@ -160,13 +132,13 @@ namespace yage {
          * @brief Returns an unordered map containing all the resources names as keys and file_paths as values
          *
          */
-        std::unordered_map<int, Resource*> getResourceMap();
+        std::unordered_map<int, Ref<Resource>> getResourceMap() const;
 
     private:
         void buildFilePathMap(std::string resource_overview);
 
-        std::unordered_map<int, Resource*> mLoadedResources;
-        std::unordered_map<std::type_index, Resource*> mPlaceholders;
+        std::unordered_map<int, Ref<Resource>> mLoadedResources;
+        std::unordered_map<std::type_index, Ref<Resource>> mPlaceholders;
         std::unordered_map<std::string, int> mIndices;
 
         std::unordered_map<std::type_index, ResourceLoader*> mLoaders;

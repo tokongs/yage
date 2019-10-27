@@ -12,7 +12,7 @@ MeshResourceView::~MeshResourceView()
 
 void MeshResourceView::constructFrame(bool independent)
 {
-    Mesh* mesh = (Mesh*)(mResource);
+    Ref<Mesh> mesh = mResource;
     if (independent)
     {
         ImGui::Begin("Resource View", &mOpen);

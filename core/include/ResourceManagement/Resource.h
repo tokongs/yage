@@ -2,6 +2,7 @@
 #pragma once
 #include <memory>
 #include <iostream>
+#include "Reference.h"
 
 namespace yage
 {
@@ -10,7 +11,7 @@ namespace yage
      * @brief Abstract Resource class. Should be inherited by all Resources e.g. Meshes, Shaders, Textures
      * 
      */
-class Resource
+class Resource : public Reference
 {
 
   public:

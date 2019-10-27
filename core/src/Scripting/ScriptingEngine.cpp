@@ -39,10 +39,8 @@ namespace yage {
     void ScriptingEngine::SetupGameObjectsAPI() {
         mLuaState.new_usertype<GameObject>("GameObject",
                                            "new", sol::no_constructor,
-                                           "getComponent", &GameObject::getComponent);
+                                           "getName", &GameObject::getName);
         mLuaState.new_usertype<Component>("Component",
-                                          "new", sol::no_constructor,
-                                          "setGameObject", &Component::setGameObject,
-                                          "getGameObject", &Component::getGameObject);
+                                          "new", sol::no_constructor);
     }
 }

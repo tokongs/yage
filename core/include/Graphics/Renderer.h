@@ -1,9 +1,13 @@
 #pragma once
 #include <GL/glew.h>
 #include <memory>
+#include <Scene/Scene.h>
 #include "VertexBuffer.h"
 #include "Program.h"
 #include "Camera.h"
+#include "Reference.h"
+#include "Mesh.h"
+#include "Material.h"
 
 namespace yage
 {
@@ -14,13 +18,8 @@ namespace yage
 class Renderer
 {
     public:
-    /**
-     * @brief Construct a new Renderer object
-     * 
-     * @param device An OpenGL Rendering Device
-     */
-    Renderer();
-    ~Renderer();
+    static void Init();
+    static void Shutdown();
 
     /**
      * @brief Render a vertex buffer with the specified shader
@@ -28,11 +27,12 @@ class Renderer
      * @param vb 
      * @param shader 
      */
-    void render(VertexBuffer* vb, Program* program);
-    void setCamera(Camera camera);
+    static void Render(VertexBuffer* vb, Program* program);
+    static void Render(Ref<Mesh> mesh, Ref<Material> material);
+    static void SetCamera(Camera camera);
 
     private:
-    Camera mCamera;
+    static Camera mCamera;
 
 };
 
