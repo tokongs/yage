@@ -1,4 +1,5 @@
 #pragma once
+#include "rapidxml/rapidxml.hpp"
 #include "config.h"
 #include "Mesh.h"
 #include "ResourceLoader.h"
@@ -7,6 +8,7 @@
 #include <string>
 #include <WavefrontLoader.h>
 #include "Logger.h"
+#include "pugixml/pugixml.hpp"
 
 namespace yage{
     /**

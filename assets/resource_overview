@@ -1,4 +1,0 @@
-#shader basic_fragment_shader shaders/basic.fs
-#shader basic_vertex_shader shaders/basic.vs
-#mesh lego meshes/lego.obj
-#script test scripts/test.lua

@@ -13,36 +13,24 @@ namespace yage {
         FileReader reader;
         for (auto filePath : files) {
             std::string fileConent = reader.readAsString(filePath);
-            rapidxml::xml_document<> document;
-            document.parse<0>(fileConent.data());
-            rapidxml::xml_node<> *node = document.first_node();
-
-            auto typeIndex = xmlTypeToTypeIndex.find(node->name());
-            if (typeIndex == xmlTypeToTypeIndex.end()) {
-                YAGE_WARN("Failed to find mapping between xml node type({}) and loader type.", node->name())
-                continue;
+            pugi::xml_document doc;
+            pugi::xml_parse_result result = doc.load_string(fileConent.c_str());
+            if (result) {
+                pugi::xml_node root = doc.first_child();
+                mFilePaths[std::string(root.attribute("name").value())] = filePath;
             }
-            auto loader = mLoaders.find(typeIndex->second);
-            if (loader == mLoaders.end()) {
-                YAGE_WARN("Failed to find loader for resource of type {}.", node->name())
-                continue;
-            }
+        }
 
-            YAGE_INFO("Start loading resource (name: {}, filePath: {})", node->name(), filePath);
-            Resource *res = loader->second->load(fileConent);
-            if (res) {
-                int id = -1;
-                if (mFreeIds.empty()) {
-                    id = mCurrentId;
-                    mCurrentId++;
-                } else {
-                    id = mFreeIds.top();
+        for (auto filePath: files) {
+            std::string fileConent = reader.readAsString(filePath);
+            pugi::xml_document doc;
+            pugi::xml_parse_result result = doc.load_string(fileConent.c_str());
+            if (result) {
+                if (mLoadedResources.find(std::string(doc.first_child().attribute("name").value())) != mLoadedResources.end()) {
+                    YAGE_INFO("Resource {} already loaded. SKipping...", doc.first_child().attribute("name").value());
+                    continue;
                 }
-                mIndices[res->getName()] = id;
-                mLoadedResources[id] = Ref<Resource>(res);
-                res->setId(id);
-                res->setFilePath(filePath);
-                YAGE_INFO("Finished loading resource (name: {}, id: {}, filePath: {}", node->name(), id, filePath);
+                loadResource(doc.first_child());
             }
         }
     }
@@ -63,39 +51,54 @@ namespace yage {
         return result;
     }
 
-    void ResourceManager::setResourceDir(std::string resource_dir) {
-        FileReader reader;
-        std::string resource_overview = reader.readAsString(resource_dir + "resource_overview");
-        mResourceDir = resource_dir;
 
-        if (resource_overview.empty()) {
-            YAGE_WARN("Resource Overview File is empty");
+    void ResourceManager::loadResource(pugi::xml_node root) {
+        if (mLoadedResources.find(std::string(root.attribute("name").value())) != mLoadedResources.end()) {
+            YAGE_INFO("Resource {} already loaded. SKipping...", root.attribute("name").value());
         }
-        buildFilePathMap(resource_overview);
-    }
-
-    void ResourceManager::buildFilePathMap(std::string resource_overview) {
-        auto start_of_type = resource_overview.find_first_of('#');
-        while (start_of_type != std::string::npos) {
-            auto start_of_name = resource_overview.find_first_of(' ', start_of_type + 1) + 1;
-            auto start_of_path = resource_overview.find_first_of(' ', start_of_name) + 1;
-            auto end_of_path = resource_overview.find_first_of('\n', start_of_path) + 1;
-            if (end_of_path == std::string::npos) {
-                end_of_path = resource_overview.size();
+        pugi::xml_node current = root.first_child();
+        while (!current.empty()) {
+            loadResource(current);
+            current = current.next_sibling();
+        }
+        auto loader = mLoaders.find(root.name());
+        if (loader == mLoaders.end()) {
+            YAGE_WARN("Failed to find loader for resource of type {}.", root.attribute("name").value())
+            return;
+        }
+        Resource *res = loader->second->load(mFilePaths[root.attribute("name").value()]);
+        if (res) {
+            int id = -1;
+            if (mFreeIds.empty()) {
+                id = mCurrentId;
+                mCurrentId++;
+            } else {
+                id = mFreeIds.top();
             }
 
-            std::string name = resource_overview.substr(start_of_name, start_of_path - start_of_name - 1);
-            std::string path = resource_overview.substr(start_of_path, end_of_path - start_of_path - 1);
-
-            path = mResourceDir + path;
-
-            mFilePaths[name] = path;
-
-            start_of_type = resource_overview.find_first_of('#', start_of_type + 1);
+            mLoadedResources[root.attribute("name").value()] = Ref<Resource>(res);
+            res->setId(id);
+            res->setName(root.attribute("name").value());
+            res->setFilePath(mFilePaths[root.attribute("name").value()]);
         }
+
     }
 
-    std::unordered_map<int, Ref<Resource>> ResourceManager::getResourceMap() const {
+    void ResourceManager::registerResourceLoader(std::string resourceTypeName, ResourceLoader *loader) {
+        if (!loader) {
+            YAGE_ERROR("Trying to register nullptr as a resource loader");
+            return;
+        }
+
+        mLoaders[resourceTypeName] = loader;
+    }
+
+
+    void ResourceManager::setResourceDir(std::string resource_dir) {
+        mResourceDir = resource_dir;
+    }
+
+    std::unordered_map<std::string, Ref<Resource>> ResourceManager::getResourceMap() const {
         return mLoadedResources;
     }
 } // namespace yage

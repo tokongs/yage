@@ -2,7 +2,7 @@
 
 namespace yage {
     ResourceBrowser::ResourceBrowser() {
-        std::unordered_map<int, Ref<Resource>> resource_map = ResourceManager::getInstance().getResourceMap();
+        std::unordered_map<std::string, Ref<Resource>> resource_map = ResourceManager::getInstance().getResourceMap();
         for (auto it = resource_map.begin(); it != resource_map.end(); it++) {
             mSelectedResource[it->second->getResourceId()] = false;
         }
@@ -19,7 +19,7 @@ namespace yage {
         ImGui::Begin(m_title.c_str(), &mOpen);
 
 
-        std::unordered_map<int, Ref<Resource>> resource_map = ResourceManager::getInstance().getResourceMap();
+        std::unordered_map<std::string, Ref<Resource>> resource_map = ResourceManager::getInstance().getResourceMap();
         if (mSelectedResource.size() < resource_map.size()) {
             mSelectedResource.clear();
             for (auto it = resource_map.begin(); it != resource_map.end(); it++) {

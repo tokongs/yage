@@ -14,9 +14,10 @@ FileReader::~FileReader()
 std::string FileReader::readAsString(std::string file_name)
 {
     std::string path = file_name;
-    YAGE_INFO("Atempting to read file to string, file name: " + file_name);
+    YAGE_INFO("Atempting to read file {}", file_name);
 
     std::ifstream file;
+    std::string result;
     try{
     file.open(path.c_str(), std::ios::in);
 
@@ -25,14 +26,14 @@ std::string FileReader::readAsString(std::string file_name)
 
     file.close();
 
-    return stream.str();
+    result =  stream.str();
     }catch(std::ifstream::failure e){
         YAGE_ERROR("Failed to read file: " + file_name);
     }
 
-    YAGE_INFO("File read successfully");
 
-    return "";
+    YAGE_INFO("Sucessfully read file {}", file_name)
+    return result;
 }
 
 bool FileReader::fileExists(std::string file){

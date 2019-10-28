@@ -1,12 +1,12 @@
 #include "Material.h"
 
 namespace yage{
-    Material::Material(yage::Ref<yage::Program> program)
-    :mShaderProgram(program){
+    Material::Material(yage::Ref<yage::Shader> shader)
+    :mShader(shader){
 
     }
 
-    Ref<Program> Material::getShaderProgram(){
-        return mShaderProgram;
+    Ref<Shader> Material::getShader(){
+        return mShader;
     }
 }

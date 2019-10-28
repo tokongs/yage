@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <material name="TestMaterial">
-    <shader path="../shaders/BasicShader.xml"></shader>
+    <shader name="BasicShader"></shader>
     <ambient color="#600060"></ambient>
 </material>

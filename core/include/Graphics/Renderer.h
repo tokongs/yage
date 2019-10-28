@@ -3,7 +3,6 @@
 #include <memory>
 #include <Scene/Scene.h>
 #include "VertexBuffer.h"
-#include "Program.h"
 #include "Camera.h"
 #include "Reference.h"
 #include "Mesh.h"
@@ -27,7 +26,7 @@ class Renderer
      * @param vb 
      * @param shader 
      */
-    static void Render(VertexBuffer* vb, Program* program);
+    static void Render(VertexBuffer* vb, Shader* shader);
     static void Render(Ref<Mesh> mesh, Ref<Material> material);
     static void SetCamera(Camera camera);
 

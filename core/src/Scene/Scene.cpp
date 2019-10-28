@@ -17,7 +17,7 @@ namespace yage{
         for(auto it : mComponents){
             for(auto pair : it.second){
                 Component* t = pair.second;
-                YAGE_INFO("Deleting")
+                YAGE_INFO("Deleting component")
                 delete t;
             }
         }

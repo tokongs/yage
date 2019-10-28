@@ -12,7 +12,7 @@ file(GLOB_RECURSE GAME_OBJECTS_SRC src/Scene/GameObjects *.cpp)
 file(GLOB_RECURSE SCENE_SRC src/Scene/*.cpp)
 
 
-add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${GAME_OBJECTS_SRC} ${SCENE_SRC})
+add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${GAME_OBJECTS_SRC} ${SCENE_SRC} 3rd_party/pugixml/pugixml.cpp)
 
 file(GLOB_RECURSE INCLUDE include *.h)
 
@@ -45,7 +45,7 @@ if (GLEW_FOUND)
 else ()
     message([ERROR] "Failed to find GLEW")
 endif ()
-
+set(OpenGL_GL_PREFERENCE "GLVND")
 find_package(OpenGL REQUIRED)
 if (OPENGL_FOUND)
     target_include_directories(yage_core PUBLIC ${OPENGL_INCLUDE_DIRS})

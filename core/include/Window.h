@@ -103,6 +103,8 @@ private:
   Window(const Window &);
   Window &operator=(const Window &);
 
+  static void window_size_callback(GLFWwindow* window, int width, int height);
+
   /**
  * @brief 
  * 

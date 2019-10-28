@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mesh name="Lego" path="./lego.obj">
-    <material path="../materials/TestMaterial.xml"></material>
+<mesh name="Lego">
+    <wavefront path="./assets/meshes/lego.obj"></wavefront>
 </mesh>

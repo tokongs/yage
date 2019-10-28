@@ -1,4 +1,5 @@
 #pragma once
+#include "pugixml/pugixml.hpp"
 #include <memory>
 #include "config.h"
 #include "ResourceLoader.h"

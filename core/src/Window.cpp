@@ -44,6 +44,7 @@ Window::Window(WindowDesc desc)
     glfwSetCursorEnterCallback(mWindowHandle, glfw_cursor_enter_callback);
     glfwSetMouseButtonCallback(mWindowHandle, glfw_mouse_button_callback);
     glfwSetScrollCallback(mWindowHandle, glfw_scroll_callback);
+    glfwSetWindowSizeCallback(mWindowHandle, window_size_callback);
 
     //Make the created OpenGL context the current context
     glfwMakeContextCurrent(mWindowHandle);
@@ -85,6 +86,10 @@ GLDevice* Window::getGraphicsDevice()
 GLFWwindow *Window::getWindowHandle()
 {
     return mWindowHandle;
+}
+
+void Window::window_size_callback(GLFWwindow* window, int width, int height){
+    glViewport(0, 0, width, height);
 }
 
 void glfw_error_callback(int error, const char *description)
