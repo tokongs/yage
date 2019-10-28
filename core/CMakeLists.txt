@@ -1,6 +1,5 @@
 project(yage_core)
 
-add_subdirectory(test)
 subdirs(3rd_party)
 
 file(GLOB SRC src/*.cpp)

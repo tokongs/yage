@@ -38,5 +38,5 @@ std::string Configuration::getAssetsFolderPath() {
     if(config_file_variable_map.count("assetDir"))
         return config_file_variable_map["assetDir"].as<std::string>();
 
-    return nullptr;
+    return "";
 }
