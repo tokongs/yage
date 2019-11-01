@@ -11,19 +11,26 @@ class Texture : public Resource
     static const int TextureUnit0 = GL_TEXTURE0;
 
   public:
-    Texture();
+    Texture(unsigned char * textureData, int width, int height, int numChannels);
     ~Texture();
+    Texture(const Texture &other);
+
+    Texture& operator= (const Texture &other);
+
+    void activate();
 
   private:
-    unsigned int m_gl_object_id;
 
-    unsigned int m_texture_unit;
+    int mWidth;
+    int mHeight;
+    int mNumChannels;
 
-    unsigned int m_s_wrapping;
-    unsigned int m_t_wrapping;
-    unsigned int m_mag_filtering;
-    unsigned int m_min_filtering;
+    unsigned int mGlObjectId;
+    unsigned int mTextureUnit;
+
+    unsigned int mSWrapping;
+    unsigned int mTWrapping;
+    unsigned int mMagFiltering;
+    unsigned int mMinFiltering;
 };
-
-typedef std::shared_ptr<Texture> TexturePtr;
 } // namespace yage

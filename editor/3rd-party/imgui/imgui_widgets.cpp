@@ -385,7 +385,7 @@ bool ImGui::ButtonBehavior(const ImRect& bb, ImGuiID id, bool* out_hovered, bool
         return false;
     }
 
-    // Default behavior requires click+release on same spot
+    // Default.xml behavior requires click+release on same spot
     if ((flags & (ImGuiButtonFlags_PressedOnClickRelease | ImGuiButtonFlags_PressedOnClick | ImGuiButtonFlags_PressedOnRelease | ImGuiButtonFlags_PressedOnDoubleClick)) == 0)
         flags |= ImGuiButtonFlags_PressedOnClickRelease;
 
@@ -836,7 +836,7 @@ bool ImGui::ImageButton(ImTextureID user_texture_id, const ImVec2& size, const I
     ImGuiContext& g = *GImGui;
     const ImGuiStyle& style = g.Style;
 
-    // Default to using texture ID as ID. User can still push string/integer prefixes.
+    // Default.xml to using texture ID as ID. User can still push string/integer prefixes.
     // We could hash the size/uv to create a unique ID but that would prevent the user from animating UV.
     PushID((void*)user_texture_id);
     const ImGuiID id = window->GetID("#image");
@@ -1021,7 +1021,7 @@ void ImGui::ProgressBar(float fraction, const ImVec2& size_arg, const char* over
     const ImVec2 fill_br = ImVec2(ImLerp(bb.Min.x, bb.Max.x, fraction), bb.Max.y);
     RenderRectFilledRangeH(window->DrawList, bb, GetColorU32(ImGuiCol_PlotHistogram), 0.0f, fraction, style.FrameRounding);
 
-    // Default displaying the fraction as percentage string, but user can override it
+    // Default.xml displaying the fraction as percentage string, but user can override it
     char overlay_buf[32];
     if (!overlay)
     {
@@ -1709,7 +1709,7 @@ bool ImGui::DragBehaviorT(ImGuiDataType data_type, TYPE* v, float v_speed, const
 {
     ImGuiContext& g = *GImGui;
 
-    // Default tweak speed
+    // Default.xml tweak speed
     bool has_min_max = (v_min != v_max) && (v_max - v_max < FLT_MAX);
     if (v_speed == 0.0f && has_min_max)
         v_speed = (float)((v_max - v_min) * g.DragSpeedDefaultRatio);
@@ -1856,7 +1856,7 @@ bool ImGui::DragScalar(const char* label, ImGuiDataType data_type, void* v, floa
     }
     const bool hovered = ItemHoverable(frame_bb, id);
 
-    // Default format string when passing NULL
+    // Default.xml format string when passing NULL
     // Patch old "%.0f" format string to use "%d", read function comments for more details.
     IM_ASSERT(data_type >= 0 && data_type < ImGuiDataType_COUNT);
     if (format == NULL)
@@ -2286,7 +2286,7 @@ bool ImGui::SliderScalar(const char* label, ImGuiDataType data_type, void* v, co
         return false;
     }
 
-    // Default format string when passing NULL
+    // Default.xml format string when passing NULL
     // Patch old "%.0f" format string to use "%d", read function comments for more details.
     IM_ASSERT(data_type >= 0 && data_type < ImGuiDataType_COUNT);
     if (format == NULL)
@@ -2435,7 +2435,7 @@ bool ImGui::VSliderScalar(const char* label, const ImVec2& size, ImGuiDataType d
     if (!ItemAdd(frame_bb, id))
         return false;
 
-    // Default format string when passing NULL
+    // Default.xml format string when passing NULL
     // Patch old "%.0f" format string to use "%d", read function comments for more details.
     IM_ASSERT(data_type >= 0 && data_type < ImGuiDataType_COUNT);
     if (format == NULL)

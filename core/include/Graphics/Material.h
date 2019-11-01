@@ -1,30 +1,27 @@
 #pragma once
+
 #include <glm/vec4.hpp>
+#include <Graphics/OpenGL/Texture.h>
 #include "Resource.h"
-#include "Program.h"
-
-namespace yage
-{
-class Material : public Resource
-{
+#include "Shader.h"
+namespace yage {
+    class Material : public Resource {
     public:
-    Material();
-    ~Material();
+        Material(Ref <Shader> shader);
 
-    void activate();
+        Ref<Shader> getShader();
+
+        void activate();
+        void setAmbientTexture(Ref<Texture> texture);
 
     private:
-    glm::vec4 m_ambient_color;
-    glm::vec4 m_diffuse_color;
-    glm::vec4 m_specular_color;
+        glm::vec4 mAmbientColor;
+        glm::vec4 mDiffuseColor;
+        glm::vec4 mSpecularColor;
 
-    //Texture m_ambient_texture;
-    //Texture m_diffuse_texture;
-    //Texture m_specular_texture;
+        Ref<Texture> mAmbientTexture;
 
+        Ref <Shader> mShader;
 
-
-    Program m_shader_program;
-    
-};
+    };
 } // namespace yage

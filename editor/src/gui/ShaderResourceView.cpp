@@ -12,13 +12,13 @@ ShaderResourceView::~ShaderResourceView()
 
 void ShaderResourceView::constructFrame(bool independent)
 {
-    ShaderPtr shader = std::static_pointer_cast<Shader>(m_resource);
+    Ref<Shader> shader = mResource;
     if (independent)
     {
-       ImGui::Begin("Shader Resource View", m_open.get());
+       ImGui::Begin("Shader Resource View", &mOpen);
     }
     ResourceView::constructFrame(false);
-    ImGui::LabelText("OpenGL ID", std::to_string(shader->getGLObjectId()).c_str());
+    ImGui::LabelText("OpenGL ID", std::to_string(shader->getGlProgramId()).c_str());
 
     if (independent)
     {

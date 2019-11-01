@@ -2,38 +2,50 @@
 
 namespace yage
 {
-DEFINE_LOGGERS(ShaderLoader)
 
 ShaderLoader::ShaderLoader()
 {
-    INIT_LOGGERS(ShaderLoader);
 }
 
 ShaderLoader::~ShaderLoader()
 {
 }
 
-ResourcePtr ShaderLoader::load(std::string file_path)
+Resource* ShaderLoader::load(std::string file_path)
 {
 
-    LOG(ShaderLoader, info, "Loading shader form file: " + file_path);
-    ShaderType type;
-    if (std::string(file_path.end() - 2, file_path.end()) == "fs")
-    {
-        type = ShaderType::FRAGMENT_SHADER;
-    }else if(std::string(file_path.end() - 2, file_path.end()) == "vs"){
-        type = ShaderType::VERTEX_SHADER;
+    std::string fileContent = mFileReader.readAsString(file_path);
+    YAGE_INFO("Loading shader from {}", file_path);
 
-    }
-
-    std::string code = m_file_reader.readAsString(file_path);
-
-    if(code.empty()){
-        LOG(ShaderLoader, error, "Trying to load shader from empty file: " + file_path);
+    pugi::xml_document doc;
+    pugi::xml_parse_result r = doc.load_string(fileContent.c_str());
+    if(!r){
+        YAGE_WARN("Failed to parse xml when loading shader from {}", file_path);
         return nullptr;
     }
-    ShaderPtr result = std::make_shared<Shader>(code, type);
+    pugi::xml_node root = doc.first_child();
+    pugi::xml_node current = root.first_child();
+    std::string vs = "";
+    std::string fs = "";
 
-    return std::dynamic_pointer_cast<Resource>(result);
+    while(!current.empty()){
+        if(!current.attribute("path").value())
+            continue;
+        if(std::string(current.name()) == "VertexShader"){
+            vs = mFileReader.readAsString(current.attribute("path").value());
+        }
+        if(std::string(current.name()) == "FragmentShader"){
+            fs = mFileReader.readAsString(current.attribute("path").value());
+        }
+        current = current.next_sibling();
+    }
+    if(vs.size() == 0 && fs.size() == 0){
+        YAGE_WARN("Cannot load shader {} from {}", root.attribute("name").value(), file_path);
+        return nullptr;
+    }
+    Shader* result = new Shader(vs, fs);
+    if(result)
+        YAGE_INFO("Loaded shader {} from {}", root.attribute("name").value(), file_path);
+    return result;
 }
 } // namespace yage

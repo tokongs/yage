@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shader name="DefaultShader">
+    <VertexShader path="./assets/shaders/basic.vs"></VertexShader>
+    <FragmentShader path="./assets/shaders/basic.fs"></FragmentShader>
+</Shader>

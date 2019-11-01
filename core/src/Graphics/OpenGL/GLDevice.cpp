@@ -2,27 +2,25 @@
 
 namespace yage
 {
-
-DEFINE_LOGGERS(GLDevice)
 GLDevice::GLDevice()
 {
-
-    INIT_LOGGERS(GLDevice);
-    LOG(GLDevice, info, "Creating GL Device and initializing glew.")
+   YAGE_INFO("Creating GL Device and initializing glew.")
     //Load GL extensions
     glewExperimental = true;
     if (glewInit() != GLEW_OK)
     {
-        LOG(GLDevice, error, "Failed to initialize glew");
+       YAGE_ERROR("Failed to initialize glew");
     }
 
     //Setup opengl
     glEnable(GL_DEBUG_OUTPUT);
+    glCullFace( GL_BACK );
+    glEnable(GL_CULL_FACE);
     glDebugMessageCallback((GLDEBUGPROC)gl_debug_message_callback, nullptr);
 }
 
 GLDevice::~GLDevice(){
-    LOG(GLDevice, info, "Destroying GL Device and initializing glew.")
+   YAGE_INFO("Destroying GL Device and initializing glew.")
 
 }
 
@@ -37,12 +35,13 @@ void GLDevice::clearBuffers(){
 void GLAPIENTRY gl_debug_message_callback(GLenum source, GLenum type, GLuint id, GLenum severity,
                                           GLsizei length, const GLchar *message, const void *userParam)
 {
-    if(type == GL_DEBUG_TYPE_ERROR){
-        LOG(GLDevice, error, "OpenGL Error(" + std::to_string(severity) + "): " + message);
-    }
-    
-    else{
-        FILE_LOGGER(GLDevice, info, "OpenGL Debug Callback(type: " + std::to_string(type) + ", severity: " + std::to_string(severity)+ "): " + message);
+    switch(type){
+        case GL_DEBUG_TYPE_ERROR:
+                YAGE_ERROR("OpenGL Error(" + std::to_string(severity) + "): " + message);
+            break;
+        default:
+                YAGE_INFO("OpenGL Debug Callback(type: " + std::to_string(type) + ", severity: " + std::to_string(severity)+ "): " + message);
+            break;
     }
 }
 

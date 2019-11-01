@@ -1,4 +1,5 @@
 #pragma once
+#include "rapidxml/rapidxml.hpp"
 #include "config.h"
 #include "Mesh.h"
 #include "ResourceLoader.h"
@@ -6,6 +7,8 @@
 #include <memory>
 #include <string>
 #include <WavefrontLoader.h>
+#include "Logger.h"
+#include "pugixml/pugixml.hpp"
 
 namespace yage{
     /**
@@ -23,14 +26,12 @@ namespace yage{
          * @param file_path 
          * @return ResourcePtr 
          */
-        ResourcePtr load(std::string file_path) override;
+        Resource* load(std::string filePath) override;
 
         private:
-        FileReader m_file_reader;
+        FileReader mFileReader;
 
         //Loaders
-        WavefrontLoader m_wavefront_loader;
-
-        DECLARE_LOGGERS;
+        WavefrontLoader mWavefrontLoader;
     };
 }

@@ -1,7 +1,13 @@
 #version 460 core
+
+in vec2 outTexCoord;
+
 out vec4 color;
-uniform float test;
-const float PI = 3.1415;
+
+uniform sampler2D ambientTexture;
+
 void main(){
-    color = vec4(test, sin(test * PI), cos(test * PI), 1.0);
+    color = texture(ambientTexture, outTexCoord);
+    //color = vec4(outTexCoord.x, outTexCoord.y, 0.0, 1.0);
+
 }

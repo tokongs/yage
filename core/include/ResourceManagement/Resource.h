@@ -2,23 +2,23 @@
 #pragma once
 #include <memory>
 #include <iostream>
+#include "Reference.h"
 
 namespace yage
 {
 
 /**
      * @brief Abstract Resource class. Should be inherited by all Resources e.g. Meshes, Shaders, Textures
-     * Derived classes need to override the getType function to det it to work well with the resource manager
      * 
      */
-class Resource
+class Resource : public Reference
 {
 
   public:
-    Resource(unsigned int id, std::string name, std::string file_path);
+    Resource(unsigned int id, std::string name, std::string filePath);
     Resource();
     
-    virtual ~Resource();
+    virtual ~Resource() = default;
 
     /**
          * @brief Get the Resource Id
@@ -43,20 +43,11 @@ class Resource
 
     void setId(int id);
     void setName(std::string name);
-    void setFilePath(std::string file_path);
-
-    /**
-     * @brief Returns a string describing the type of resource
-     * 
-     * @return std::string 
-     */
-    virtual std::string getType();
+    void setFilePath(std::string filePath);
     
   protected:
-    unsigned int m_id;
-    std::string m_file_path;
-    std::string m_name;
-    std::string m_resource_type = "no_Type_Base_Resource_Class";
+    unsigned int mID;
+    std::string mFilePath;
+    std::string mName;
 };
-typedef std::shared_ptr<Resource> ResourcePtr;
 } // namespace yage

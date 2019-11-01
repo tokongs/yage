@@ -1,30 +1,33 @@
 #include "MeshLoader.h"
 
-namespace yage
-{
-DEFINE_LOGGERS(MeshLoader);
-MeshLoader::MeshLoader()
-{
-    INIT_LOGGERS(MeshLoader);
-}
+namespace yage {
+    MeshLoader::MeshLoader() {
+    }
 
-MeshLoader::~MeshLoader(){
+    MeshLoader::~MeshLoader() {
 
-}
+    }
+    Resource *MeshLoader::load(std::string file_path) {
+        std::string fileContent = mFileReader.readAsString(file_path);
+        YAGE_INFO("Loading Mesh from {}", file_path);
 
-ResourcePtr MeshLoader::load(std::string file_path){
-    std::string file = m_file_reader.readAsString(file_path);
-    LOG(MeshLoader, info, "Loading mesh from file: " + file_path);
-    if(file.empty()){
-        LOG(MeshLoader, error, "Trying to load empty mesh from: " + file_path);
+        pugi::xml_document doc;
+        pugi::xml_parse_result r = doc.load_string(fileContent.c_str());
+        if(!r){
+            YAGE_WARN("Failed to parse xml when loading mesh from {}", file_path);
+            return nullptr;
+        }
+        pugi::xml_node root = doc.first_child();
+       ;
+        if (std::string(root.first_child().name()) == "Wavefront") {
+            VertexBuffer *buffer = mWavefrontLoader.loadWavefront(root.first_child().attribute("path").value());
+            Mesh *result = new Mesh(buffer);
+            YAGE_INFO("Done loading mesh {} from {}", root.attribute("name").value(), file_path);
+            return result;
+        }
+
+        YAGE_WARN("Failed to load mesh {} from {}", root.attribute("name").value(), file_path);
         return nullptr;
     }
-    
-    
-    VertexBufferPtr buffer = m_wavefront_loader.loadWavefront(file);
-    MeshPtr result = std::make_shared<Mesh>(buffer);
-
-    return std::dynamic_pointer_cast<Resource>(result);
-}
 
 } // namespace yage

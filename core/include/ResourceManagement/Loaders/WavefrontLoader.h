@@ -5,6 +5,9 @@
 #include <vector>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 namespace yage{
     /**
@@ -22,6 +25,6 @@ namespace yage{
          * @param file Content of a wavefront file as a string
          * @return VertexBufferPtr 
          */
-        VertexBufferPtr loadWavefront(std::string file);
+        VertexBuffer* loadWavefront(std::string file);
     };
 }

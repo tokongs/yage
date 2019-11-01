@@ -4,6 +4,8 @@
 #include "imgui_impl_opengl3.h"
 #include "config.h"
 #include "functional"
+#include "Logger.h"
+#include <memory>
 namespace yage
 {
 /**
@@ -26,7 +28,7 @@ public:
          * 
          * @param bool independent
          */
-  virtual void constructFrame(bool independent = false);
+  virtual void constructFrame(bool independent = false) = 0;
   /**
      * @brief A pointer to the open status of the element. Do not use this unless you know what you are doing
      * 
@@ -42,10 +44,8 @@ public:
   void close();
 
 protected:
-  std::unique_ptr<bool> m_open;
-  std::function<void()> m_action;
+  bool mOpen;
+  std::function<void()> mAction;
 
-private:
-  DECLARE_LOGGERS;
 };
 } // namespace yage

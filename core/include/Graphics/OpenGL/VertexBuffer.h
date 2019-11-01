@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 #include <config.h>
-
+#include "Logger.h"
 
 namespace yage
 {
@@ -21,9 +21,9 @@ struct Vertex
     glm::vec3 position;
     glm::vec3 normal;
     glm::vec3 color;
-    glm::vec2 tex_coord;
-    glm::vec4 bone_id;
-    glm::vec4 bone_weight;
+    glm::vec2 texCoord;
+    glm::vec4 boneId;
+    glm::vec4 boneWeight;
 };
 
 /**
@@ -32,12 +32,12 @@ struct Vertex
  */
 struct VertexBufferDesc
 {
-    bool has_position = false;        ///< Data contains position
-    bool has_normal = false;          ///< Data contains normal
-    bool has_color = false;          ///< Data contains color
-    bool has_tex_coord = false;       ///< Data contains texture coordinates
-    bool has_bones = false;          ///< Data has bones
-    bool keep_shadow_buffer = false; ///< keep a shadow buffer in memory
+    bool hasPosition = false;        ///< Data contains position
+    bool hasNormal = false;          ///< Data contains normal
+    bool hasColor = false;          ///< Data contains color
+    bool hasTexCoord = false;       ///< Data contains texture coordinates
+    bool hasBones = false;          ///< Data has bones
+    bool keepShadowBuffer = false; ///< keep a shadow buffer in memory
 };
 
 /**
@@ -60,7 +60,8 @@ class VertexBuffer
    * @param desc 
    * @param data 
    */
-    VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data);
+   VertexBuffer();
+    VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data, std::vector<unsigned int> indices);
     ~VertexBuffer();
 
     /**
@@ -78,14 +79,14 @@ class VertexBuffer
      *
      * @param index_buffer std::shared_ptr<IndexBuffer> to the IndexBuffer to attach
      */
-    void attachIndexBuffer(std::shared_ptr<IndexBuffer> index_buffer);
+    void attachIndexBuffer(IndexBuffer* indexBuffer);
 
     /**
      * @brief Get the Index Buffer object
      * 
      * @return std::shared_ptr<IndexBuffer> 
      */
-    std::shared_ptr<IndexBuffer> getIndexBuffer();
+    IndexBuffer* getIndexBuffer();
 
     /**
      * @brief Get the number of vertices in the buffer
@@ -109,17 +110,15 @@ class VertexBuffer
      * @param desc 
      */
     void setupVao(VertexBufferDesc desc);
-    unsigned int m_vb_object_id;
-    unsigned int m_vao_object_id;
+    unsigned int mVbObjectId;
+    unsigned int mVaoObjectId;
 
-    unsigned int m_size;
+    unsigned int mSize;
 
-    VertexBufferDesc m_buffer_desc;
-    IndexBufferPtr m_index_buffer;
-    bool m_indexed = false;
-    std::vector<float> m_shadow_copy;
-
-    DECLARE_LOGGERS;
+    VertexBufferDesc mBufferDesc;
+    IndexBuffer *mIndexBuffer = nullptr;
+    bool mIndexed = false;
+    std::vector<float> mShadowCopy;
 
     private:
     /**
@@ -130,6 +129,4 @@ class VertexBuffer
      */
     int sizeOfVertex(VertexBufferDesc desc);
 };
-
-    typedef std::shared_ptr<VertexBuffer> VertexBufferPtr;
 } // namespace yage

@@ -2,31 +2,26 @@
 
 namespace yage
 {
-Mesh::Mesh(VertexBufferPtr buffer)
-    : m_vertex_buffer(buffer)
+Mesh::Mesh(VertexBuffer* vertexBuffer)
+:mVertexBuffer(vertexBuffer)
 {
 }
 
-Mesh::Mesh(){
-    
-}
 
 Mesh::~Mesh()
 {
+    if(mVertexBuffer){
+        delete mVertexBuffer;
+    }
 }
 
-VertexBufferPtr Mesh::getVertexBuffer()
+VertexBuffer* Mesh::getVertexBuffer()
 {
-    return m_vertex_buffer;
+    return mVertexBuffer;
 }
 
 aabb Mesh::getAABB()
 {
-    return m_aabb;
-}
-
-
-std::string Mesh::getType(){
-    return m_resource_type;
+    return mAABB;
 }
 } // namespace yage

@@ -3,11 +3,15 @@
 namespace yage
 {
 Camera::Camera()
-    : m_position(glm::vec3(0, 1, -1)), m_target(glm::vec3(0, 0, 0)),
-      m_up_dir(glm::vec3(0, 1, 0)), m_fov(3.14f / 6.0f), m_aspect_ratio(16.0f / 9.0f), m_near_clip(0.1f), m_far_clip(1000.0f)
+    : mPosition(glm::vec3(0, 0, 3.0f)), mTarget(glm::vec3(0, 0, 0)), mFront(glm::vec3(0, 0, -1)),
+      mUpDir(glm::vec3(0, 1, 0)), mFov(3.14f / 6.0f), mAspectRatio(16.0f / 9.0f), mNearClip(0.1f), mFarClip(1000.0f)
 {
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+}
+
+Camera::Camera(glm::vec3 position, glm::vec3 target)
+        : mPosition(position), mTarget(target), mFront(glm::vec3(0, 0, -1)),
+          mUpDir(glm::vec3(0, 1, 0)), mFov(3.14f / 6.0f), mAspectRatio(16.0f / 9.0f), mNearClip(0.1f), mFarClip(1000.0f)
+{
 }
 
 Camera::~Camera()
@@ -16,95 +20,105 @@ Camera::~Camera()
 
 glm::vec3 Camera::getPosition()
 {
-    return m_position;
+    return mPosition;
 }
 
 glm::mat4 Camera::getProjectionMatrix()
 {
-    return m_projection_matrix;
+    calculateProjectionMatrix();
+    return mProjectionMatrix;
 }
 
 glm::mat4 Camera::getViewMatrix()
 {
-    return m_view_matrix;
+    calculateViewMatrix();
+    return mViewMatrix;
 }
 
 glm::mat4 Camera::getProjectionViewMatrix()
 {
-    return m_projection_matrix * m_view_matrix;
+    return getProjectionMatrix() * getViewMatrix();
 }
 
-void Camera::move(glm::vec3 movement)
+void Camera::moveAbsolute(glm::vec3 movement)
 {
-    m_position += movement;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mPosition += movement;
+}
+
+void Camera::moveRelative(glm::vec3 movement)
+{
+    glm::vec3 dir = glm::normalize(mTarget - mPosition);
+    mPosition += dir * movement.z;
+    mPosition += mUpDir * movement.y;
+    mPosition += glm::normalize(glm::cross(dir, mUpDir)) * movement.x;
+    mTarget = mPosition +dir;
+}
+
+glm::vec3 Camera::getDirection(){
+    return glm::normalize(mTarget - mPosition);
+}
+void Camera::rotate(float pitch, float yaw, float roll) {
+
+    glm::vec3 dir = glm::normalize(mTarget - mPosition);
+    glm::vec3 axis = glm::cross(dir, mUpDir);
+    glm::quat qPitch = glm::angleAxis(pitch, axis);
+    glm::quat qYaw = glm::angleAxis(yaw, mUpDir);
+    glm::quat rotation = glm::normalize(glm::cross(qPitch, qYaw));
+    dir = rotation * dir;
+    mTarget = mPosition + dir;
+
+    mViewMatrix = glm::lookAt(mPosition, mTarget, mUpDir);
 }
 
 void Camera::setPosition(glm::vec3 position)
 {
-    m_position = position;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mPosition = position;
 }
 
 void Camera::moveTarget(glm::vec3 movement)
 {
-    m_target += movement;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mTarget += movement;
 }
 
 void Camera::setTarget(glm::vec3 position)
 {
-    m_target = position;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mTarget = position;
 }
 
 void Camera::setUpDirection(glm::vec3 direction)
 {
-    m_up_dir = direction;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mUpDir = direction;
 }
 
 void Camera::setFoV(float fov)
 {
-    m_fov = fov;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mFov = fov;
 }
 
 void Camera::setAspectRatio(float aspect_ratio)
 {
-    m_aspect_ratio = aspect_ratio;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mAspectRatio = aspect_ratio;
 }
 
 void Camera::setNearClipPlane(float clip)
 {
-    m_near_clip = clip;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mNearClip = clip;
 }
 
 void Camera::setFarClipPlane(float clip)
 {
-    m_far_clip = clip;
-    calculateViewMatrix();
-    calculateProjectionMatrix();
+    mFarClip = clip;
 }
 
 void Camera::calculateViewMatrix()
 {
-    m_view_matrix = glm::lookAt(m_position, m_target, m_up_dir);
+
+    mViewMatrix = glm::lookAt(mPosition, mTarget, mUpDir);
 }
 
 void Camera::calculateProjectionMatrix()
 {
-    m_projection_matrix = glm::perspective(m_fov, m_aspect_ratio, m_near_clip, m_far_clip);
+    mProjectionMatrix = glm::perspective(mFov, mAspectRatio, mNearClip, mFarClip);
 }
 
 } // namespace yage

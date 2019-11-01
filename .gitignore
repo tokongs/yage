@@ -32,7 +32,6 @@
 *.app
 
 # Assets
-*.obj
 *.png
 
 CMakeFiles/
@@ -45,3 +44,9 @@ imgui.ini
 
 *.cmake
 MakeFile
+
+*.cbp
+cmake-build-debug/
+default.txt
+LOG.txt
+

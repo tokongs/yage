@@ -3,43 +3,36 @@
 namespace yage
 {
 Resource::Resource(unsigned int id, std::string name, std::string path)
-    : m_id(id), m_name(name), m_file_path(path)
+    : mID(id), mName(name), mFilePath(path)
 {
 }
 
 Resource::Resource(){
     
 }
-Resource::~Resource(){
-
-}
 
 unsigned int Resource::getResourceId(){
-    return m_id;
+    return mID;
 }
 
 std::string Resource::getFilePath(){
-    return m_file_path;
+    return mFilePath;
 }
 
 std::string Resource::getName(){
-    return m_name;
-}
-
-std::string Resource::getType(){
-    return m_resource_type;
+    return mName;
 }
 
 void Resource::setId(int id){
-    m_id = id;
+    mID = id;
 }
 
 void Resource::setName(std::string name){
-    m_name = name;
+    mName = name;
 }
 
 void Resource::setFilePath(std::string file_path){
-    m_file_path = file_path;
+    mFilePath = file_path;
 }
 
 

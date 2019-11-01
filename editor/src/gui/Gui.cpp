@@ -2,18 +2,18 @@
 
 namespace yage
 {
-Gui::Gui(GLFWwindow *glfw_window_handle, unsigned int glsl_version)
-    : m_glfw_window_handle(glfw_window_handle),
-      m_glsl_version(glsl_version)
+Gui::Gui(GLFWwindow *glfwWindowHandle, unsigned int glslVersion)
+    : mGlfwWindowHandle(glfwWindowHandle),
+      mGlslVersion(glslVersion)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &io = ImGui::GetIO();
     (void)io;
 
-    ImGui_ImplGlfw_InitForOpenGL(m_glfw_window_handle, false);
-    std::string verison_string = "#version " + std::to_string(m_glsl_version);
-    ImGui_ImplOpenGL3_Init(verison_string.c_str());
+    ImGui_ImplGlfw_InitForOpenGL(mGlfwWindowHandle, false);
+    std::string verisonString = "#version " + std::to_string(mGlslVersion);
+    ImGui_ImplOpenGL3_Init(verisonString.c_str());
 
     // Setup style
     ImGui::StyleColorsDark();
@@ -33,17 +33,17 @@ void Gui::constructFrame()
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    for (auto it = m_elements.begin(); it != m_elements.end(); it++)
+    for (auto it : mElements)
     {
-        it->get()->constructFrame(true);
+        it->constructFrame(true);
     }
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void Gui::addGuiElement(std::unique_ptr<GuiElement> element)
+void Gui::addGuiElement(GuiElement* element)
 {
-    m_elements.push_back(std::move(element));
+    mElements.push_back(element);
 }
 } // namespace yage

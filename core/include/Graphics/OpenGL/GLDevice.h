@@ -5,6 +5,7 @@
 #include <memory>
 #include <iostream>
 #include <glm/vec4.hpp>
+#include "Logger.h"
 
 namespace yage
 {
@@ -44,11 +45,6 @@ class GLDevice
      * @param color
      */
     void setClearColor(glm::vec4 color);
-
-  private:
-
-    DECLARE_LOGGERS;
-
 
   private:
     friend void GLAPIENTRY

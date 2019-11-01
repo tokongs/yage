@@ -17,14 +17,14 @@ class ResourceLoader
    * 
    * @param type 
    */
-    ResourceLoader();
-    ~ResourceLoader();
+    ResourceLoader() {};
+    ~ResourceLoader() {};
 
     /**
      * @brief This class needs to be overridden to load the specified resource
      * 
      * @return ResourcePtr 
      */
-    virtual ResourcePtr load(std::string filepath) = 0;
+    virtual Resource* load(std::string filePath) = 0;
 };
 } // namespace yage

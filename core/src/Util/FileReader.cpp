@@ -1,34 +1,23 @@
 #include <FileReader.h>
 namespace yage
 {
-DEFINE_LOGGERS(FileReader)
+
 FileReader::FileReader(std::string root_dir)
 {
 
-    INIT_LOGGERS(FileReader);
-
-    if (root_dir.empty())
-    {
-        m_root_dir = ROOT_DIR;
-    }
-    else
-    {
-        m_root_dir = root_dir;
-    }
 }
 
 FileReader::~FileReader()
 {
-    FLUSH_LOGGERS(FileReader);
 }
 
 std::string FileReader::readAsString(std::string file_name)
 {
     std::string path = file_name;
-    CONSOLE_LOGGER(FileReader, info, "Atempting to read file to string, file name: " + file_name);
-    FILE_LOGGER(FileReader, info, "Atempting to read file to string, file name: " + file_name);
+    YAGE_INFO("Atempting to read file {}", file_name);
 
     std::ifstream file;
+    std::string result;
     try{
     file.open(path.c_str(), std::ios::in);
 
@@ -37,15 +26,14 @@ std::string FileReader::readAsString(std::string file_name)
 
     file.close();
 
-    return stream.str();
+    result =  stream.str();
     }catch(std::ifstream::failure e){
-        CONSOLE_LOGGER(FileReader, error, "Failed to read file: " + file_name);
-        FILE_LOGGER(FileReader, error, "Failed to read file: " + file_name);
+        YAGE_ERROR("Failed to read file: " + file_name);
     }
 
-    CONSOLE_LOGGER(FileReader, info, "File read successfully");
-    FILE_LOGGER(FileReader, info, "File read successfully");
 
+    YAGE_INFO("Sucessfully read file {}", file_name)
+    return result;
 }
 
 bool FileReader::fileExists(std::string file){
@@ -55,11 +43,12 @@ bool FileReader::fileExists(std::string file){
 
 void FileReader::changeRootDir(std::string dir)
 {
-    m_root_dir = dir;
+    mRootDir = dir;
 }
 
 std::string FileReader::getRootDir()
 {
-    return m_root_dir;
+    return mRootDir;
 }
+
 } // namespace yage

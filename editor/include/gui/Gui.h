@@ -15,7 +15,7 @@ namespace yage
      */
     class Gui{
         public:
-        Gui(GLFWwindow* glfw_window_handle, unsigned int glsl_version);
+        Gui(GLFWwindow* glfwWindowHandle, unsigned int glslVersion);
         ~Gui();
 
         /**
@@ -31,11 +31,12 @@ namespace yage
          * a the parameter or pass a already created unique_ptr with std::move()
          * 
          */
-        void addGuiElement(std::unique_ptr<GuiElement>);
+        void addGuiElement(GuiElement *element);
 
         private:
-        GLFWwindow* m_glfw_window_handle;
-        std::vector<std::unique_ptr<GuiElement> > m_elements;
-        unsigned int m_glsl_version;
+        GLFWwindow* mGlfwWindowHandle;
+        std::vector<GuiElement*> mElements;
+        unsigned int mGlslVersion;
+
     };
 }

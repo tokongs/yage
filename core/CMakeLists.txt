@@ -1,60 +1,81 @@
 project(yage_core)
 
-add_subdirectory(test)
+subdirs(3rd_party)
 
-set(GraphicsSource src/Graphics/OpenGL/GLDevice.cpp src/Graphics/OpenGL/VertexBuffer.cpp
-src/Graphics/OpenGL/IndexBuffer.cpp src/Graphics/OpenGL/Shader.cpp src/Graphics/Renderer.cpp src/Graphics/Mesh.cpp
-src/Graphics/OpenGL/Program.cpp src/Graphics/Camera.cpp)
+file(GLOB SRC src/*.cpp)
+file(GLOB EVENTS_SRC src/Events/*.cpp include/Events/*.h)
+file(GLOB GRAPHICS_SRC src/Graphics/*.cpp inlclude/Graphics/*.h src/Graphics/OpenGL/*.cpp)
+file(GLOB UTIL_SRC src/Util/*.cpp inlclude/Util/*.h)
+file(GLOB RESOURCE_MANAGEMENT_SRC src/ResourceManagement/*.cpp include/ResourceManagement/*.h src/ResourceManagement/Loaders/*.cpp)
+file(GLOB SCRIPTING_SRC src/Scripting/*.cpp)
+file(GLOB_RECURSE GAME_OBJECTS_SRC src/Scene/GameObjects *.cpp)
+file(GLOB_RECURSE SCENE_SRC src/Scene/*.cpp)
 
-set(UtilSource src/Util/FileReader.cpp src/Util/Util.cpp)
-set(ResourceManagementSource src/ResourceManagement/Resource.cpp src/ResourceManagement/ResourceManager.cpp
-src/ResourceManagement/Loaders/ResourceLoader.cpp src/ResourceManagement/Loaders/MeshLoader.cpp src/ResourceManagement/Loaders/WavefrontLoader.cpp
-src/ResourceManagement/Loaders/ShaderLoader.cpp)
-add_library(yage_core STATIC src/Window.cpp src/Input.cpp ${GraphicsSource} ${UtilSource} ${ResourceManagementSource})
 
-target_include_directories(yage_core PUBLIC 
-${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics
-${CMAKE_CURRENT_SOURCE_DIR}/include/Graphics/OpenGL ${CMAKE_CURRENT_SOURCE_DIR}/include/Util ${CMAKE_CURRENT_SOURCE_DIR}/include/ResourceManagement
-${CMAKE_CURRENT_SOURCE_DIR}/include/ResourceManagement/Loaders) 
+add_library(yage_core STATIC ${SRC} ${GRAPHICS_SRC} ${UTIL_SRC} ${RESOURCE_MANAGEMENT_SRC} ${EVENTS_SRC} ${SCRIPTING_SRC} ${GAME_OBJECTS_SRC} ${SCENE_SRC} 3rd_party/pugixml/pugixml.cpp)
+
+file(GLOB_RECURSE INCLUDE include *.h)
+
+target_include_directories(yage_core PUBLIC
+        include include/Graphics include/GameObjects
+        include/Graphics/OpenGL include/Util include/ResourceManagement
+        include/ResourceManagement/Loaders include/Scripting
+        include/Scene include/Scene/GameObjects include/Scene/GameObjects/Components
+        include/Scene/GameObjects/Systems 3rd_party)
+
+
+find_package(Lua REQUIRED)
+if (LUA_FOUND)
+    target_include_directories(yage_core PUBLIC ${LUA_INCLUDE_DIRS})
+    target_link_libraries(yage_core ${LUA_LIBRARIES})
+endif ()
 
 find_package(glfw3 REQUIRED)
-if(glfw3_FOUND)
+if (glfw3_FOUND)
     target_include_directories(yage_core PUBLIC ${GLFW_INCLUDE_DIRS})
     target_link_libraries(yage_core glfw)
-else()
+else ()
     message([ERROR] "Failed to find GLFW3")
-endif()
+endif ()
 
 find_package(GLEW REQUIRED)
-if(GLEW_FOUND)
+if (GLEW_FOUND)
     target_include_directories(yage_core PUBLIC ${GLEW_INCLUDE_DIRS})
     target_link_libraries(yage_core ${GLEW_LIBRARIES})
-else()
+else ()
     message([ERROR] "Failed to find GLEW")
-endif()
-
+endif ()
+set(OpenGL_GL_PREFERENCE "GLVND")
 find_package(OpenGL REQUIRED)
-if(OPENGL_FOUND)
+if (OPENGL_FOUND)
     target_include_directories(yage_core PUBLIC ${OPENGL_INCLUDE_DIRS})
     target_link_libraries(yage_core ${OPENGL_LIBRARIES})
-else()
+else ()
     message([ERROR] "Failed to find OpenGL")
-endif()
+endif ()
 
 find_package(spdlog REQUIRED)
-if(spdlog_FOUND)
+if (spdlog_FOUND)
     target_include_directories(yage_core PUBLIC ${spdlog_INCLUDE_DIRS})
     target_link_libraries(yage_core ${spdlog_LIBRARIES})
 
-else()
+else ()
     message([ERROR] "Failed to find spdlog")
-endif()
+endif ()
 
 find_package(glm REQUIRED)
-if(spdlog_FOUND)
+if (glm_FOUND)
     target_include_directories(yage_core PUBLIC ${GLM_INCLUDE_DIRS})
     target_link_libraries(yage_core ${GLM_LIBRARY_DIRS})
+else ()
+    message([ERROR] "Failed to find glm")
+endif ()
 
-else()
-    message([ERROR] "Failed to find spdlog")
-endif()
+find_package(assimp REQUIRED)
+if (assimp_FOUND)
+    find_library(ASSIMP_LIBRARY NAMES ${ASSIMP_LIBRARIES} PATH ${ASSIMP_LIBRARY_DIRS})
+    target_include_directories(yage_core PUBLIC ${ASSIMP_INCLUDE_DIRS})
+    target_link_libraries(yage_core ${ASSIMP_LIBRARY})
+else ()
+    message([ERROR] "Failed to find assimp")
+endif ()

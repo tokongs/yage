@@ -1,10 +1,12 @@
 #pragma once
+#include "pugixml/pugixml.hpp"
 #include <memory>
 #include "config.h"
 #include "ResourceLoader.h"
 #include "Resource.h"
 #include "Shader.h"
 #include "FileReader.h"
+#include "Logger.h"
 namespace yage
 {
 class ShaderLoader : public ResourceLoader
@@ -13,10 +15,9 @@ class ShaderLoader : public ResourceLoader
     ShaderLoader();
     ~ShaderLoader();
 
-    ResourcePtr load(std::string file_path) override;
+    Resource* load(std::string filePath) override;
 
   private:
-    DECLARE_LOGGERS;
-    FileReader m_file_reader;
+    FileReader mFileReader;
 };
 } // namespace yage

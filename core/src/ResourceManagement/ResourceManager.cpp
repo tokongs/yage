@@ -1,81 +1,101 @@
 #include "ResourceManager.h"
 
-namespace yage
-{
-DEFINE_LOGGERS(ResourceManager);
-ResourceManager::ResourceManager()
-{
-    INIT_LOGGERS(ResourceManager);
-}
-
-ResourceManager::~ResourceManager()
-{
-    FLUSH_LOGGERS(ResourceManager);
-}
-
-void ResourceManager::setResourceDir(std::string resource_dir)
-{
-    FileReader reader;
-    std::string resource_overview = reader.readAsString(resource_dir + "resource_overview");
-    m_resource_dir = resource_dir;
-
-    if (resource_overview.empty())
-    {
-        LOG(ResourceManager, warn, "Resource Overview File is empty");
+namespace yage {
+    ResourceManager::ResourceManager() {
     }
-    buildFilePathMap(resource_overview);
-}
 
-void ResourceManager::unloadResource(int id)
-{
-    for (auto it = m_indices.begin(); it != m_indices.end(); it++)
-    {
-        if (it->second == id)
-        {
-            m_indices.erase(it);
-            break;
-        }
+    ResourceManager::~ResourceManager() {
     }
-    m_loaded_resources.erase(id);
-    m_free_ids.push(id);
-}
 
-void ResourceManager::registerPlaceholderResource(ResourcePtr resource)
-{
-    if (!resource)
-    {
-        LOG(ResourceManager, error, "Trying to load nullptr as placeholder resource");
-        return;
-    }
-    m_placeholders[resource->getType()] = resource;
-}
+    void ResourceManager::loadAllResources() {
 
-void ResourceManager::buildFilePathMap(std::string resource_overview)
-{
-    auto start_of_type = resource_overview.find_first_of('#');
-    while (start_of_type != std::string::npos)
-    {
-        auto start_of_name = resource_overview.find_first_of(' ', start_of_type + 1) + 1;
-        auto start_of_path = resource_overview.find_first_of(' ', start_of_name) + 1;
-        auto end_of_path = resource_overview.find_first_of('\n', start_of_path) + 1;
-        if (end_of_path == std::string::npos)
-        {
-            end_of_path = resource_overview.size();
+        std::vector<std::string> files = traverseDirectories(mResourceDir);
+        FileReader reader;
+        for (auto filePath : files) {
+            std::string fileConent = reader.readAsString(filePath);
+            pugi::xml_document doc;
+            pugi::xml_parse_result result = doc.load_string(fileConent.c_str());
+            if (result) {
+                pugi::xml_node root = doc.first_child();
+                mFilePaths[std::string(root.attribute("name").value())] = filePath;
+            }
         }
 
-        std::string name = resource_overview.substr(start_of_name, start_of_path - start_of_name - 1);
-        std::string path = resource_overview.substr(start_of_path, end_of_path - start_of_path - 1);
-
-        path = m_resource_dir + path;
-
-        m_file_paths[name] = path;
-
-        start_of_type = resource_overview.find_first_of('#', start_of_type + 1);
+        for (auto filePath: files) {
+            std::string fileConent = reader.readAsString(filePath);
+            pugi::xml_document doc;
+            pugi::xml_parse_result result = doc.load_string(fileConent.c_str());
+            if (result) {
+                loadResource(doc.first_child());
+            }
+        }
     }
-}
 
-std::unordered_map<int, ResourcePtr> ResourceManager::getResourceMap()
-{
-    return m_loaded_resources;
-}
+    std::vector<std::string> ResourceManager::traverseDirectories(std::string baseDir) {
+        std::vector<std::string> result;
+        for (auto &entry : std::filesystem::directory_iterator(baseDir)) {
+            if (entry.is_directory()) {
+                std::vector<std::string> dirContents = traverseDirectories(entry.path());
+                result.insert(result.end(), dirContents.begin(), dirContents.end());
+            } else {
+                if (entry.is_regular_file() && entry.path().extension() == ".xml") {
+                    result.push_back(entry.path());
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+    void ResourceManager::loadResource(pugi::xml_node root) {
+        if (mLoadedResources.find(std::string(root.attribute("name").value())) != mLoadedResources.end()) {
+            YAGE_INFO("Resource {} already loaded. SKipping...", root.attribute("name").value());
+            return;
+        }
+        pugi::xml_node current = root.first_child();
+        while (!current.empty()) {
+            loadResource(current);
+            current = current.next_sibling();
+        }
+        auto loader = mLoaders.find(root.name());
+        if (loader == mLoaders.end()) {
+            YAGE_WARN("Failed to find loader for resource of type {}.", root.attribute("name").value())
+            return;
+        }
+        Resource *res = loader->second->load(mFilePaths[root.attribute("name").value()]);
+        if (res) {
+            int id = -1;
+            if (mFreeIds.empty()) {
+                id = mCurrentId;
+                mCurrentId++;
+            } else {
+                id = mFreeIds.top();
+            }
+
+            mLoadedResources[root.attribute("name").value()] = Ref<Resource>(res);
+            res->setId(id);
+            res->setName(root.attribute("name").value());
+            res->setFilePath(mFilePaths[root.attribute("name").value()]);
+        }
+
+    }
+
+    void ResourceManager::registerResourceLoader(std::string resourceTypeName, ResourceLoader *loader) {
+        if (!loader) {
+            YAGE_ERROR("Trying to register nullptr as a resource loader");
+            return;
+        }
+
+        mLoaders[resourceTypeName] = loader;
+    }
+
+
+    void ResourceManager::setResourceDir(std::string resource_dir) {
+        mResourceDir = resource_dir;
+    }
+
+    std::unordered_map<std::string, Ref<Resource>> ResourceManager::getResourceMap() const {
+        return mLoadedResources;
+    }
 } // namespace yage

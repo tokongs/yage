@@ -3,6 +3,9 @@
 #include <glm/mat4x4.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
+#include <glm/detail/type_quat.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 
 namespace yage
 {
@@ -16,17 +19,21 @@ class Camera
 {
   public:
     Camera();
+    Camera(glm::vec3 position, glm::vec3 target);
     ~Camera();
 
-    void move(glm::vec3 movement);
+    void moveAbsolute(glm::vec3 movement);
+    void moveRelative(glm::vec3 movement);
     void setPosition(glm::vec3 position);
 
+    void rotate(float pitch, float yaw, float roll);
+    glm::vec3 getDirection();
     void moveTarget(glm::vec3 movement);
     void setTarget(glm::vec3 position);
 
     void setUpDirection(glm::vec3 direction);
     void setFoV(float fov);
-    void setAspectRatio(float aspect_ratio);
+    void setAspectRatio(float aspectRatio);
     void setNearClipPlane(float clip);
     void setFarClipPlane(float clip);
 
@@ -41,18 +48,21 @@ class Camera
     void calculateProjectionMatrix();
 
   protected:
-    glm::mat4 m_view_matrix;
-    glm::mat4 m_projection_matrix;
+    glm::mat4 mViewMatrix;
+    glm::mat4 mProjectionMatrix;
 
-    glm::vec3 m_position;
+    glm::vec3 mPosition;
+    float mPitch;
+    float mYaw;
+    float mRoll;
 
-    float m_fov;
-    float m_aspect_ratio;
-    float m_near_clip;
-    float m_far_clip;
+    float mFov;
+    float mAspectRatio;
+    float mNearClip;
+    float mFarClip;
 
-  private:
-    glm::vec3 m_target;
-    glm::vec3 m_up_dir;
+    glm::vec3 mTarget;
+    glm::vec3 mUpDir;
+    glm::vec3 mFront;
 };
 } // namespace yage

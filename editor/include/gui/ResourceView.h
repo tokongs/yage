@@ -5,6 +5,7 @@
 #include "Resource.h"
 #include "GuiElement.h"
 #include "config.h"
+#include "Logger.h"
 
 namespace yage
 {
@@ -30,13 +31,10 @@ class ResourceView : public GuiElement
      * 
      * @param resource 
      */
-    void setResource(ResourcePtr resource);
+    void setResource(Ref<Resource> resource);
     void constructFrame(bool independent) override;
 
     protected:
-    ResourcePtr m_resource;
-
-    private:
-    DECLARE_LOGGERS;
+    Ref<Resource> mResource;
 };
 } // namespace yage
