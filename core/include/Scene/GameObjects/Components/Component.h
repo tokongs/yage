@@ -5,7 +5,8 @@
 namespace yage {
 
 
-#define COMPONENT_CLASS_TYPE(type) virtual const char* getName() const override { return #type; }
+#define COMPONENT_CLASS_TYPE(type) virtual const char* getName() const override { return #type; } \
+                                static type* get##type(GameObject* gameObject) { return gameObject->getComponent<type>();}
 
     class GameObject;
 

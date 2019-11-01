@@ -3,6 +3,7 @@
 #include <vector>
 #include <functional>
 #include <unordered_map>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <Events/EventBus.h>
 #include "config.h"

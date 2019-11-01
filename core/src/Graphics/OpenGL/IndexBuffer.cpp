@@ -9,10 +9,8 @@ IndexBuffer::IndexBuffer(std::vector<unsigned int> data)
     bind();
 
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * data.size(), &data[0], GL_STATIC_DRAW);
-    unbind();
     mSize = data.size();
     m_shadow_copy = data;
-
 }
 
 IndexBuffer::~IndexBuffer()

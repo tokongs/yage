@@ -6,10 +6,12 @@ namespace yage {
 
     }
 
-    VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data) {
+    VertexBuffer::VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data, std::vector<unsigned int> indices) {
         mBufferDesc = desc;
         glGenVertexArrays(1, &mVaoObjectId);
         YAGE_INFO("Created Vertex Array Object, ID: " + std::to_string(mVaoObjectId));
+
+        mIndexBuffer = new IndexBuffer(indices);
 
         bind();
         glGenBuffers(1, &mVbObjectId);
@@ -40,6 +42,7 @@ namespace yage {
     }
 
     VertexBuffer::~VertexBuffer() {
+        delete mIndexBuffer;
         YAGE_INFO("Deleting Vertex Buffer Object, ID: " + std::to_string(mVbObjectId));
         glDeleteBuffers(1, &mVbObjectId);
         YAGE_INFO("Deleting Vertex Array Object, ID: " + std::to_string(mVaoObjectId));
@@ -47,6 +50,7 @@ namespace yage {
     }
 
     void VertexBuffer::bind() {
+        mIndexBuffer->bind();
         glBindVertexArray(mVaoObjectId);
     }
 
@@ -134,25 +138,25 @@ namespace yage {
         if (desc.hasNormal) {
             glEnableVertexAttribArray(NORMAL_BUFFER_INDEX);
             glVertexAttribPointer(NORMAL_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
-            offset = 3 * sizeof(float);
+            offset += 3 * sizeof(float);
         }
         if (desc.hasColor) {
             glEnableVertexAttribArray(COLOR_BUFFER_INDEX);
             glVertexAttribPointer(COLOR_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
-            offset = 3 * sizeof(float);
+            offset += 3 * sizeof(float);
         }
         if (desc.hasTexCoord) {
             glEnableVertexAttribArray(TEX_COORD_BUFFER_INDEX);
-            glVertexAttribPointer(TEX_COORD_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
-            offset = 2 * sizeof(float);
+            glVertexAttribPointer(TEX_COORD_BUFFER_INDEX, 2, GL_FLOAT, false, stride, (const void *) offset);
+            offset += 2 * sizeof(float);
         }
         if (desc.hasBones) {
             glEnableVertexAttribArray(BONE_ID_BUFFER_INDEX);
             glVertexAttribPointer(BONE_ID_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
-            offset = 4 * sizeof(float);
+            offset += 4 * sizeof(float);
             glEnableVertexAttribArray(BONE_WEIGHT_BUFFER_INDEX);
             glVertexAttribPointer(BONE_WEIGHT_BUFFER_INDEX, 3, GL_FLOAT, false, stride, (const void *) offset);
-            offset = 4 * sizeof(float);
+            offset += 4 * sizeof(float);
         }
     }
 

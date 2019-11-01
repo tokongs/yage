@@ -5,9 +5,7 @@
 namespace yage{
     struct TransformComponent : public Component {
         TransformComponent(){};
-
         COMPONENT_CLASS_TYPE(TransformComponent);
-        Transform mTransform;
-
+        Transform mData;
     };
 }

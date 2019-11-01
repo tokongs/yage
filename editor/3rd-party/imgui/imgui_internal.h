@@ -250,7 +250,7 @@ enum ImGuiSliderFlags_
 
 enum ImGuiColumnsFlags_
 {
-    // Default: 0
+    // Default.xml: 0
     ImGuiColumnsFlags_None                  = 0,
     ImGuiColumnsFlags_NoBorder              = 1 << 0,   // Disable column dividers
     ImGuiColumnsFlags_NoResize              = 1 << 1,   // Disable resizing columns when clicking on the dividers

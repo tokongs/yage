@@ -356,7 +356,7 @@ namespace pugi
 		typedef void (*unspecified_bool_type)(xml_attribute***);
 
 	public:
-		// Default constructor. Constructs an empty attribute.
+		// Default.xml constructor. Constructs an empty attribute.
 		xml_attribute();
 
 		// Constructs attribute from internal pointer
@@ -463,7 +463,7 @@ namespace pugi
 		typedef void (*unspecified_bool_type)(xml_node***);
 
 	public:
-		// Default constructor. Constructs an empty node.
+		// Default.xml constructor. Constructs an empty node.
 		xml_node();
 
 		// Constructs node from internal pointer
@@ -720,7 +720,7 @@ namespace pugi
 		xml_node_struct* _data() const;
 
 	public:
-		// Default constructor. Constructs an empty object.
+		// Default.xml constructor. Constructs an empty object.
 		xml_text();
 
 		// Safe bool conversion operator
@@ -816,7 +816,7 @@ namespace pugi
 		typedef std::bidirectional_iterator_tag iterator_category;
 	#endif
 
-		// Default constructor
+		// Default.xml constructor
 		xml_node_iterator();
 
 		// Construct an iterator which points to the specified node
@@ -858,7 +858,7 @@ namespace pugi
 		typedef std::bidirectional_iterator_tag iterator_category;
 	#endif
 
-		// Default constructor
+		// Default.xml constructor
 		xml_attribute_iterator();
 
 		// Construct an iterator which points to the specified attribute
@@ -894,7 +894,7 @@ namespace pugi
 		typedef std::bidirectional_iterator_tag iterator_category;
 	#endif
 
-		// Default constructor
+		// Default.xml constructor
 		xml_named_node_iterator();
 
 		// Construct an iterator which points to the specified node
@@ -986,7 +986,7 @@ namespace pugi
 		// Source document encoding
 		xml_encoding encoding;
 
-		// Default constructor, initializes object to failed state
+		// Default.xml constructor, initializes object to failed state
 		xml_parse_result();
 
 		// Cast to bool operator
@@ -1013,7 +1013,7 @@ namespace pugi
 		void _move(xml_document& rhs) PUGIXML_NOEXCEPT_IF_NOT_COMPACT;
 
 	public:
-		// Default constructor, makes empty document
+		// Default.xml constructor, makes empty document
 		xml_document();
 
 		// Destructor, invalidates all node/attribute handles to this document
@@ -1095,7 +1095,7 @@ namespace pugi
 		// Last parsed offset (in char_t units from string start)
 		ptrdiff_t offset;
 
-		// Default constructor, initializes object to failed state
+		// Default.xml constructor, initializes object to failed state
 		xpath_parse_result();
 
 		// Cast to bool operator
@@ -1155,7 +1155,7 @@ namespace pugi
 		static void _destroy(xpath_variable* var);
 
 	public:
-		// Default constructor/destructor
+		// Default.xml constructor/destructor
 		xpath_variable_set();
 		~xpath_variable_set();
 
@@ -1295,7 +1295,7 @@ namespace pugi
 		typedef void (*unspecified_bool_type)(xpath_node***);
 
 	public:
-		// Default constructor; constructs empty XPath node
+		// Default.xml constructor; constructs empty XPath node
 		xpath_node();
 
 		// Construct XPath node from XML node/attribute
@@ -1344,7 +1344,7 @@ namespace pugi
 		// We define non-constant iterator to be the same as constant iterator so that various generic algorithms (i.e. boost foreach) work
 		typedef const xpath_node* iterator;
 
-		// Default constructor. Constructs empty set.
+		// Default.xml constructor. Constructs empty set.
 		xpath_node_set();
 
 		// Constructs a set from iterator range; data is not checked for duplicates and is not sorted according to provided type, so be careful

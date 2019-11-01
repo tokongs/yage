@@ -17,8 +17,8 @@ class ResourceLoader
    * 
    * @param type 
    */
-    ResourceLoader();
-    ~ResourceLoader();
+    ResourceLoader() {};
+    ~ResourceLoader() {};
 
     /**
      * @brief This class needs to be overridden to load the specified resource

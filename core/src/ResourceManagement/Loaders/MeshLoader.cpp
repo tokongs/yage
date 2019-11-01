@@ -7,7 +7,6 @@ namespace yage {
     MeshLoader::~MeshLoader() {
 
     }
-
     Resource *MeshLoader::load(std::string file_path) {
         std::string fileContent = mFileReader.readAsString(file_path);
         YAGE_INFO("Loading Mesh from {}", file_path);
@@ -20,8 +19,8 @@ namespace yage {
         }
         pugi::xml_node root = doc.first_child();
        ;
-        if (std::string(root.first_child().name()) == "wavefront") {
-            VertexBuffer *buffer = mWavefrontLoader.loadWavefront(mFileReader.readAsString(root.first_child().attribute("path").value()));
+        if (std::string(root.first_child().name()) == "Wavefront") {
+            VertexBuffer *buffer = mWavefrontLoader.loadWavefront(root.first_child().attribute("path").value());
             Mesh *result = new Mesh(buffer);
             YAGE_INFO("Done loading mesh {} from {}", root.attribute("name").value(), file_path);
             return result;

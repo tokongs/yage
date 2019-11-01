@@ -1,5 +1,6 @@
 #include <Transform.h>
 #include "Scene.h"
+#include <Scripting/ScriptingEngine.h>
 
 namespace yage{
     Scene::Scene(const std::string name)
@@ -45,9 +46,25 @@ namespace yage{
             MeshComponent*      mesh = object->getComponent<MeshComponent>();
             MaterialComponent*  material = object->getComponent<MaterialComponent>();
             if(mesh && material){
-                Renderer::Render(mesh->mMesh, material->mMaterial);
+                Renderer::SetCamera(mActiveCameraComponent->mData);
+                Renderer::Render(mesh->mData, material->mData);
             }
         }
+    }
+
+    void Scene::executeScripts() const {
+        for(auto object : mGameObjects){
+            ScriptComponent* script = object->getComponent<ScriptComponent>();
+            ScriptingEngine::ExecuteOnUpdate(object, script->mData.get());
+        }
+    }
+
+    CameraComponent* Scene::getActiveCameraComponent() {
+        return mActiveCameraComponent;
+    }
+
+    void Scene::setActiveCameraComponent(yage::CameraComponent *component) {
+        mActiveCameraComponent = component;
     }
 
     GameObjectList Scene::getGameObjects() const{

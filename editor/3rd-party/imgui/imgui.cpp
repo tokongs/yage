@@ -1007,7 +1007,7 @@ ImGuiStyle::ImGuiStyle()
     AntiAliasedFill         = true;             // Enable anti-aliasing on filled shapes (rounded rectangles, circles, etc.)
     CurveTessellationTol    = 1.25f;            // Tessellation tolerance when using PathBezierCurveTo() without a specific number of segments. Decrease for highly tessellated curves (higher quality, more polygons), increase to reduce quality.
 
-    // Default theme
+    // Default.xml theme
     ImGui::StyleColorsDark(this);
 }
 
@@ -2131,7 +2131,7 @@ void ImGui::RenderTextWrapped(ImVec2 pos, const char* text, const char* text_end
     }
 }
 
-// Default clip_rect uses (pos_min,pos_max)
+// Default.xml clip_rect uses (pos_min,pos_max)
 // Handle clipping on CPU immediately (vs typically let the GPU clip the triangles that are overlapping the clipping rectangle edges)
 void ImGui::RenderTextClipped(const ImVec2& pos_min, const ImVec2& pos_max, const char* text, const char* text_end, const ImVec2* text_size_if_known, const ImVec2& align, const ImRect* clip_rect)
 {
@@ -3246,7 +3246,7 @@ void ImGui::NewFrame()
     // Create implicit window - we will only render it if the user has added something to it.
     // We don't use "Debug" to avoid colliding with user trying to create a "Debug" window with custom flags.
     SetNextWindowSize(ImVec2(400,400), ImGuiCond_FirstUseEver);
-    Begin("Debug##Default");
+    Begin("Debug##Default.xml");
 }
 
 void ImGui::Initialize(ImGuiContext* context)
@@ -4167,7 +4167,7 @@ static ImGuiWindow* CreateNewWindow(const char* name, ImVec2 size, ImGuiWindowFl
     window->Flags = flags;
     g.WindowsById.SetVoidPtr(window->ID, window);
 
-    // Default/arbitrary window position. Use SetNextWindowPos() with the appropriate condition flag to change the initial position of a window.
+    // Default.xml/arbitrary window position. Use SetNextWindowPos() with the appropriate condition flag to change the initial position of a window.
     window->Pos = ImVec2(60, 60);
 
     // User can disable loading and saving of settings. Tooltip and child windows also don't store settings.
@@ -4786,7 +4786,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         if (!window->Collapsed)
             UpdateManualResize(window, size_auto_fit, &border_held, resize_grip_count, &resize_grip_col[0]);
 
-        // Default item width. Make it proportional to window size if window manually resizes
+        // Default.xml item width. Make it proportional to window size if window manually resizes
         if (window->Size.x > 0.0f && !(flags & ImGuiWindowFlags_Tooltip) && !(flags & ImGuiWindowFlags_AlwaysAutoResize))
             window->ItemWidthDefault = (float)(int)(window->Size.x * 0.65f);
         else
@@ -6573,7 +6573,7 @@ ImVec2 ImGui::FindBestWindowPosForPopupEx(const ImVec2& ref_pos, const ImVec2& s
         }
     }
 
-    // Default popup policy
+    // Default.xml popup policy
     const ImGuiDir dir_prefered_order[ImGuiDir_COUNT] = { ImGuiDir_Right, ImGuiDir_Down, ImGuiDir_Up, ImGuiDir_Left };
     for (int n = (*last_dir != ImGuiDir_None) ? -1 : 0; n < ImGuiDir_COUNT; n++)
     {

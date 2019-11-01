@@ -26,10 +26,6 @@ namespace yage {
             pugi::xml_document doc;
             pugi::xml_parse_result result = doc.load_string(fileConent.c_str());
             if (result) {
-                if (mLoadedResources.find(std::string(doc.first_child().attribute("name").value())) != mLoadedResources.end()) {
-                    YAGE_INFO("Resource {} already loaded. SKipping...", doc.first_child().attribute("name").value());
-                    continue;
-                }
                 loadResource(doc.first_child());
             }
         }
@@ -55,6 +51,7 @@ namespace yage {
     void ResourceManager::loadResource(pugi::xml_node root) {
         if (mLoadedResources.find(std::string(root.attribute("name").value())) != mLoadedResources.end()) {
             YAGE_INFO("Resource {} already loaded. SKipping...", root.attribute("name").value());
+            return;
         }
         pugi::xml_node current = root.first_child();
         while (!current.empty()) {

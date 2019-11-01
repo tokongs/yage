@@ -5,18 +5,21 @@
 #include "Script.h"
 #include "Input.h"
 #include "GameObject.h"
+#include "Scene.h"
+#include "ScriptAPI.h"
 
 namespace yage{
+
 class ScriptingEngine {
 public:
     static void Init();
-    static void OpenLibs();
-    static void SetupInputAPI();
-    static void SetupGameObjectsAPI();
+    static void ExecuteOnUpdate(GameObject* object, Script* script);
+    static void ExecuteScript(GameObject* object, Script* script);
     static void ExecuteScript(Script* script);
 
 private:
+
+
     static sol::state mLuaState;
 };
-
 }

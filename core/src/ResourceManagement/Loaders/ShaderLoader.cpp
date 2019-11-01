@@ -31,10 +31,10 @@ Resource* ShaderLoader::load(std::string file_path)
     while(!current.empty()){
         if(!current.attribute("path").value())
             continue;
-        if(std::string(current.name()) == "vertexshader"){
+        if(std::string(current.name()) == "VertexShader"){
             vs = mFileReader.readAsString(current.attribute("path").value());
         }
-        if(std::string(current.name()) == "fragmentshader"){
+        if(std::string(current.name()) == "FragmentShader"){
             fs = mFileReader.readAsString(current.attribute("path").value());
         }
         current = current.next_sibling();

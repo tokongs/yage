@@ -7,6 +7,8 @@
 #include "MaterialComponent.h"
 #include "Renderer.h"
 #include "queue"
+#include "CameraComponent.h"
+#include "ScriptComponent.h"
 
 namespace yage {
     typedef std::vector<GameObject *> GameObjectList;
@@ -38,15 +40,19 @@ namespace yage {
         }
 
         void render() const;
+        void executeScripts() const;
 
         GameObjectList getGameObjects() const;
 
+        CameraComponent* getActiveCameraComponent();
+        void setActiveCameraComponent(CameraComponent* component);
         std::string getName() const;
 
     private:
         const std::string mName;
         GameObjectList mGameObjects;
         ComponentMap mComponents;
+        CameraComponent* mActiveCameraComponent = nullptr;
         std::queue<int> mFreeIds;
         int mNextId = 0;
     };

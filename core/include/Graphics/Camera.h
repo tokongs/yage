@@ -3,6 +3,9 @@
 #include <glm/mat4x4.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
+#include <glm/detail/type_quat.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 
 namespace yage
 {
@@ -21,9 +24,10 @@ class Camera
 
     void moveAbsolute(glm::vec3 movement);
     void moveRelative(glm::vec3 movement);
-    void rotate(float pitch, float yaw);
     void setPosition(glm::vec3 position);
 
+    void rotate(float pitch, float yaw, float roll);
+    glm::vec3 getDirection();
     void moveTarget(glm::vec3 movement);
     void setTarget(glm::vec3 position);
 
@@ -48,7 +52,9 @@ class Camera
     glm::mat4 mProjectionMatrix;
 
     glm::vec3 mPosition;
-    glm::vec3 mDirection;
+    float mPitch;
+    float mYaw;
+    float mRoll;
 
     float mFov;
     float mAspectRatio;

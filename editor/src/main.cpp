@@ -1,4 +1,5 @@
 #include "yage.h"
+#include <GL/glew.h>
 #include "Window.h"
 #include <GLFW/glfw3.h>
 #include "GLDevice.h"
@@ -14,10 +15,10 @@
 #include "ShaderResourceView.h"
 #include <GameObjects/GameObject.h>
 #include <gui/SceneView.h>
+#include <Scene/GameObjects/Components/ScriptComponent.h>
 #include "Input.h"
 #include "Camera.h"
 #include "Configuration.h"
-#include "MovingCamera.h"
 
 
 int main(int argc, char **argv) {
@@ -37,12 +38,7 @@ int main(int argc, char **argv) {
     yage::Window window(desc);
     yage::GLDevice *device = window.getGraphicsDevice();
     /////////////////////////////////////////////////////////////////////
-    std::shared_ptr<MovingCamera> cam = std::make_shared<MovingCamera>();
-
-    //Set up Input
-    yage::Input::eventBus.subscribe(cam.get(), EventType::KeyPressEvent);
-    yage::Input::eventBus.subscribe(cam.get(), EventType::KeyRepeatEvent);
-    yage::Input::eventBus.subscribe(cam.get(), EventType::MouseScrollEvent);
+   yage::Camera cam;
 
     /////////////////////////////////////////////////////////////
     //Set resource dir and load resources
@@ -56,9 +52,15 @@ int main(int argc, char **argv) {
     yage::GameObject *object = scene->createGameObject("MyObject");
     yage::MeshComponent *meshComp = scene->createComponent<yage::MeshComponent>(object);
     yage::MaterialComponent *materialComp = scene->createComponent<yage::MaterialComponent>(object);
-    meshComp->mMesh = yage::ResourceManager::getInstance().getResource<yage::Mesh>("Lego");
-    materialComp->mMaterial = yage::ResourceManager::getInstance().getResource<yage::Material>("TestMaterial");
+    yage::ScriptComponent *scriptComp = scene->createComponent<yage::ScriptComponent>(object);
+    yage::CameraComponent *cameraComp = scene->createComponent<yage::CameraComponent>(object);
 
+    meshComp->mData = yage::ResourceManager::getInstance().getResource<yage::Mesh>("DefaultMesh");
+    materialComp->mData = yage::ResourceManager::getInstance().getResource<yage::Material>("DefaultMaterial");
+    scriptComp->mData = yage::ResourceManager::getInstance().getResource<yage::Script>("CameraScript");
+    cameraComp->mData = cam;
+
+    scene->setActiveCameraComponent(cameraComp);
     //Set up gui
     yage::Gui gui(window.getWindowHandle(), 460);
     yage::ResourceBrowser *resourceBrowser = new yage::ResourceBrowser();
@@ -77,10 +79,9 @@ int main(int argc, char **argv) {
         glfwPollEvents();
         yage::Input::handleInputs();
         device->clearBuffers();
-        yage::Renderer::SetCamera(*cam);
         scene->render();
+        scene->executeScripts();
         gui.constructFrame();
-
         window.update();
     }
 

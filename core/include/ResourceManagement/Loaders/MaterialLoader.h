@@ -10,7 +10,7 @@ namespace yage {
     class MaterialLoader : public ResourceLoader {
     public:
         MaterialLoader();
-
+        ~MaterialLoader();
         Resource *load(std::string filePath) override;
 
     private:

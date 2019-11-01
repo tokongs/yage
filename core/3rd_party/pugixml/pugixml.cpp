@@ -8428,7 +8428,7 @@ PUGI__NS_BEGIN
 	{
 		namespace_uri_predicate pred = attr.name();
 
-		// Default namespace does not apply to attributes
+		// Default.xml namespace does not apply to attributes
 		if (!pred.prefix) return PUGIXML_TEXT("");
 
 		xml_node p = parent;

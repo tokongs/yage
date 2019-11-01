@@ -13,6 +13,8 @@ public:
     int getId();
     std::string getName();
 
+    void setName(std::string name);
+
     template<typename T>
     void attachComponent(T *component){
         mComponents[typeid(T)] = component;

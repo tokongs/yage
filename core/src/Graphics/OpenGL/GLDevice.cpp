@@ -14,6 +14,8 @@ GLDevice::GLDevice()
 
     //Setup opengl
     glEnable(GL_DEBUG_OUTPUT);
+    glCullFace( GL_BACK );
+    glEnable(GL_CULL_FACE);
     glDebugMessageCallback((GLDEBUGPROC)gl_debug_message_callback, nullptr);
 }
 

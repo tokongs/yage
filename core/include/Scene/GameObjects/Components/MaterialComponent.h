@@ -9,6 +9,6 @@ namespace yage {
 
         COMPONENT_CLASS_TYPE(MaterialComponent);
 
-        Ref<Material> mMaterial;
+        Ref<Material> mData;
     };
 }

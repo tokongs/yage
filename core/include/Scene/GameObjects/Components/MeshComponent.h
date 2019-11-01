@@ -4,10 +4,9 @@
 #include "Mesh.h"
 
 namespace yage {
-    class MeshComponent : public Component{
-    public:
+    struct MeshComponent : public Component{
         MeshComponent() {};
         COMPONENT_CLASS_TYPE(MeshComponent);
-        Ref<Mesh> mMesh;
+        Ref<Mesh> mData;
     };
 }

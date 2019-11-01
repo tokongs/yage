@@ -11,12 +11,21 @@ class Texture : public Resource
     static const int TextureUnit0 = GL_TEXTURE0;
 
   public:
-    Texture();
+    Texture(unsigned char * textureData, int width, int height, int numChannels);
     ~Texture();
+    Texture(const Texture &other);
+
+    Texture& operator= (const Texture &other);
+
+    void activate();
 
   private:
-    unsigned int mGlObjectId;
 
+    int mWidth;
+    int mHeight;
+    int mNumChannels;
+
+    unsigned int mGlObjectId;
     unsigned int mTextureUnit;
 
     unsigned int mSWrapping;

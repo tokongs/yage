@@ -14,4 +14,8 @@ int GameObject::getId(){
     return mId;
 }
 
+void GameObject::setName(std::string name) {
+    mName = name;
+}
+
 }

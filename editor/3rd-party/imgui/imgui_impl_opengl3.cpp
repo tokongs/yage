@@ -12,7 +12,7 @@
 // CHANGELOG
 // (minor and older changes stripped away, please see git history for details)
 //  2018-08-29: OpenGL: Added support for more OpenGL loaders: glew and glad, with comments indicative that any loader can be used.
-//  2018-08-09: OpenGL: Default to OpenGL ES 3 on iOS and Android. GLSL version default to "#version 300 ES".
+//  2018-08-09: OpenGL: Default.xml to OpenGL ES 3 on iOS and Android. GLSL version default to "#version 300 ES".
 //  2018-07-30: OpenGL: Support for GLSL 300 ES and 410 core. Fixes for Emscripten compilation.
 //  2018-07-10: OpenGL: Support for more GLSL versions (based on the GLSL version string). Added error output when shaders fail to compile/link.
 //  2018-06-08: Misc: Extracted imgui_impl_opengl3.cpp/.h away from the old combined GLFW/SDL+OpenGL3 examples.

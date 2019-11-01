@@ -4,6 +4,7 @@ namespace yage{
     ShaderLoader* yage::shaderLoader = new ShaderLoader();
     ScriptLoader* yage::scriptLoader = new ScriptLoader();
     MaterialLoader* yage::materialLoader = new MaterialLoader();
+    TextureLoader* yage::textureLoader = new TextureLoader();
 
     void yage::InitYage(){
         Logger::Init();
@@ -12,14 +13,16 @@ namespace yage{
         ScriptingEngine::Init();
         Renderer::Init();
 
-        ResourceManager::getInstance().registerResourceLoader("mesh", meshLoader);
-        ResourceManager::getInstance().registerResourceLoader("shader", shaderLoader);
-        ResourceManager::getInstance().registerResourceLoader("script", scriptLoader);
-        ResourceManager::getInstance().registerResourceLoader("material", materialLoader);
+        ResourceManager::getInstance().registerResourceLoader("Mesh", meshLoader);
+        ResourceManager::getInstance().registerResourceLoader("Texture", textureLoader);
+        ResourceManager::getInstance().registerResourceLoader("Shader", shaderLoader);
+        ResourceManager::getInstance().registerResourceLoader("Script", scriptLoader);
+        ResourceManager::getInstance().registerResourceLoader("Material", materialLoader);
 
     }
 
     void yage::ShutdownYage(){
+        delete textureLoader;
         delete meshLoader;
         delete shaderLoader;
         delete scriptLoader;

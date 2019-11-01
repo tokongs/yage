@@ -10,7 +10,7 @@ find_package(Boost 1.45.0 COMPONENTS program_options)
 
 
 
-add_executable(yage_editor src/main.cpp src/MovingCamera.cpp ${GUI_SRC} include/Configuration.h src/Configuration.cpp)
+add_executable(yage_editor src/main.cpp ${GUI_SRC} include/Configuration.h src/Configuration.cpp)
 target_link_libraries(yage_editor yage_core imgui)
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})

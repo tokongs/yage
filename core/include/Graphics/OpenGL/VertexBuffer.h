@@ -61,7 +61,7 @@ class VertexBuffer
    * @param data 
    */
    VertexBuffer();
-    VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data);
+    VertexBuffer(VertexBufferDesc desc, std::vector<Vertex> data, std::vector<unsigned int> indices);
     ~VertexBuffer();
 
     /**
